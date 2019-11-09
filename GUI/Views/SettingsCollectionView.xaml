@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Aura.Views.SettingsCollectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:views="clr-namespace:Aura.Views"
+             d:DataContext="{d:DesignInstance viewModels:ISettingsCollectionVM, IsDesignTimeCreatable=True}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModels:SettingsItemVMPlastic}">
+            <views:SettingsCollectionItemView IsSelected="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:SettingsItemVMFiber}">
+            <views:SettingsCollectionItemView IsSelected="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:SettingsItemVMPrinter}">
+            <views:SettingsCollectionItemView IsSelected="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:SettingsItemVMProfile}">
+            <views:SettingsCollectionItemView IsSelected="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Width="380">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <controls:ColoredButton x:Name="PART_ButtonAddNewMaterial"
+                                HighlightBrush="{DynamicResource AccentColorBrush}"
+                                MainColorBrush="{DynamicResource MysteriousGray}"
+                                ForegroundBrush="White"
+                                MainText="{Binding AddItemText}"
+                                Height="45"
+                                Width="380"
+                                Margin="0 0 0 4"
+                                Command="{Binding AddItemCommand}"/>
+        <Border x:Name="Top" Style="{DynamicResource RowStyleSettings}" Background="White" Height="30"
+                BorderThickness="1"
+                Grid.Row="1">
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <primitive:ButtonWithVisual x:Name="PART_ButtonImportProfiles"
+                                                Padding="15 0 0 0"
+                                                VisualWidth="16"
+                                                VisualHeight="16"
+                                                NormalBrush="{DynamicResource ImportNormal}"
+                                                MouseOverBrush="{DynamicResource ImportAccent}"
+                                                Margin="0 0 0 0"
+                                                ToolTip="{Binding ImportTip}"
+                                                ToolTipService.InitialShowDelay="1000"
+                                                Command="{Binding ImportCommand}"/>
+                    <primitive:ButtonWithVisual x:Name="PART_ButtonExportProfiles"
+                                                Padding="15 0 0 0"
+                                                VisualWidth="16"
+                                                VisualHeight="16"
+                                                NormalBrush="{DynamicResource ExportNormal}"
+                                                MouseOverBrush="{DynamicResource ExportAccent}"
+                                                ToolTip="{Binding ExportTip}"
+                                                ToolTipService.InitialShowDelay="1000"
+                                                Command="{Binding ExportCommand}"
+                                                Margin="5 0 0 0" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <ScrollViewer Style="{DynamicResource MinimalisticScrollViewer}"
+                      Grid.Row="2"
+                      Focusable="False"
+                      Background="Transparent"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="PART_ListBoxMainContainer" ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                <ListView.Template>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <Grid>
+                            <Border x:Name="Border" BorderThickness="0" Background="Transparent" />
+                            <ItemsPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

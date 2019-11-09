@@ -1,0 +1,279 @@
+﻿<UserControl x:Class="Aura.Views.SettingsItemFiberView"
+                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                xmlns:util="clr-namespace:Aura.Controls.Util"
+                                xmlns:viewModels="clr-namespace:Aura.ViewModels"
+                                xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+                                xmlns:localization="clr-namespace:Aura.Themes.Localization"
+                                xmlns:val="clr-namespace:Settings.ValidValues;assembly=Settings"
+                                xmlns:resx="clr-namespace:Aura.Controls.Resources"
+                                xmlns:controls="clr-namespace:Aura.Controls"
+                                xmlns:views="clr-namespace:Aura.Views"
+                                xmlns:validationRules="clr-namespace:Aura.Controls.ValidationRules"
+                                mc:Ignorable="d"
+                                d:DataContext="{d:DesignInstance viewModels:SettingsItemVMFiber, IsDesignTimeCreatable=True}"
+                                x:Name="UserControl">
+    <UserControl.Resources>
+        <util:InvertBooleanConverter x:Key="InvertBoolConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+    </UserControl.Resources>
+    <Border Padding=" 0 0 0 10" Background="#f2f2f2">
+        <StackPanel Orientation="Vertical">
+            <Border x:Name="BorderName"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Common_en_EN.Name}"
+                            DockPanel.Dock="Left"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    <TextBox x:Name="MaterialName"
+                                 DockPanel.Dock="Right"
+                                 Style="{DynamicResource TextBoxSettingsWithoutWidth}"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}">
+                        <TextBox.Text>
+                            <Binding Path="Model.Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validationRules:NameValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </DockPanel>
+            </Border>
+            <Border x:Name="FiberType"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <TextBox x:Name="MaterialFiberType"
+                                 DockPanel.Dock="Right"
+                                 Style="{DynamicResource TextBoxSettings}"
+                                 Text="{Binding Mode=TwoWay, Path=Model.FiberType, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.FiberType}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderFiberDiameter"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="MaterialFiberDiameter"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=FiberDiameterMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=FiberDiameterMax}"
+                                                Value="{Binding Mode=TwoWay, Path=Model.FiberDiameter}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.FiberDiameter}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Fiber_en_EN.FiberDiameter}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.FiberDiameter}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgFiberDiameter}" />
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivRestart"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Fiber_en_EN.HEADER_RESTART}" />
+            <Border x:Name="BorderZHopF"
+                        Style="{DynamicResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="ProfileZHopF"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=ZHopFMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=ZHopFMax}"
+                                                Value="{Binding Model.ZHopF, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.ZHopF}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Fiber_en_EN.ZHopF}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.FiberZHopF}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgFiberZLiftOnRestart}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderExtraSpeed"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="MaterialExtraSpeed"
+                                                HorizontalAlignment="Left"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=ExtraSpeedFMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=ExtraSpeedFMax}"
+                                                Value="{Binding Mode=TwoWay, Path=Model.ExtraSpeedF, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.ExtrusionSpeed}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Fiber_en_EN.ExtrusionSpeed}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.FiberExtraSpeed}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgFiberFiberExtrusionSpeed}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderZHopFPauseAdhesion"
+                        Style="{DynamicResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="ProfileZHopFPauseAdhesion"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=ZHopFPauseAdhesionMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=ZHopFPauseAdhesionMax}"
+                                                Value="{Binding Model.ZHopFPauseAdhesion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.ZHopFPauseAdhesion}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Fiber_en_EN.ZHopFPauseAdhesion}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.FiberZHopFPauseAdhesion}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgFiberRestartPause}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderInsetXFEndPolygonEmptyDistanceMM"
+                        Style="{DynamicResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox
+                            x:Name="ProfileInsetXFEndPolygonEmptyDistanceMM"
+                            DockPanel.Dock="Right"
+                            BoxType="DOUBLES"
+                            Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=EndPolygonEmptyDistanceMMMin}"
+                            Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=EndPolygonEmptyDistanceMMMax}"
+                            Value="{Binding Model.EndPolygonEmptyDistanceMM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextStyle="{DynamicResource TextBoxSettings}"
+                            IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.EndPolygonEmptyDistanceMM}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Fiber_en_EN.EndPolygonEmptyDistanceMM}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.FiberEndPolygonEmptyDistanceMM}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgFiberFinishIroningDistance}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderDoPlasticRetract"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <CheckBox x:Name="DoPlasticRetract"
+                                  DockPanel.Dock="Right"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  HorizontalAlignment="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  IsChecked="{Binding Model.DoPlasticRetract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    <primitive:QuestionedTextBlock x:Name="QTBDOPLasticRetract"
+                                                       Caption="{x:Static localization:Fiber_en_EN.DoPlasticRetract}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Fiber_en_EN.DoPlasticRetract}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.FiberDoPlasticRetract}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderFanSpeed"
+                        Style="{DynamicResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="TTBFanSpeed"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=FanSpeedMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=FanSpeedMax}"
+                                                Value="{Binding Model.FanSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.FanSpeed}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivOther"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Fiber_en_EN.HEADER_OTHER}" />
+            <Border x:Name="BorderLinearDensity"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="MaterialDensity"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=LinearDensityMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=LinearDensityMax}"
+                                                Value="{Binding Mode=TwoWay, Path=Model.LinearDensity, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Fiber_en_EN.LinearDensity}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderCostPerSpool"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="MaterialCostPerSpool"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=CostPerSpoolMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=CostPerSpoolMax}"
+                                                Value="{Binding Mode=TwoWay, Path=Model.CostPerSpool, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Plastic_en_EN.CostPerSpool}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderLegthPerSpool"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="MaterialSpoolLength"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SMaterialF.Default}, Path=LengthPerSpoolMin}"
+                                                Maximum="{Binding Source={x:Static val:SMaterialF.Default}, Path=LengthPerSpoolMax}"
+                                                Value="{Binding Mode=TwoWay, Path=Model.LengthPerSpool, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Plastic_en_EN.LengthPerSpool}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderVersion"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="MaterialVersion"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="1"
+                                                Maximum="100"
+                                                Value="{Binding Mode=TwoWay, Path=Model.Version, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Common_en_EN.Version}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderDescription"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:QuestionedTextBlock DockPanel.Dock="Top"
+                                                       Caption="{x:Static localization:Common_en_EN.Description}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    <TextBox x:Name="MaterialDescription"
+                                 Style="{DynamicResource TextBoxSettingsDescription}"
+                                 Text="{Binding Mode=TwoWay, Path=Model.Description, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="150"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                </DockPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>

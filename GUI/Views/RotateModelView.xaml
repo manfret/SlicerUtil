@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="Aura.Views.RotateModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:managers="clr-namespace:Aura.Managers"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:RotateModelVM, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ImageBrush x:Key="ApplyNormal" ImageSource="{DynamicResource ImgApplyBig}"/>
+        <ImageBrush x:Key="ApplyAccent" ImageSource="{DynamicResource ImgApplyBigAccent}"/>
+        <ImageBrush x:Key="CancelNormal" ImageSource="{DynamicResource ImgCancel}"/>
+        <ImageBrush x:Key="CancelAccent" ImageSource="{DynamicResource ImgCancelAccent}"/>
+    </UserControl.Resources>
+    <Border Background="{DynamicResource HightLightGrayBrush}" BorderThickness="1"  BorderBrush="LightGray">
+        <Grid Margin="0" Width="380">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical">
+                <Border x:Name="BorderX" 
+                        Style="{StaticResource SimpleRowStyleSettings}"
+                        BorderThickness="0">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox x:Name="TTBX"
+                                                BoxType="DOUBLES"
+                                                DockPanel.Dock="Right"
+                                                Minimum="-10000"
+                                                Maximum="10000"
+                                                Value="{Binding X, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                HasError="{Binding XHasError, Mode=OneWayToSource}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                HorizontalContentAlignment="Left"
+                                                HorizontalAlignment="Left"
+                                                IsReadOnly="False"
+                                                MinWidth="0"/>
+                        <TextBlock Text="X (°)" Style="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+                <Border x:Name="BorderY" 
+                        Style="{StaticResource SimpleRowStyleSettings}"
+                        BorderThickness="0">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox x:Name="TTBY"
+                                                BoxType="DOUBLES"
+                                                DockPanel.Dock="Right"
+                                                Minimum="-10000"
+                                                Maximum="10000"
+                                                Value="{Binding Y, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                HasError="{Binding YHasError, Mode=OneWayToSource}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                HorizontalContentAlignment="Left"
+                                                HorizontalAlignment="Left"
+                                                IsReadOnly="False"
+                                                MinWidth="0"/>
+                        <TextBlock Text="Y (°)" Style="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+                <Border x:Name="BorderZ" 
+                        Style="{StaticResource SimpleRowStyleSettings}"
+                        BorderThickness="0">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox x:Name="TTBZ"
+                                                BoxType="DOUBLES"
+                                                DockPanel.Dock="Right"
+                                                Minimum="-10000"
+                                                Maximum="10000"
+                                                Value="{Binding Z, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                HasError="{Binding ZHasError, Mode=OneWayToSource}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                HorizontalContentAlignment="Left"
+                                                HorizontalAlignment="Left"
+                                                IsReadOnly="False"
+                                                MinWidth="0"/>
+                        <TextBlock Text="Z (°)" Style="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+            <Border Grid.Row="1" Style="{DynamicResource RowStyleSettings}" 
+                    Background="White" 
+                    Margin="0 10 0 0"
+                    BorderThickness="0 1 0 0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Right">
+                    <Border x:Name="BorderOK" >
+                        <primitive:ButtonWithVisual x:Name="ButtonApply"
+                                                    VisualWidth="16"
+                                                    VisualHeight="16"
+                                                    ImgBorderMargin="0 0 3 0"
+                                                    NormalBrush="{StaticResource ApplyNormal}"
+                                                    MouseOverBrush="{StaticResource ApplyAccent}"
+                                                    Command="{Binding ApplyCommand}"
+                                                    Content="{x:Static localization:Common_en_EN.TipApply}"
+                                                    managers:InputBindingBehavior.PropagateInputBindingsToWindow="True">
+                            <primitive:ButtonWithVisual.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding ApplyCommand}" />
+                            </primitive:ButtonWithVisual.InputBindings>
+                        </primitive:ButtonWithVisual>
+                    </Border>
+                    <Border x:Name="BorderCancel" Margin="10 0 0 0">
+                        <primitive:ButtonWithVisual x:Name="ButtonCancel"
+                                                    VisualWidth="12"
+                                                    VisualHeight="12"
+                                                    ImgBorderMargin="0 0 3 0"
+                                                    NormalBrush="{StaticResource CancelNormal}"
+                                                    MouseOverBrush="{StaticResource CancelAccent}"
+                                                    Command="{Binding CanceCommand}"
+                                                    Content="{x:Static localization:Common_en_EN.TipCancel}">
+                            <primitive:ButtonWithVisual.InputBindings>
+                                <KeyBinding Key="Escape" Command="{Binding ApplyCommand}" />
+                            </primitive:ButtonWithVisual.InputBindings>
+                        </primitive:ButtonWithVisual>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

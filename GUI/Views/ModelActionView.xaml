@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="Aura.Views.ModelActionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Aura.Views"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:ModelsCollectionVM, IsDesignTimeCreatable=True}"
+             x:Name="UserControl">
+    <UserControl.Resources>
+        <ImageBrush x:Key="BrushRemoveNormal" ImageSource="{DynamicResource ImgRemoveNormal}" />
+        <ImageBrush x:Key="BrushRemoveHightlight" ImageSource="{DynamicResource ImgRemoveHighlight}" />
+        <ImageBrush x:Key="BrushRemoveDisabled" ImageSource="{DynamicResource ImgRemoveDisabled}" />
+        <ImageBrush x:Key="BrushShiftNormal" ImageSource="{DynamicResource ImgShiftNormal}" />
+        <ImageBrush x:Key="BrushShiftHightlight" ImageSource="{DynamicResource ImgShiftHighlight}" />
+        <ImageBrush x:Key="BrushShiftDisabled" ImageSource="{DynamicResource ImgShiftDisabled}" />
+        <ImageBrush x:Key="BrushRotateNormal" ImageSource="{DynamicResource ImgRotateNormal}" />
+        <ImageBrush x:Key="BrushRotateHightlight" ImageSource="{DynamicResource ImgRotateHighlight}" />
+        <ImageBrush x:Key="BrushRotateDisabled" ImageSource="{DynamicResource ImgRotateDisabled}" />
+        <ImageBrush x:Key="BrushResizeNormal" ImageSource="{DynamicResource ImgResizeNormal}" />
+        <ImageBrush x:Key="BrushResizeHightlight" ImageSource="{DynamicResource ImgResizeHighlight}" />
+        <ImageBrush x:Key="BrushResizeDisabled" ImageSource="{DynamicResource ImgResizeDisabled}" />
+        <ImageBrush x:Key="BrushCloneNormal" ImageSource="{DynamicResource ImgCloneNormal}" />
+        <ImageBrush x:Key="BrushCloneHightlight" ImageSource="{DynamicResource ImgCloneHighlight}" />
+        <ImageBrush x:Key="BrushCloneDisabled" ImageSource="{DynamicResource ImgCloneDisabled}" />
+        <ImageBrush x:Key="BrushLayupNormal" ImageSource="{DynamicResource ImgLayupNormal}" />
+        <ImageBrush x:Key="BrushLayupHightlight" ImageSource="{DynamicResource ImgLayupHighlight}" />
+        <ImageBrush x:Key="BrushLayupDisabled" ImageSource="{DynamicResource ImgLayupDisabled}" />
+    </UserControl.Resources>
+    <Grid Width="380">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Background="White"
+                Opacity="0.9"
+                BorderThickness="{Binding ElementName=UserControl, Path=BorderThickness}"
+                BorderBrush="DarkGray">
+            <StackPanel Orientation="Horizontal" Margin="5 2 5 2">
+                <primitive:ButtonWithVisual x:Name="ButtonRemove"
+                                            VisualWidth="16"
+                                            VisualHeight="16"
+                                            Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Left"
+                                            NormalBrush="{StaticResource BrushRemoveNormal}"
+                                            MouseOverBrush="{StaticResource BrushRemoveHightlight}"
+                                            DisabledBrush="{StaticResource BrushRemoveDisabled}"
+                                            ToolTip="{x:Static localization:Common_en_EN.TipDelete}"
+                                            ToolTipService.InitialShowDelay="1000"
+                                            Command="{Binding RemoveModelCommand}"/>
+                <primitive:ButtonWithVisual x:Name="ButtonShift"
+                                            VisualWidth="16"
+                                            VisualHeight="16"
+                                            Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Left"
+                                            NormalBrush="{StaticResource BrushShiftNormal}"
+                                            MouseOverBrush="{StaticResource BrushShiftHightlight}"
+                                            DisabledBrush="{StaticResource BrushShiftDisabled}"
+                                            ToolTip="{x:Static localization:Common_en_EN.TipShift}"
+                                            ToolTipService.InitialShowDelay="1000"
+                                            Command="{Binding ShiftModelCommand}"/>
+                <primitive:ButtonWithVisual x:Name="ButtonRotate"
+                                            VisualWidth="16"
+                                            VisualHeight="16"
+                                            Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Left"
+                                            NormalBrush="{StaticResource BrushRotateNormal}"
+                                            MouseOverBrush="{StaticResource BrushRotateHightlight}"
+                                            DisabledBrush="{StaticResource BrushRotateDisabled}"
+                                            ToolTip="{x:Static localization:Common_en_EN.TipRotate}"
+                                            ToolTipService.InitialShowDelay="1000"
+                                            Command="{Binding RotateModelCommand}"/>
+                <primitive:ButtonWithVisual x:Name="ButtonResize"
+                                            VisualWidth="16"
+                                            VisualHeight="16"
+                                            Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Left"
+                                            NormalBrush="{StaticResource BrushResizeNormal}"
+                                            MouseOverBrush="{StaticResource BrushResizeHightlight}"
+                                            DisabledBrush="{StaticResource BrushResizeDisabled}"
+                                            ToolTip="{x:Static localization:Common_en_EN.TipResize}"
+                                            ToolTipService.InitialShowDelay="1000"
+                                            Command="{Binding ResizeModelCommand}"/>
+                <primitive:ButtonWithVisual x:Name="ButtonClone"
+                                            VisualWidth="16"
+                                            VisualHeight="16"
+                                            Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Left"
+                                            NormalBrush="{StaticResource BrushCloneNormal}"
+                                            MouseOverBrush="{StaticResource BrushCloneHightlight}"
+                                            DisabledBrush="{StaticResource BrushCloneDisabled}"
+                                            ToolTip="{x:Static localization:Common_en_EN.TipClone}"
+                                            ToolTipService.InitialShowDelay="1000"
+                                            Command="{Binding CloneModelCommand}"/>
+                <primitive:ButtonWithVisual x:Name="ButtonLayup"
+                                            VisualWidth="16"
+                                            VisualHeight="16"
+                                            Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Left"
+                                            NormalBrush="{StaticResource BrushLayupNormal}"
+                                            MouseOverBrush="{StaticResource BrushLayupHightlight}"
+                                            DisabledBrush="{StaticResource BrushLayupDisabled}"
+                                            ToolTip="{x:Static localization:Common_en_EN.TipLayup}"
+                                            ToolTipService.InitialShowDelay="1000"
+                                            Command="{Binding LayupModelCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,1678 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{37CE10F6-DC9E-4404-9322-8B292023E452}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aura</RootNamespace>
+    <AssemblyName>Aura</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://www.anisoprint.com</SupportUrl>
+    <ProductName>Aura</ProductName>
+    <PublisherName>Anisoprint LLC</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.9.7.0</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>aura_ixo_GZA_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>bin\Debug\Aura.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="devDept.Eyeshot.Control.Wpf.v12">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 12\Bin\devDept.Eyeshot.Control.Wpf.v12.dll</HintPath>
+    </Reference>
+    <Reference Include="devDept.Geometry.v12">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 12\Bin\devDept.Geometry.v12.dll</HintPath>
+    </Reference>
+    <Reference Include="devDept.Graphics.Shaders.v12">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 12\Bin\devDept.Graphics.Shaders.v12.dll</HintPath>
+    </Reference>
+    <Reference Include="devDept.Graphics.Wpf.v12">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\devDept Software\Eyeshot Ultimate 12\Bin\devDept.Graphics.Wpf.v12.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Microsoft.Expression.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Design\Microsoft.Expression.Controls.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Design\Microsoft.Expression.Drawing.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Effects, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Microsoft.Expression.Effects.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Effects.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Design\Microsoft.Expression.Effects.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Prototyping.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Microsoft.Expression.Prototyping.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Prototyping.SketchControls, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Microsoft.Expression.Prototyping.SketchControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Prototyping.SketchControls.design.v4, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\Design\Microsoft.Expression.Prototyping.SketchControls.design.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Extensibility">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\PublicAssemblies\Microsoft.Windows.Design.Extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="MyToolkit, Version=2.5.16.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
+      <HintPath>..\packages\MyToolkit.2.5.16\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.1\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.1.0.431\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.1.0.431\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTools, Version=2015.2.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyTools.Wpf.2015.2.0\lib\net45\PropertyTools.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyTools.Wpf, Version=2015.2.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyTools.Wpf.2015.2.0\lib\net45\PropertyTools.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Expression.Blend.SDK.WPF.4.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.4\lib\net47\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\DefferedContent.cs" />
+    <Compile Include="Controls\Util\AngleListRule.cs" />
+    <Compile Include="Controls\Util\BooleanToVisibilityInvertConverter.cs" />
+    <Compile Include="Controls\Util\DynamicContainerStyle.cs" />
+    <Compile Include="Controls\Util\EmptyToVisibleConverter.cs" />
+    <Compile Include="Controls\Util\FiberInfillTypeToVisibilityConverter.cs" />
+    <Compile Include="Controls\Util\LayupDataConverter.cs" />
+    <Compile Include="Controls\Util\MyColorItem.cs" />
+    <Compile Include="CORE\AuraCommands.cs" />
+    <Compile Include="CORE\AuraFile\AuraMainPrinting.cs" />
+    <Compile Include="AuraViewportLayout.cs" />
+    <Compile Include="Controls\ColoredButton.cs" />
+    <Compile Include="Managers\InputBindingsBehavior.cs" />
+    <Compile Include="Controls\InfillTypeData.cs" />
+    <Compile Include="Controls\BlocksConverter.cs" />
+    <Compile Include="Controls\LinearPathMulti.cs" />
+    <Compile Include="Controls\Primitive\RangeSlider.cs" />
+    <Compile Include="Controls\Primitive\RBLeft.cs" />
+    <Compile Include="Controls\LayupDataToolBox.cs" />
+    <Compile Include="Controls\ModelToolbox.cs" />
+    <Compile Include="Controls\Primitive\ButtonWithVisual.cs" />
+    <Compile Include="Controls\Primitive\QuestionedTextBlock.cs" />
+    <Compile Include="Controls\Primitive\Size3DPanel.cs" />
+    <Compile Include="Controls\Primitive\SliderTTB.cs" />
+    <Compile Include="Controls\Primitive\SliderWithODivide.cs" />
+    <Compile Include="Controls\Resources\Images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resources\SettingsTipsResorces.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettingsTipsResorces.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Primitive\SliderWithIO.cs" />
+    <Compile Include="Controls\Primitive\SliderWithO.cs" />
+    <Compile Include="Controls\Primitive\TipPopupSheet.cs" />
+    <Compile Include="Controls\Primitive\TypedTextBox.cs" />
+    <Compile Include="Controls\Primitive\TextDivider.cs" />
+    <Compile Include="Controls\Util\AssemblyTree.cs" />
+    <Compile Include="Controls\Util\BrushAnimation.cs" />
+    <Compile Include="Controls\Util\BrushToColorConverter.cs" />
+    <Compile Include="Controls\Util\ColorDeppedConverter.cs" />
+    <Compile Include="Controls\Util\ConcatObjectsAsStrings.cs" />
+    <Compile Include="Controls\Util\ConditionEventTrigger.cs" />
+    <Compile Include="Controls\Util\ImageSourceConverter.cs" />
+    <Compile Include="Controls\Util\MathConverter.cs" />
+    <Compile Include="Controls\Util\MaxFromTwoConverter.cs" />
+    <Compile Include="Controls\Util\MultiplyConverter.cs" />
+    <Compile Include="Controls\Util\InvertBooleanConverter.cs" />
+    <Compile Include="Controls\Util\IntNullVisibilityConverter.cs" />
+    <Compile Include="Controls\Util\RatioToMacroConverter.cs" />
+    <Compile Include="Managers\LayupViewerManager.cs" />
+    <Compile Include="Managers\MouseMoveBehavior.cs" />
+    <Compile Include="Managers\ParentScrollBehavior.cs" />
+    <Compile Include="Managers\SettingsManager.cs" />
+    <Compile Include="Controls\Util\StringConcatConverter.cs" />
+    <Compile Include="Controls\ValidationRules\IsDoubleRule.cs" />
+    <Compile Include="Controls\ValidationRules\IsIntRule.cs" />
+    <Compile Include="Managers\AuraViewportManager.cs" />
+    <Compile Include="Managers\CodeViewerManager.cs" />
+    <Compile Include="Managers\SlicingManager.cs" />
+    <Compile Include="Themes\SendReportView.xaml.cs">
+      <DependentUpon>SendReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PrintInformationVM.cs" />
+    <Compile Include="ViewModels\SendReportVM.cs" />
+    <Compile Include="ViewModels\SessionVM.cs" />
+    <Compile Include="Views\ComboBoxWithAdditionalCommand.xaml.cs">
+      <DependentUpon>ComboBoxWithAdditionalCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartCancelFinishButton.xaml.cs">
+      <DependentUpon>StartCancelFinishButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintInformationView.xaml.cs">
+      <DependentUpon>PrintInformationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SessionView.xaml.cs">
+      <DependentUpon>SessionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToggleButtonWithBrush.xaml.cs">
+      <DependentUpon>ToggleButtonWithBrush.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ConflictCollectionVM.cs" />
+    <Compile Include="ViewModels\ExtrudersVM.cs" />
+    <Compile Include="ViewModels\IDialogResultVMHelper.cs" />
+    <Compile Include="ViewModels\LayupDataCollectionVM.cs" />
+    <Compile Include="ViewModels\LayupDataVM.cs" />
+    <Compile Include="ViewModels\ResizeModelVM.cs" />
+    <Compile Include="ViewModels\RotateModelVM.cs" />
+    <Compile Include="ViewModels\SettingsItemVM.cs" />
+    <Compile Include="ViewModels\SettingsCollectionVM.cs" />
+    <Compile Include="ViewModels\ShiftModelVM.cs" />
+    <Compile Include="Views\CodeViewerView.xaml.cs">
+      <DependentUpon>CodeViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CodeViewerCodeVM.cs" />
+    <Compile Include="ViewModels\CodeViewerGeometryVM.cs" />
+    <Compile Include="ViewModels\CodeViewerVM.cs" />
+    <Compile Include="ViewModels\CollectionViewModel.cs" />
+    <Compile Include="ViewModels\EntityDatasItemVM.cs" />
+    <Compile Include="CORE\LayerCreator.cs" />
+    <Compile Include="CORE\AuraFile\EntityLayupData.cs" />
+    <Compile Include="ViewModels\ModelsCollectionVM.cs" />
+    <Compile Include="Extensions\GUIExtension.cs" />
+    <Compile Include="Extensions\UtilExtension.cs" />
+    <Compile Include="Themes\AuraAbout.xaml.cs">
+      <DependentUpon>AuraAbout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\AuraComposerFirmwarer.xaml.cs">
+      <DependentUpon>AuraComposerFirmwarer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\AuraSendReport.xaml.cs">
+      <DependentUpon>AuraSendReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Brim-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Brim-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\CodeViewer-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CodeViewer-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Common-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\AuraNaming-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuraNaming-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Fiber-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fiber-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\FiberPrinting-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FiberPrinting-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Global-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InfillFiber-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfillFiber-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InfillFiberCellular-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfillFiberCellular-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InfillFiberSolid-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfillFiberSolid-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InfillPlasticCellular-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfillPlasticCellular-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InfillPlasticSolid-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfillPlasticSolid-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Inset-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Inset-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Inset0-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Inset0-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InsetFiber-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InsetFiber-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\InsetPlastic-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InsetPlastic-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Plastic-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Plastic-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Printer-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Printer-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\PrintInformation-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintInformation-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Profile-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Profile-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Session-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Session-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Skirt-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Skirt-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Support-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Support-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\ConflictDialog-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConflictDialog-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\AuraPathPanel.xaml.cs">
+      <DependentUpon>AuraPathPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\WipeTower-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WipeTower-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Extensions\SettingsExtension.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\Localization\Errors-en-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors-en-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Util\TypeConversionExtension.cs" />
+    <Compile Include="Views\CodeViewerCodeView.xaml.cs">
+      <DependentUpon>CodeViewerCodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CodeViewerGeometryView.xaml.cs">
+      <DependentUpon>CodeViewerGeometryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConflictDialogNew.xaml.cs">
+      <DependentUpon>ConflictDialogNew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConflictView.xaml.cs">
+      <DependentUpon>ConflictView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectableUserControl.cs" />
+    <Compile Include="Views\ExpanderExtended.xaml.cs">
+      <DependentUpon>ExpanderExtended.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtruderExpander.xaml.cs">
+      <DependentUpon>ExtruderExpander.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtruderPFView.xaml.cs">
+      <DependentUpon>ExtruderPFView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtruderPView.xaml.cs">
+      <DependentUpon>ExtruderPView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtrudersView.xaml.cs">
+      <DependentUpon>ExtrudersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayupDataCollectionView.xaml.cs">
+      <DependentUpon>LayupDataCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayupDataView.xaml.cs">
+      <DependentUpon>LayupDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LayupExpander.xaml.cs">
+      <DependentUpon>LayupExpander.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModelActionView.xaml.cs">
+      <DependentUpon>ModelActionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModelsView.xaml.cs">
+      <DependentUpon>ModelsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResizeModelView.xaml.cs">
+      <DependentUpon>ResizeModelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RotateModelView.xaml.cs">
+      <DependentUpon>RotateModelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsCollectionItemView.xaml.cs">
+      <DependentUpon>SettingsCollectionItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsCollectionView.xaml.cs">
+      <DependentUpon>SettingsCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsItemFiberView.xaml.cs">
+      <DependentUpon>SettingsItemFiberView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsItemPlasticView.xaml.cs">
+      <DependentUpon>SettingsItemPlasticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsItemPrinterView.xaml.cs">
+      <DependentUpon>SettingsItemPrinterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsItemProfileView.xaml.cs">
+      <DependentUpon>SettingsItemProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShiftModelView.xaml.cs">
+      <DependentUpon>ShiftModelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TabListView.xaml.cs">
+      <DependentUpon>TabListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\TabsVM.cs" />
+    <Page Include="Themes\AuraAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\SendReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComboBoxWithAdditionalCommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartCancelFinishButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrintInformationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SessionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ToggleButtonWithBrush.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CodeViewerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\AuraComposerFirmwarer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\AuraSendReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraColoredButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\ArrowlessExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Primitives\AuraButtonWithVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraRangeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraRbText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraSIze3DPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraCheckBoxToggle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Minimalistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\PropertyObserver.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraQuestionedTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraSliderWithIO.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraTipPopupSheet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Primitives\AuraTypedTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\AuraPathPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CodeViewerCodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CodeViewerGeometryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConflictDialogNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConflictView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExpanderExtended.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtruderExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtruderPFView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtruderPView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtrudersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayupDataCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayupDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LayupExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModelActionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResizeModelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RotateModelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsCollectionItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsItemFiberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsItemPlasticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsItemPrinterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsItemProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShiftModelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TabListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\Resources\Images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resources\SettingsTipsResorces.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>SettingsTipsResorces.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Brim-en-EN.resx">
+      <LastGenOutput>Brim-en-EN.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\CodeViewer-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CodeViewer-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Common-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\AuraNaming-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AuraNaming-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Errors-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Fiber-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fiber-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\FiberPrinting-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FiberPrinting-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Global-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InfillFiber-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InfillFiber-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InfillFiberCellular-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InfillFiberCellular-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InfillFiberSolid-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InfillFiberSolid-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InfillPlasticCellular-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InfillPlasticCellular-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InfillPlasticSolid-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InfillPlasticSolid-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Inset-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Inset-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Inset0-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Inset0-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InsetFiber-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InsetFiber-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\InsetPlastic-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InsetPlastic-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Plastic-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Plastic-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Printer-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Printer-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\PrintInformation-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintInformation-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Profile-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Profile-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Session-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Session-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Skirt-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Skirt-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\Support-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Support-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\ConflictDialog-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConflictDialog-en-EN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Localization\WipeTower-en-EN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WipeTower-en-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFiller\EntityFiller.csproj">
+      <Project>{6d708aaf-dafb-465f-b383-4ed2a6bed974}</Project>
+      <Name>EntityFiller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LayersStruct\LayersStruct.csproj">
+      <Project>{38b44e38-8e27-4358-ad1c-606eddccf357}</Project>
+      <Name>LayersStruct</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PostProcessor\PostProcessor.csproj">
+      <Project>{4dd73d5f-14ae-473f-bfc8-5fb742e0db34}</Project>
+      <Name>PostProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Settings\Settings.csproj">
+      <Project>{20753f01-d899-492e-ad41-d7383faac9ba}</Project>
+      <Name>Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Slicer\Slicer.csproj">
+      <Project>{518ad01f-98ed-4eed-a316-9344641d5a91}</Project>
+      <Name>Slicer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{15f64e84-3ea0-4f59-a275-a63a212ce711}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{ab6d82e6-5223-474d-8886-9abd9005c728}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Filament diameter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\plus_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\plus_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\Import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\Import_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\export_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\trash.png" />
+    <Resource Include="Controls\Resources\Images\trash_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\new_by_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\new_by_copy_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\plus_plastic_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\plus_plastic_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\plus_composite_accent.png" />
+    <Resource Include="Controls\Resources\Images\plus_composite_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\shift.png" />
+    <Resource Include="Controls\Resources\Images\shift_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\apply.png" />
+    <Resource Include="Controls\Resources\Images\apply_accent.png" />
+    <Resource Include="Controls\Resources\Images\cancel.png" />
+    <Resource Include="Controls\Resources\Images\cancel_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\rotate.png" />
+    <Resource Include="Controls\Resources\Images\rotate_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\resize.png" />
+    <Resource Include="Controls\Resources\Images\resize_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\clone.png" />
+    <Resource Include="Controls\Resources\Images\clone_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\split.png" />
+    <Resource Include="Controls\Resources\Images\split_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\layup.png" />
+    <Resource Include="Controls\Resources\Images\layup_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\apply_big.png" />
+    <Resource Include="Controls\Resources\Images\apply_big_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\eyedropper.png" />
+    <Resource Include="Controls\Resources\Images\eyedropper_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\arrow_down.png" />
+    <Resource Include="Controls\Resources\Images\arrow_down_accent.png" />
+    <Resource Include="Controls\Resources\Images\arrow_up.png" />
+    <Resource Include="Controls\Resources\Images\arrow_up_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\arrow_down_disabled.png" />
+    <Resource Include="Controls\Resources\Images\arrow_up_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\target.png" />
+    <Resource Include="Controls\Resources\Images\target_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\eyedropper_cancel.png" />
+    <Resource Include="Controls\Resources\Images\eyedropper_cancel_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\eyedropper_cursor.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\arrow_filled_down.png" />
+    <Resource Include="Controls\Resources\Images\arrow_filled_down_accent.png" />
+    <Resource Include="Controls\Resources\Images\arrow_filled_up.png" />
+    <Resource Include="Controls\Resources\Images\arrow_filled_up_accent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\Anisoprint_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="aura_ixo_GZA_icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LicenceAgreement.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bed temperature.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coast length.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CoolingEnable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Extra unretract length.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Extrusion multiplier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\First layers fan speed height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\First layers height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maximum fan speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print temperature - v1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print temperature - v2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Regular fan speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Retraction length on tool change.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Retraction length.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Retraction minimum travel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Retraction minimum travel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wipe length.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Z-hop height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fiber diameter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Finish ironing distance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plastic flow multiplier.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Restart pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Z-lift on restart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fiber extrusion speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer bowden.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer external shell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer has heated table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer length.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer travel speed XY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer travel speed Z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer width.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer Z-lift height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtruderHasFan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtruderHorizontalOffset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtruderNozzleDiameter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtruderZOffset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgExtruderHasFan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgExtruderHorizontalOffset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgExtruderNozzleDiameter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgExtruderZOffset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtruderCompositeFiberRestartValue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtruserCompositeCutDistance.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateSupport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateWipeTower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetFInnerCount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetFOuterCount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetXPCount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetXPInnerWhenFiber.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProfileLayerThicknessMacroLayerHeight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartFillDensity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInfillSBottomTipLayerCount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetXPOuterWhenFiber.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileLayerThicknessSupport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileLayerThicknessInsetXPInfill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileLayerThicknessMacroLayerHeight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileFLCoeffToNormals.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileFLThickness.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInsetXFFiberFeedrate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInsetXFSolidPlasticLayersBelowFiber.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInxsetXFEWCoeff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticInfillSolidAngleStep.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileExternalShellThickness.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileExtrusionCoefficient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileFillPattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInfillCStartingAngle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInfillSStartingAngle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportXYDistanceFromModel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileOtherTrimGapRatio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportDoAirGaps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportGenerateInternalSupport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportGeneratePerimeters.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportSelfSupportAngle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInxsetXFEW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticWipeLength.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticRetractionMinimumTravel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticRetractionLengthOnToolChange.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticRetractionLength.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticRegularFanSpeed.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticPrintTemperature2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticPrintTemperature1 .jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticPlasticZHopHeight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticMaximumFanSpeed.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticFirstLayersHeight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticFirstLayersFanSpeedHeight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticExtrusionMultiplier.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticExtraUnretractLength.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticCoolingEnable.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticCoastLength.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticBedTemperature.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgFiberDiameter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgFiberFiberExtrusionSpeed.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgFiberFinishIroningDistance.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgFiberPlasticFlowMultiplier.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgFiberRestartPause.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgFiberZLiftOnRestart.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterBowden.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterExternalShell.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterHasHeatedTable.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterHeight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterTravelSpeedXY.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterTravelSpeedZ.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterWidth.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterZLiftHeight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgExtruderHorizontalOffset.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgExtruderZOffset.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPlasticInfillSolidAngleStep.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileBrimLoops.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileExternalShellPrintingSpeed.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileExternalShellThickness.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileExtrusionCoefficient.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileFillPattern.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileFLCoeffToNormals.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileFLThickness.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInfillCStartingAngle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInfillSStartingAngle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInsetXFFiberFeedrate.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInsetXFSolidPlasticLayersBelowFiber.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInxsetXFEW.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileLayerThicknessInsetXPInfill.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileLayerThicknessMacroLayerHeight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileLayerThicknessSupport.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileOozePreventionAvoidCrossing.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileOtherExtensionIntoPerimeter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileOtherTrimGapRatio.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartFillDensity.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateBrim.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateFiberPerimeters.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateSkirt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateSupport.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateWipeTower.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInfillSBottomTipLayerCount.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetFInnerCount.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetFOuterCount.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetX0Count.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetXPCount.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetXPInnerWhenFiber.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInsetXPOuterWhenFiber.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSkirtDistance.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSkirtLoops.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportDoAirGaps.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportGenerateInternalSupport.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportGeneratePerimeters.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportSelfSupportAngle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileSupportXYDistanceFromModel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pusheen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartGenerateFiberInfill.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartInfillFiberType.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfilePartRibPlacement.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgProfileInfillFiberRombicSecondRibAngle.jpg" />
+    <None Include="Resources\ImgProfileInfillFiberRombicFirstRibAngle.jpg" />
+    <None Include="Resources\ImgProfileInfillFiberIsogridOrientation.jpg" />
+    <None Include="Resources\ImgProfileInfillFiberAnisogridOrientation.jpg" />
+    <None Include="Resources\ImgProfileInfillFiberAnisogridAngleBetweenMainRibs.jpg" />
+    <None Include="Resources\ImgProfileInfillFiberSolidMinLength.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\CloneAccent.png" />
+    <Resource Include="Controls\Resources\Images\CloneDisabled.png" />
+    <Resource Include="Controls\Resources\Images\CloneNormal.png" />
+    <Resource Include="Controls\Resources\Images\LayupAccent.png" />
+    <Resource Include="Controls\Resources\Images\LayupDisabled.png" />
+    <Resource Include="Controls\Resources\Images\LayupNormal.png" />
+    <Resource Include="Controls\Resources\Images\RemoveAccent.png" />
+    <Resource Include="Controls\Resources\Images\RemoveDisabled.png" />
+    <Resource Include="Controls\Resources\Images\RemoveNormal.png" />
+    <Resource Include="Controls\Resources\Images\ResizeAccent.png" />
+    <Resource Include="Controls\Resources\Images\ResizeDisabled.png" />
+    <Resource Include="Controls\Resources\Images\ResizeNormal.png" />
+    <Resource Include="Controls\Resources\Images\RotateAccent.png" />
+    <Resource Include="Controls\Resources\Images\RotateDisabled.png" />
+    <Resource Include="Controls\Resources\Images\RotateNormal.png" />
+    <Resource Include="Controls\Resources\Images\ShiftAccent.png" />
+    <Resource Include="Controls\Resources\Images\ShiftDisabled.png" />
+    <Resource Include="Controls\Resources\Images\ShiftNormal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\DownAccent.png" />
+    <Resource Include="Controls\Resources\Images\DownDisabled.png" />
+    <Resource Include="Controls\Resources\Images\DownNormal.png" />
+    <Resource Include="Controls\Resources\Images\UpAccent.png" />
+    <Resource Include="Controls\Resources\Images\UpDisabled.png" />
+    <Resource Include="Controls\Resources\Images\UpNormal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Resources\Images\EditAccent.png" />
+    <Resource Include="Controls\Resources\Images\EditDisabled.png" />
+    <Resource Include="Controls\Resources\Images\EditNormal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgPrinterLength.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Obsolete\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PlasticBedHeatupOnFLs" xml:space="preserve">
+    <value>The build plate temperature on first layers is the table temperature which is kept constant only on first layers below height defined in settings. It should be high enough for a part immediately and securely glues to a table.</value>
+  </data>
+  <data name="PlasticBedTemperature" xml:space="preserve">
+    <value>The build plate temperature is the table constant temperature throughout all printing process except printing first layers. Set this value high enough so a part won't detache and edges won't bend.</value>
+  </data>
+  <data name="PlasticCoastAtEndLength" xml:space="preserve">
+    <value>The coast length is the length of the last polygon segment which is printed without plastic extrusion. Plastic goes out only by gravity on this coast segment. Choose length enough to stop free plastic spilling after retract, however, keep an eye on underextrusion.</value>
+  </data>
+  <data name="PlasticCoolingEnable" xml:space="preserve">
+    <value>Enable print cooling is the flag of fan on/off for cooling extruders. For best results, turn on cooling with any print.</value>
+  </data>
+  <data name="PlasticCoolingFirstLayersFanHeight" xml:space="preserve">
+    <value>The first layers fan speed height is the height below which cooling rules are special. Choose a minimum but sufficient height so a part is securely glued to a bed and part geometry won't lose its geometry by bed heating.</value>
+  </data>
+  <data name="PlasticCoolingFirstLayersFanSpeed" xml:space="preserve">
+    <value>Choose the fan speed low enough for better adhesion to a bed and to prevent geometry changes due to bed heating.</value>
+  </data>
+  <data name="PlasticCoolingMaximumFanSpeed" xml:space="preserve">
+    <value>The maximum fan speed is the fan speed for cooling, which is used when layer time is less than minimal layer time (specified in settings). Indicated as percentage. Choose maximum speed to have no form meltings and geometry distorsions.</value>
+  </data>
+  <data name="PlasticCoolingMinLayerTimeForCooling" xml:space="preserve">
+    <value>The layer time for max fan speed is the time when edges of a part start melting and the part losing its geometry integrity with regular fan speed.</value>
+  </data>
+  <data name="PlasticCoolingRegularFanSpeed" xml:space="preserve">
+    <value>The regular fan speed is the fan speed for cooling while all printing process except printing first layers. Indicated as percentage. Choose high enough for saving part geometry undisturbed, but not too high for layers start losing good adhesion beetwen themselves.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlasticExtraLength" xml:space="preserve">
+    <value>The extra unretract length is the value additional to retract length. On print resuming, if portion of plastic has spilled from an extruder, then volume of plastic in a nozzle becomes less than what it was before travel. If you have noticed for this plastic (especcially for runny) that at the beginning of print there is an underextrusion migrating to normal extrusion, then you shoud set not null for this parameter.</value>
+  </data>
+  <data name="PlasticExtraSpeed" xml:space="preserve">
+    <value>The unretract speed is the speed of direct movement of plastic in a feeder. Choose maximum for fast printing restart, however, keep in mind that some feeders can't handle fast feeding speed.</value>
+  </data>
+  <data name="PlasticExtrusionMultiplier" xml:space="preserve">
+    <value>The flow multiplier is a correction factor of plastic extrusion. Vary this parameter if all parts have under- or overextrusion.</value>
+  </data>
+  <data name="PlasticFilamentDiameter" xml:space="preserve">
+    <value>The filament diameter of plastic thread is measured in cross section. Usually it is 1.75mm or 3mm. You can find this value on the package of plastic filament.</value>
+  </data>
+  <data name="FilamentDiameterLabel" xml:space="preserve">
+    <value>GlobalFilamentDiameter</value>
+  </data>
+  <data name="ImgPlasticFilamentDiameter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>filament diameter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlasticFirstLayersHeightMM" xml:space="preserve">
+    <value>The first layers temperatures height is the height below which extruders and a table have special heating rules.</value>
+  </data>
+  <data name="ImgPlasticFirstLayersFanSpeedHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\First layers fan speed height.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlasticRetractionLengthOnChangingExtruder" xml:space="preserve">
+    <value>The retraction length on tool change is the length of plastic reverse movement in a feeder. Choose maximum length, taking into account the fact that plastic won't be fed into this tool for a long time and it is necessary to prevent plastic leakings due to gravity.</value>
+  </data>
+  <data name="PlasticRetractionLengthOnTravel" xml:space="preserve">
+    <value>The retraction length is the length of plastic reverse movement in a feeder. Choose long enough length to stop pressure onto plastic in an extruder chamber. Keep in mind that during retract, the extruder stays still, so the longer retract, the longer it stays without movement, which can lead to part melting by the extruder, and leakings for runny plastics.</value>
+  </data>
+  <data name="PlasticRetractionSpeed" xml:space="preserve">
+    <value>The retract speed is the speed of reverse movement of plastic in a feeder. Choose maximum for fast printing restart, however, keep in mind that some feeders can't handle fast feeding speed.</value>
+  </data>
+  <data name="PlasticRetractMinimumTravelNoCrossing" xml:space="preserve">
+    <value>The retraction minimum travel is the sufficient travel length before retraction. In case of short travels it makes no sence to stop for retraction because plastic has not enough time to spill out uncontrolled. Choose this value to maximum, but beware of plastic leaks while travels.</value>
+  </data>
+  <data name="PlasticTemperatureOnFLs" xml:space="preserve">
+    <value>The extruder temperature on first layers is the extruder printing temperature which is kept constant only on first layers - below height defined in settings.</value>
+  </data>
+  <data name="PlasticTemperaturePrint" xml:space="preserve">
+    <value>The extruder temperature is the temperature at which plastic will be melted for extruding from a nozzle. You can find an appropriate temperature range on the plastic filament package.</value>
+  </data>
+  <data name="PlasticTemperatureWait" xml:space="preserve">
+    <value>The standby extruder temperature is the extruder temperature at which it will be in an inactive state (another extruder is active, i.e. is printing). It should be as close as possible to printing temperature for faster heatup and print start, but low enough to prevent plastic free flow out from an extruder by gravity.</value>
+  </data>
+  <data name="PlasticWipeNozzleLength" xml:space="preserve">
+    <value>The wipe nozzle length is the length of reverse print head movement. The print head is moving in reverse after retract and is wiping spilling plastic on already printed lines. Choose length enough for stop free plastic spilling after retract.</value>
+  </data>
+  <data name="PlasticZHopP" xml:space="preserve">
+    <value>The Z-hop height is the extruder lift up height when moving between print areas. Choose minimum for fast printing process, but enough for prevent part edges hitting and as a result bringing and leaving beads on a part shell. Z-hop may lead formation of strings, however, it is usually easier remove this than removing beads.</value>
+  </data>
+  <data name="FiberEndPolygonEmptyDistanceMM" xml:space="preserve">
+    <value>Finish ironing distance is the length of travel which is performed by a composite nozzle at the end of fiber polygon in the direction of last segment. It happens after cut and full exit a of fiber tail. This movement is needed for ironing tail which, if not done, will be fluffy.</value>
+  </data>
+  <data name="FiberDiameter" xml:space="preserve">
+    <value>The fiber diameter is the average diameter of a fiber thread measured in cross section. For the Anisoprint CCF-1.5k this value is 0.34mm.</value>
+  </data>
+  <data name="FiberExtraSpeed" xml:space="preserve">
+    <value>Fiber extrusion speed is the speed of the fiber tail extrusion.</value>
+  </data>
+  <data name="FiberExtrusionMultiplier" xml:space="preserve">
+    <value>The plastic flow multiplier is a factor by which amount of extruded plastic in a composite extruder is multiplied. Vary this parameter if all composite polygons have under- or overextrusion.</value>
+  </data>
+  <data name="LinearDensity" xml:space="preserve">
+    <value>Linear density is the mass of 1km of fiber in grams.</value>
+  </data>
+  <data name="FiberZHopF" xml:space="preserve">
+    <value>Z-lift on restart is the height at which a composite extruder is raised to put out a fiber tail and start to print a composite polygon.</value>
+  </data>
+  <data name="FiberZHopFPauseAdhesion" xml:space="preserve">
+    <value>Restart pause is the delay before start of composite polygon printing. This is needed for the good adhesion between a fiber tail and an a underlying layer.</value>
+  </data>
+  <data name="PrinterAdditionalRetract" xml:space="preserve">
+    <value>The additional retract length is the additional length of plastic reverse movement in a feeder which will be added to the retract length value for used plastics. Use this parameter if your printer has bowden tube for plastic feeding, because in this case retraction inertia may appear.</value>
+  </data>
+  <data name="PrinterEndGCode" xml:space="preserve">
+    <value>The end G-code is the code which is executed at the end of print process.</value>
+  </data>
+  <data name="PrinterHasHeatedTable" xml:space="preserve">
+    <value>The has heated table flag is the flag which indicates if a printer has heatable table.</value>
+  </data>
+  <data name="PrinterHeight" xml:space="preserve">
+    <value>The height is the size of build area along the Z axis.</value>
+  </data>
+  <data name="PrinterInset0Acceleration" xml:space="preserve">
+    <value>The external shell acceleration is the acceleration which is used only for external shell printing. It has affect on travels and moves with extrusion.</value>
+  </data>
+  <data name="PrinterInset0Jerk" xml:space="preserve">
+    <value>The external shell jerk is the jerk value which is used only for external shell printing. It has affect on travels and moves without extrusion.</value>
+  </data>
+  <data name="PrinterLength" xml:space="preserve">
+    <value>The depth is the size of build area along the Y axis.</value>
+  </data>
+  <data name="PrinterOnChangeExtruderUpMM" xml:space="preserve">
+    <value>The Z-lift on tool change is the height at which a print head raises for tool change.</value>
+  </data>
+  <data name="PrinterOthersAcceleration" xml:space="preserve">
+    <value>The regular acceleration is the acceleration which is used for all printing areas except an external shell. It has affect on travels and moves with extrusions.</value>
+  </data>
+  <data name="PrinterOthersJerk" xml:space="preserve">
+    <value>The regular jerk is the jerk which is used for all printing areas except an external shell. It has affect on travels and moves with extrusion.</value>
+  </data>
+  <data name="PrinterStartGCode" xml:space="preserve">
+    <value>The start G-code is the code which is executed at the start of print process.</value>
+  </data>
+  <data name="PrinterTravelSpeedXY" xml:space="preserve">
+    <value>The X/Y travel speed is the linear speed of print head movements in XY plane without extrusions.</value>
+  </data>
+  <data name="PrinterTravelSpeedZ" xml:space="preserve">
+    <value>The Z travel speed is the linear speed of print head movements in the Z direction without extrusion.</value>
+  </data>
+  <data name="PrinterUseAccelerations" xml:space="preserve">
+    <value>The enable acceleration control is the flag of manual control over acceleartions.</value>
+  </data>
+  <data name="PrinterUseJerks" xml:space="preserve">
+    <value>The enable jerk control is the flag of manual control over jerks.</value>
+  </data>
+  <data name="PrinterWidth" xml:space="preserve">
+    <value>The width is the size of build area along the X axis.</value>
+  </data>
+  <data name="ImgExtruderCompositeFiberRestart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ExtruderCompositeFiberRestartValue.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExtruderFanIndex" xml:space="preserve">
+    <value>The cooling fan index is the number of this cooling fan in printer firmware.</value>
+  </data>
+  <data name="ExtruderHasFan" xml:space="preserve">
+    <value>The has cooling fan flag is the flag which indicates thar extruder has a nozzle cooling fan.</value>
+  </data>
+  <data name="ExtruderNozzleDiameter" xml:space="preserve">
+    <value>The nozzle diameter is the diameter of the outlet hole of a nozzle.</value>
+  </data>
+  <data name="ExtruderOffsetX" xml:space="preserve">
+    <value>X offset is the extruder X offset relative to the base point on a print head. If your printer has only one extruder then set this parameter to zero. If printer firmware doesn't set offset by itself then you should set other extruders offsets relative to base (usually first) extruder. In this case you sholud set offsets for this base extruder offsets to zero.</value>
+  </data>
+  <data name="ExtruderOffsetY" xml:space="preserve">
+    <value>Y offset is the extruder Y offset relatively to the base point on a print head. If your printer has only one extruder then set this parameter to zero. If printer firmware doesn't set offset by itself then you should set other extruders offsets relative to base (usually first) extruder. In this case you sholud set offsets for this base extruder offsets to zero.</value>
+  </data>
+  <data name="ExtruderOffsetZ" xml:space="preserve">
+    <value>Z offset is the extruder Z offset relatively to the base point on a print head. If your printer has only one extruder then set this parameter to zero. If printer firmware doesn't set offset by itself then you should set other extruders offsets relative to base (usually first) extruder. In this case you sholud set offsets for this base extruder offsets to zero.</value>
+  </data>
+  <data name="ExtruderPFCutCode" xml:space="preserve">
+    <value>The cut G-code is the code, that actuates fiber cutting. This value should be set only by printer manufacturer.</value>
+  </data>
+  <data name="ExtruderPFCutDistance" xml:space="preserve">
+    <value>The cut distance is the distance from a cut point to outlet hole of a nozzle. This value should be set only by printer manufacturer.</value>
+  </data>
+  <data name="ExtruderPFExtraLength" xml:space="preserve">
+    <value>The fiber restart length is the length of fiber extrusion during restart. This is necessary for the fiber tail to get out of the nozzle. This parameter in general should equal to the cut distance.</value>
+  </data>
+  <data name="ImgExtruderCompositeCutDistance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ExtruserCompositeCutDistance.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgExtruderHasFan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgExtruderHasFan.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgExtruderNozzleDiameter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgExtruderNozzleDiameter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProfilePartAllowGenerateFiber" xml:space="preserve">
+    <value>The use fiber flag is the flag which indicates that parts may be reinforced with fiber.</value>
+  </data>
+  <data name="ProfilePartGenerateBrim" xml:space="preserve">
+    <value>The generate brim flag is the flag which indicates that the Aura will generate brims for parts. The brim is the extended contour of a part on a first layer. Use brim to prevent part stick-off from table surface during printing process.</value>
+  </data>
+  <data name="ProfilePartGenerateFiberPerimeters" xml:space="preserve">
+    <value>The generate reinforced perimeters flag is the flag which indicates that the Aura will generate reinforced perimeters for printed parts.</value>
+  </data>
+  <data name="ProfilePartGenerateSkirt" xml:space="preserve">
+    <value>The generate skirt is the flag which indicates that the Aura will generate skirts for parts. The skirt is the extended contour of a part on a first layer. Use skirt to stabilize plastic flow in extruder before main printing.</value>
+  </data>
+  <data name="ProfilePartGenerateSupport" xml:space="preserve">
+    <value>The generate support flag is the flag which indicates that the Aura will generate supports for parts. The support is used to prevent the fall of overhanging parts.</value>
+  </data>
+  <data name="ProfilePartGenerateWipeTower" xml:space="preserve">
+    <value>The generate wipe tower flag is the flag which indicates that the Aura will generate wipe tower for parts. The wipe tower is a service part that is being printed at the same time as main parts. The wipe tower is used to clean nozzles on tool change.</value>
+  </data>
+  <data name="ProfilePartInfillCPercent" xml:space="preserve">
+    <value>The fill density percent is the percent of filled space inside the shell.</value>
+  </data>
+  <data name="ProfilePartInfillSBottomTopLayerCount" xml:space="preserve">
+    <value>The top/bottom solid layers count is the number of layers in which solid infill will be generated. The solid infill will be generated in special spots - where a layer contacts with external environment.</value>
+  </data>
+  <data name="ProfilePartInsetFInnerCount" xml:space="preserve">
+    <value>The inner reinforced perimeters count is the number of perimeters which will reinforce inner holes (not surface) of a part.</value>
+  </data>
+  <data name="ProfilePartInsetFOuterCount" xml:space="preserve">
+    <value>The outer reinforced perimeters count is the number of perimeters which will reinforce outer surface(not holes) of a part.</value>
+  </data>
+  <data name="ProfilePartInsetX0Count" xml:space="preserve">
+    <value>The external shell perimeters is the number of perimeters which build the plastic external shell - the most precise one.</value>
+  </data>
+  <data name="ProfilePartInsetXPInnerWhenFiberCount" xml:space="preserve">
+    <value>The plastic perimeters count inside fiber is the number of perimeters between fiber and cellular infill.</value>
+  </data>
+  <data name="ProfilePartInsetXPOnlyCount" xml:space="preserve">
+    <value>The plastic perimeters count is the number of perimeters which build the plastic internal shell. It provides solidity of part surface.</value>
+  </data>
+  <data name="ProfilePartInsetXPOuterWhenFiberCount" xml:space="preserve">
+    <value>The plastic perimeters count outside fiber is the number of perimeters between external shell and fiber perimeters.</value>
+  </data>
+  <data name="ImgPlasticInfillSolidAngleStep" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticInfillSolidAngleStep.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProfileBrimEWCoeff" xml:space="preserve">
+    <value>The extrusion width coefficient is the nozzle diameter multiplication factor. That is extrusion width = nozzle diameter * coefficient.</value>
+  </data>
+  <data name="ProfileBrimLoops" xml:space="preserve">
+    <value>The brim loops count is the number of brim loops around a part. The more loops, the adhesion between parts and a table is stronger.</value>
+  </data>
+  <data name="ProfileFLEWCoeffToNormal" xml:space="preserve">
+    <value>The first layer extrusion width coefficient is the extrusion width multiplication factor. It has affect on extrusion width for all entities on first layer and consequently on plastic amount.</value>
+  </data>
+  <data name="ProfileFLSpeed" xml:space="preserve">
+    <value>The first layer printing speed is the speed of printing of all entities at the first layer. You may want to set this value a little slower than average speed on other layers to improve adhesion between parts and a table.</value>
+  </data>
+  <data name="ProfileFLThickness" xml:space="preserve">
+    <value>The first layer height is the height of the first layer. Set this parameter a little bit larger that other microlayers to compensate table relief. The first layer has no microlayers structure as macrolayer and it doesn't comprise into any macrolayer as other microlayers.</value>
+  </data>
+  <data name="ProfileInfillPCEWCoeff" xml:space="preserve">
+    <value>The extrusion width coefficient is the nozzle diameter multiplication factor. That is extrusion width = nozzle diameter * coefficient.</value>
+  </data>
+  <data name="ProfileInfillPCSpeed" xml:space="preserve">
+    <value>The printing speed is the speed which will be applied to plastic infill printing. Set this parameter as high as possible to speed up printing process.</value>
+  </data>
+  <data name="ProfileInfillPCStartingAngle" xml:space="preserve">
+    <value>The fill starting angle is the angle of infill rotation.</value>
+  </data>
+  <data name="ProfileInfillPCType" xml:space="preserve">
+    <value>Fill pattern. You could choose from three patterns: lines, grid or triangles, depending on your preferences.</value>
+  </data>
+  <data name="ProfileInfillPSAngleStep" xml:space="preserve">
+    <value>The fill angle offset is the offset angle which is added to current infill rotation angle on each layer. For example, if fill angle offset is 10°, on first macro layer angle is 0°, on second is 10°, on third is 20° etc.</value>
+  </data>
+  <data name="ProfileInfillPSEWCoeff" xml:space="preserve">
+    <value>The extrusion width coefficient is the nozzle diameter multiplication factor. That is extrusion width = nozzle diameter * coefficient</value>
+  </data>
+  <data name="ProfileInfillPSMacroLayersOntoFiberCount" xml:space="preserve">
+    <value>The solid plastic layers above fiber count is the number of macrolayers in which solid infill will be generated. This parameter not used as solid plastic layers below fiber, so you may want to use it only for cover up fiber polygons from above.</value>
+  </data>
+  <data name="ProfileInfillPSMacroLayersUnderFiberCount" xml:space="preserve">
+    <value>The solid plastic layers below fiber count is the number of macrolayers in which solid infill will be generated. It needs to prevent fiber fall through cellular infill.</value>
+  </data>
+  <data name="ProfileInfillPSSpeed" xml:space="preserve">
+    <value>The printing speed is the speed which will be applied to plastic infill printing. Set this parameter as high as possible to speed up printing process.</value>
+  </data>
+  <data name="ProfileInfillPSStartingAngle" xml:space="preserve">
+    <value>The fill starting angle is the starting angle of infill rotation.</value>
+  </data>
+  <data name="ProfileInset0EWCoeff" xml:space="preserve">
+    <value>The extrusion width coefficient is the nozzle diameter multiplication factor. That is extrusion width = nozzle diameter * coefficient.</value>
+  </data>
+  <data name="ProfileInset0Speed" xml:space="preserve">
+    <value>The printing speed is the speed which will be applied to external shell printing. Set this parameter to the sufficient minimum to improve surface quality of parts. The slower printing speed, the lower chance to obtain vertical ringing on parts.</value>
+  </data>
+  <data name="ProfileInsetXFEW" xml:space="preserve">
+    <value>The extrusion width is the width of composite material (plastic + fiber).</value>
+  </data>
+  <data name="ProfileInsetXFExtrusionFiberMaxPercent" xml:space="preserve">
+    <value>The fiber feedrate is the percent of full presumed path length. Descrease this parameter to increase fiber tension and increase this parameter to descrease fiber tension.</value>
+  </data>
+  <data name="ProfileInsetXFSpeed" xml:space="preserve">
+    <value>The printing speed coefficient is the multiplication factor which will be applied to fiber print speeds.</value>
+  </data>
+  <data name="ProfileInsetXPEWCoeff" xml:space="preserve">
+    <value>The extrusion width coefficient is the nozzle diameter multiplication factor. That is extrusion width = nozzle diameter * coefficient.</value>
+  </data>
+  <data name="ProfileInsetXPSpeed" xml:space="preserve">
+    <value>The printing speed is the speed which will be applied to plastic perimeters printing. Set this parameter as high as possible to speed up printing process.</value>
+  </data>
+  <data name="ProfileLayerThicknessInfillRatioToMacro" xml:space="preserve">
+    <value>The infill layer height is the height of layers which contain cellular infill. The cellular infill is inside plastic perimeters and leaves an empty space in a part.</value>
+  </data>
+  <data name="ProfileLayerThicknessInset0RatioToMacro" xml:space="preserve">
+    <value>The external shell height is the height of thin plastic layers which build up an external shell of a part. The thinner external shell, the more precise and accurate the part looks.</value>
+  </data>
+  <data name="ProfileLayerThicknessInsetXPRatioToMacro" xml:space="preserve">
+    <value>The plastic perimeters layer height is the height of thick plastic shell. Set this value as much as possible to speed up the print process. Because plastic perimeters are not visible they can be printed thicker than an external shell to speed up the printing process.</value>
+  </data>
+  <data name="ProfileLayerThicknessMacroLayerHeight" xml:space="preserve">
+    <value>The macrolayer height is the height of a layer package which contains microlayers. The microlayer is the layer which contains one or more print entities with the same height. The macrolayer contains microlayers and its structure is defined by microlayer heights. For example, macrolayer height = 0.6mm, external shell height = 0.2mm, plastic perimeters height = 0.3mm, fiber layer height is always equal to macrolayer height and now it is 0.6mm. Accordinally, in this macrolayer we have 4 microlayers. First on 0.2mm and it has only external shell for printing. Second on 0.3mm and it has only plastic perimeters. Third on 0.4mm and it has only external shell. And the last one on 0.6mm and it has external shell, plastic perimeters and fiber perimeters.</value>
+  </data>
+  <data name="ProfileLayerThicknessSSThickRatioToMacro" xml:space="preserve">
+    <value>The thick support layer height is the height of layers which contain thick supports. The thick support is calcalated by intersection of thin support layers. Set thick support layer height as large as possible to speed up the print process.</value>
+  </data>
+  <data name="ProfileLayerThicknessSSThinRatioToMacro" xml:space="preserve">
+    <value>The thin support layer height is the height of layers which contain thin supports. Thin supports are generated in the areas which can't be converted into thick support.</value>
+  </data>
+  <data name="ProfileOozePreventionDoAvoidCrossingPerimeters" xml:space="preserve">
+    <value>The avoid crossing borders flag is the flag which indicates that border crossing minimization mode in on. It means that if it is possible to travel from one print area to another without crossing borders, that path will be chosen instead of direct path with borders crossing . This mode increases print time, but improves external surface quality.</value>
+  </data>
+  <data name="ProfileOozePreventionDoCoastAtEnd" xml:space="preserve">
+    <value>The do coast before retract is the flag which indicates that plastic polygon will have dry (without plastic feeding) segments in the end.</value>
+  </data>
+  <data name="ProfileOozePreventionDoRetractOnLayerChange" xml:space="preserve">
+    <value>The do retract on changing layers is the flag which indicates that plastic will be retracted on layer change even if there is no XY movements during change layers.</value>
+  </data>
+  <data name="ProfileOozePreventionDoRetractOnlyWhenCrossingPerimeters" xml:space="preserve">
+    <value>The do retract only when crossing borders is the flag which indicates that only crossing perimeter travels will have retracts before them. Choose that mode to speed up print process. Plastic that running from nozzle on travels will be all inside a part, so it will not be visible. If you want to do retract before all travels you should uncheck this flag.</value>
+  </data>
+  <data name="ProfileOozePreventionDoWipeNozzle" xml:space="preserve">
+    <value>The do wipe nozzle flag is the flag which indicates that plastic polygon will have reverse movement after full polygon print has ended.</value>
+  </data>
+  <data name="ProfileOozePreventionDoZHop" xml:space="preserve">
+    <value>The do z-hop when retracted flag is the flag which switches on/off a nozzle z-hop mode when travel has retract. Choose this mode to improve external shell surface quality, but keep in mind that it sligtly slow down print process. Besides, it may produce strings between print areas, but usually it is easier to remove them than plastic drops.</value>
+  </data>
+  <data name="ProfileOtherCoolingMinLayerTimeForSlowing" xml:space="preserve">
+    <value>The minimum layer print time. If layer print time is less that this parameter value, the printing speed will be reduced.</value>
+  </data>
+  <data name="ProfileOtherInfillPSExtendIntoPerimeter" xml:space="preserve">
+    <value>The infill extension into perimeters is the length by which infill penetrate perimeters. Choose the length that provides infills fusion together with perimeters.</value>
+  </data>
+  <data name="ProfileOtherTrimGapRatio" xml:space="preserve">
+    <value>When this parameter is 0 plastic polygon is fully closed. When this parameter is 1, plastic polygon has empty gap that is equal to extrusion width. Choose the value that is differ from 0, if you've seen the plastic overextrusions on polygon seam.</value>
+  </data>
+  <data name="ProfileSkirtDistance" xml:space="preserve">
+    <value>The distance from part is the distance between skirt and part.</value>
+  </data>
+  <data name="ProfileSkirtLoops" xml:space="preserve">
+    <value>The skirt loops count is the number of skirt loops around a part. Choose the sufficient number to stabilize plastic flow by the end of printing the skirt.</value>
+  </data>
+  <data name="ProfileSSAirGapToBottom" xml:space="preserve">
+    <value>The bottom airgap thin layers count is the number of layers between the bottom of a support and the top of a part. Choose a value with which support will be easy to tear from a part and support will not fall down because of large distance to a part.</value>
+  </data>
+  <data name="ProfileSSAirGapToUp" xml:space="preserve">
+    <value>The top airgap thin layers count is the number of layers between the top of a support and the bottom of a part. Choose a value with which support will be easy to tear from a part and supported areas will not fall down because of large distance to a support.</value>
+  </data>
+  <data name="ProfileSSDoAirGap" xml:space="preserve">
+    <value>The make airgaps flag is the flag which indicates that air gaps will be generated onto and/or under supports.</value>
+  </data>
+  <data name="ProfileSSEWCoeffThickAndThin" xml:space="preserve">
+    <value>The extrusion width coefficient is the nozzle diameter multiplication factor. That is extrusion width = nozzle diameter * coefficient.</value>
+  </data>
+  <data name="ProfileSSGenerateInternalSupport" xml:space="preserve">
+    <value>The generate support in holes is the flag which indicates that support will be generated not only on the outside of part but in holes too.</value>
+  </data>
+  <data name="ProfileSSGeneratePerimeters" xml:space="preserve">
+    <value>The generate shell for support is the flag which indicates that external shell will be generated for supports.</value>
+  </data>
+  <data name="ProfileSSInfillPercent" xml:space="preserve">
+    <value>The fill density percent is the percent of filled space inside the support.</value>
+  </data>
+  <data name="ProfileSSInfillType" xml:space="preserve">
+    <value>Fill pattern. You could choose from three patterns: lines, grid or triangles, depending on your preferences.</value>
+  </data>
+  <data name="ProfileSSSelfSupportAngle" xml:space="preserve">
+    <value>The max unsopported overhang angle up to which part overhang has no need to be supported. If angle is more than the unsupported angle then supports will be generated. The angle is regarding to vertical axe.</value>
+  </data>
+  <data name="ProfileSSSpeedThick" xml:space="preserve">
+    <value>The thick support printing speed is the speed which will be applied to thick support printing. Set this parameter as high as possible to speed up printing process.</value>
+  </data>
+  <data name="ProfileSSSpeedThin" xml:space="preserve">
+    <value>The thin support printing speed is the speed which will be applied to thin support printing. Set this parameter as high as possible to speed up printing process.</value>
+  </data>
+  <data name="ProfileSSStartingAngle" xml:space="preserve">
+    <value>The fill angle is the angle of infill rotation.</value>
+  </data>
+  <data name="ProfileSSXYDistanceFromObject" xml:space="preserve">
+    <value>The horizontal X/Y distance from model is the offset from a part to supports. Set this parameter to a part has no fusion with supports.</value>
+  </data>
+  <data name="FiberDoPlasticRetract" xml:space="preserve">
+    <value>The do plastic retract flag is the flag which indicates that plastic retract should be performed during composite printing.</value>
+  </data>
+  <data name="ImgExtruderHorizontalOffset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgExtruderHorizontalOffset.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgExtruderZOffset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgExtruderZOffset.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFiberDiameter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgFiberDiameter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFiberFiberExtrusionSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgFiberFiberExtrusionSpeed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFiberFinishIroningDistance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgFiberFinishIroningDistance.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFiberPlasticFlowMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgFiberPlasticFlowMultiplier.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFiberRestartPause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgFiberRestartPause.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFiberZLiftOnRestart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgFiberZLiftOnRestart.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticBedTemperature" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticBedTemperature.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticCoastLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticCoastLength.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticCoolingEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticCoolingEnable.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticExtraUnretractLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticExtraUnretractLength.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticExtrusionMultiplier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticExtrusionMultiplier.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticFirstLayersFanSpeedHeight1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticFirstLayersFanSpeedHeight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticFirstLayersHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticFirstLayersHeight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticMaximumFanSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticMaximumFanSpeed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticPlasticZHopHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticPlasticZHopHeight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticPrintTemperature1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticPrintTemperature1 .jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticPrintTemperature2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticPrintTemperature2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticRegularFanSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticRegularFanSpeed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticRetractionLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticRetractionLength.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticRetractionLengthOnToolChange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticRetractionLengthOnToolChange.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticRetractionMinimumTravel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticRetractionMinimumTravel.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticWipeLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticWipeLength.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterBowden" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterBowden.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterExternalShell" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterExternalShell.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterHasHeatedTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterHasHeatedTable.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterHeight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterLength.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterTravelSpeedXY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterTravelSpeedXY.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterTravelSpeedZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterTravelSpeedZ.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterWidth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterWidth.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPrinterZLiftHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPrinterZLiftHeight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgPlasticInfillSolidAngleStep1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgPlasticInfillSolidAngleStep.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileBrimLoops" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileBrimLoops.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileExternalShellPrintingSpeed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileExternalShellPrintingSpeed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileExternalShellThickness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileExternalShellThickness.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileExtrusionCoefficient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileExtrusionCoefficient.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileFillPattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileFillPattern.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileFLCoeffToNormals" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileFLCoeffToNormals.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileFLThickness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileFLThickness.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInfillCStartingAngle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillCStartingAngle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInfillSStartingAngle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillSStartingAngle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInsetXFFiberFeedrate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInsetXFFiberFeedrate.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInsetXFSolidPlasticLayersBelowFiber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInsetXFSolidPlasticLayersBelowFiber.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInxsetXFEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInxsetXFEW.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileLayerThicknessInsetXPInfill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileLayerThicknessInsetXPInfill.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileLayerThicknessMacroLayerHeight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileLayerThicknessMacroLayerHeight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileLayerThicknessSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileLayerThicknessSupport.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileOozePreventionAvoidCrossing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileOozePreventionAvoidCrossing.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileOtherExtensionIntoPerimeter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileOtherExtensionIntoPerimeter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileOtherTrimGapRatio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileOtherTrimGapRatio.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartFillDensity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartFillDensity.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartGenerateBrim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartGenerateBrim.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartGenerateFiberPerimeters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartGenerateFiberPerimeters.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartGenerateSkirt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartGenerateSkirt.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartGenerateSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartGenerateSupport.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartGenerateWipeTower" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartGenerateWipeTower.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInfillSBottomTopLayerCount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInfillSBottomTipLayerCount.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInsetFInnerCount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInsetFInnerCount.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInsetFOuterCount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInsetFOuterCount.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInsetX0Count" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInsetX0Count.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInsetXPCount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInsetXPCount.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInsetXPInnerWhenFiber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInsetXPInnerWhenFiber.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartInsetXPOuterWhenFiber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInsetXPOuterWhenFiber.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSkirtDistance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSkirtDistance.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSkirtLoops" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSkirtLoops.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSupportDoAirGaps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSupportDoAirGaps.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSupportGenerateInternalSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSupportGenerateInternalSupport.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSupportGeneratePerimeters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSupportGeneratePerimeters.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSupportSelfSupportAngle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSupportSelfSupportAngle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileSupportXYDistanceFromModel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileSupportXYDistanceFromModel.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pusheen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\Pusheen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartGenerateFiberInfill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartGenerateFiberInfill.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProfilePartGenerateFiberInfills" xml:space="preserve">
+    <value>The generate reinforced infills flag is the flag which indicates that the Aura will generate reinforced infills for printed parts.</value>
+  </data>
+  <data name="ImgProfilePartInfillFiberType" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartInfillFiberType.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfilePartRibPlacement" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfilePartRibPlacement.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProfilePartInfillFiberType" xml:space="preserve">
+    <value>The fiber infill pattern. You may choose from four patterns: solid, rombic grid, isogrid and anisogrid.</value>
+  </data>
+  <data name="ProfilePartAnisogridRibPlacementType" xml:space="preserve">
+    <value>The anisogrid ribs crossing type. You may choose from two types: first is when all crossing will be laying near one mutual vertex and second is when transverse rib will be laying on the middles of main (side) ribs.</value>
+  </data>
+  <data name="ProfileInfillFiberSolidAngleList" xml:space="preserve">
+    <value>The guide directions is the angles of reinfircing infill lines in a layer. You shoud divide angles with / character. For example, the "60/-60/0" string will result on the 1st layer 60° angle of infill lines, on the 2nd layer -60° angle of infill lines, on the 3rd layer 0°, on the 4th layer 60°, on the 5th layer -60°, on the 6th layer 0° e.t.c</value>
+  </data>
+  <data name="ProfileInfillFiberSolidEW" xml:space="preserve">
+    <value>The extrusion width is the width of composite material (plastic + fiber).</value>
+  </data>
+  <data name="ProfileInfillFiberSolidExtendIntoPerimeters" xml:space="preserve">
+    <value>The infill extension into perimeters is the distance by which infill penetrates perimeters. Choose the length that provides infills fusion together with perimeters.</value>
+  </data>
+  <data name="ProfileInfillFiberSolidExtrusionFiberMaxPercent" xml:space="preserve">
+    <value>The fiber feedrate is the percentage of full presumed path length. Decrease this parameter to raise fiber tension and increase this parameter to decrease fiber tension.</value>
+  </data>
+  <data name="ProfileInfillFiberSolidMinSegmentLength" xml:space="preserve">
+    <value>The minimum line length is the length of shortest line that can be printed as it is (with/without prolonging and with/without connection in polygon with other infill lines).</value>
+  </data>
+  <data name="ProfileInfillFiberSolidSpeedCoefficient" xml:space="preserve">
+    <value>The printing speed coefficient is the multiplication factor which will be applied to fiber print speeds.</value>
+  </data>
+  <data name="ImgProfileInfillFiberSolidMinLength" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillFiberSolidMinLength.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProfileInfillFiberAnisogridAngleBetweenMainRibs" xml:space="preserve">
+    <value>The angle between main ribs is the angle between side ribs in anisogrid triangles.</value>
+  </data>
+  <data name="ProfileInfillFiberAnisogridFillDensity" xml:space="preserve">
+    <value>The fill density percent is the percent of filled space inside the shell.</value>
+  </data>
+  <data name="ProfileInfillFiberAnisogridOrientation" xml:space="preserve">
+    <value>The guide angle is the angle between the vector that is going through the middle of a triangle base and its opposite vertex, and the horizontal axis OX.</value>
+  </data>
+  <data name="ProfileInfillFiberCellularEW" xml:space="preserve">
+    <value>The extrusion width is the width of composite material (plastic + fiber).</value>
+  </data>
+  <data name="ProfileInfillFiberCellularExtendIntoPerimeter" xml:space="preserve">
+    <value>The infill extension into perimeters is the distance by which infill penetrates perimeters. Choose the length that provides infills fusion together with perimeters.</value>
+  </data>
+  <data name="ProfileInfillFiberCellularExtrusionFiberMaxPercent" xml:space="preserve">
+    <value>The fiber feedrate is the percentage of full presumed path length. Decrease this parameter to raise fiber tension and increase this parameter to decrease fiber tension.</value>
+  </data>
+  <data name="ProfileInfillFiberCellularMinSegmentLength" xml:space="preserve">
+    <value>The minimum line length is the length of shortest line that can be printed as it is (with/without prolonging and with/without connection in polygon with other infill lines).</value>
+  </data>
+  <data name="ProfileInfillFiberCellularSpeedCoefficient" xml:space="preserve">
+    <value>The printing speed coefficient is the multiplication factor which will be applied to fiber print speeds.</value>
+  </data>
+  <data name="ProfileInfillFiberIsogridDensity" xml:space="preserve">
+    <value>The fill density percent is the percent of filled space inside the shell.</value>
+  </data>
+  <data name="ProfileInfillFiberIsogridOrientation" xml:space="preserve">
+    <value>The guide angle is the angle between the vector that is going through the middle of a triangle base and its opposite vertex, and the horizontal axis OX.</value>
+  </data>
+  <data name="ProfileInfillFiberRombicGridDensity" xml:space="preserve">
+    <value>The fill density percent is the percent of filled space inside the shell.</value>
+  </data>
+  <data name="ProfileInfillFiberRombicGridFirstRibAngle" xml:space="preserve">
+    <value>The first rib angle is the angle between the one pair of parallel ribs in rombic grid and the horizontal axis OX.</value>
+  </data>
+  <data name="ProfileInfillFiberRombicGridSecondRibAngle" xml:space="preserve">
+    <value>The second rib angle is the angle between the another pair of parallel ribs in rombic grid and the horizontal axis OX.</value>
+  </data>
+  <data name="ImgProfileInfillFiberAnisogridAngleBetweenMainRibs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillFiberAnisogridAngleBetweenMainRibs.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInfillFiberAnisogridOrientation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillFiberAnisogridOrientation.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInfillFiberIsogridOrientation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillFiberIsogridOrientation.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInfillFiberRombicFirstRibAngle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillFiberRombicFirstRibAngle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgProfileInfillFiberRombicSecondRibAngle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\Resources\ImgProfileInfillFiberRombicSecondRibAngle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

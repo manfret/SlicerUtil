@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Aura.Themes.AuraSendReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:Aura.Themes.Localization"
+        xmlns:controls="clr-namespace:Aura.Controls"
+        mc:Ignorable="d">
+    <Border Style="{DynamicResource RowStyleSettings}" Background="{DynamicResource MainGray}" BorderThickness="1"
+            Margin="0 10 0 0">
+        <Grid Height="300" Width="380" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="EMailLabel" Grid.Row="0" Style="{DynamicResource LabelTextBlockSettings}"
+                       Text="{x:Static localization:Common_en_EN.YourEMail}"/>
+            <TextBox x:Name="EMail" Grid.Row="1" Style="{DynamicResource TextBoxSettingsWithoutWidth}"
+                     HorizontalContentAlignment="Left"/>
+            <TextBlock x:Name="DescriptionCaption" Grid.Row="2" Style="{DynamicResource LabelTextBlockSettings}"
+                       Text="{x:Static localization:Common_en_EN.Description}"
+                       Margin="0 2 0 0"/>
+            <TextBox x:Name="ReportText" Grid.Row="3" Style="{DynamicResource TextBoxSettingsDescription}"
+                     Margin="0 5 0 8" />
+            <StackPanel Orientation="Vertical" Grid.Row="4">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"> 
+                    <CheckBox x:Name="CheckBoxAddProject" IsChecked="True" Margin="0 1 0 0" 
+                              Checked="CheckBoxAddProject_OnChecked"
+                              Unchecked="CheckBoxAddProject_OnUnchecked"/>
+                    <TextBlock Style="{DynamicResource LabelTextBlockSettings}" 
+                               Text="{x:Static localization:Common_en_EN.ReportAttachProject}" 
+                               FontSize="12" Margin="6 0 0 0"/>
+                </StackPanel>
+                <StackPanel x:Name="StackPanelProject" Orientation="Horizontal" Margin="0 5 0 0" VerticalAlignment="Center" Visibility="Visible">
+                    <RadioButton x:Name="RBAttachCurrent" IsChecked="True" Margin="0 1 0 0"/>
+                    <TextBlock Style="{DynamicResource LabelTextBlockSettings}" 
+                               Text="{x:Static localization:Common_en_EN.ReportAttachCurrentProject}"
+                               Margin="2 0 0 0"
+                               FontSize="12"/>
+                    <RadioButton x:Name="RBAttachAnothert" Margin="10 1 0 0" Checked="RBAttachAnothert_OnChecked"/>
+                    <TextBlock Style="{DynamicResource LabelTextBlockSettings}" 
+                               Text="{x:Static localization:Common_en_EN.ReportAttachAnotherProject}"
+                               Margin="2 0 0 0" FontSize="12"/>
+                </StackPanel>
+
+            </StackPanel>
+            <TextBlock x:Name="ErrorText" Grid.Row="5" FontSize="10" Foreground="Red"/>
+            <DockPanel Grid.Row="6" LastChildFill="True"
+                        Margin="0 10 0 6">
+                <controls:ColoredButton x:Name="SendReport" DockPanel.Dock="Right" 
+                                        MainColorBrush="{DynamicResource MysteriousGray}"
+                                        ForegroundBrush="White"
+                                        Width="120" BorderThickness="0" Height="25"
+                                        MainText="{x:Static localization:Common_en_EN.ReportSend}"
+                                        FontSize="12" HighlightBrush="{DynamicResource AccentColorBrush}"
+                                        Click="SendReport_OnClick"/>
+                <TextBlock x:Name="TextBlockSuccess" Text="{x:Static localization:Common_en_EN.Success}"
+                           Foreground="Green" Visibility="Hidden"/>
+
+            </DockPanel>
+        </Grid>
+    </Border>
+</UserControl>

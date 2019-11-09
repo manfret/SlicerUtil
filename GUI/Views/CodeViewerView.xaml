@@ -1,0 +1,624 @@
+﻿<UserControl x:Class="Aura.Views.CodeViewerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:util="clr-namespace:GUI.Controls.Util"
+             xmlns:util1="clr-namespace:Aura.Controls.Util"
+             xmlns:wpf="clr-namespace:Aura.Controls.Util.IKriv.Wpf"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:views="clr-namespace:Aura.Views"
+             xmlns:managers="clr-namespace:Aura.Managers"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:CodeViewerVM, IsDesignTimeCreatable=True}"
+             managers:InputBindingBehavior.PropagateInputBindingsToWindow="True" >
+    <UserControl.InputBindings>
+        <KeyBinding Key="Down" Command="{Binding LayerSelectedDownCommand}"/>
+        <KeyBinding Key="Up" Command="{Binding LayerSelectedUpCommand}"/>
+    </UserControl.InputBindings>
+    <UserControl.Resources>
+        <Style x:Key="CVSimpleRow" TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness" Value="1 0 1 0" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Padding" Value="10 4 10 4" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="MinWidth" Value="35" />
+        </Style>
+        <Style x:Key="CVWhiteSimpleRow" TargetType="{x:Type Border}" BasedOn="{StaticResource CVSimpleRow}">
+            <Setter Property="Background" Value="White" />
+        </Style>
+        <Style x:Key="CVGraySimpleRow" TargetType="{x:Type Border}" BasedOn="{StaticResource CVSimpleRow}">
+            <Setter Property="Background" Value="{DynamicResource MainGray}" />
+        </Style>
+        <Style x:Key="CVSmallTextBoxSettingsWithoutWidth" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="Background" Value="{DynamicResource MainBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="IsTabStop" Value="True" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="bg" BorderBrush="{TemplateBinding BorderBrush}" Width="{TemplateBinding Width}"
+                                Background="{TemplateBinding Background}" BorderThickness="1" Padding="2 0 2 0">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsReadOnly" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource MainGray}" />
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="ToolTip"
+                                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)[0].ErrorContent}" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsReadOnly" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="BorderBrush" TargetName="bg"
+                                            Value="{DynamicResource AccentColorBrush}" />
+                                    <Setter Property="BorderThickness" TargetName="bg" Value="1" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsFocused" Value="True" />
+                                    <Condition Property="IsReadOnly" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="BorderBrush" TargetName="bg"
+                                            Value="{DynamicResource AccentColorBrush}" />
+                                    <Setter Property="BorderThickness" TargetName="bg" Value="1" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CVSmallTextBoxSettings" TargetType="{x:Type TextBox}"
+               BasedOn="{StaticResource CVSmallTextBoxSettingsWithoutWidth}">
+            <Setter Property="Width" Value="70" />
+        </Style>
+        <ImageBrush x:Key="ArrowUpNormal" ImageSource="{DynamicResource ImgArrowUpFilled}" />
+        <ImageBrush x:Key="ArrowUpAccent" ImageSource="{DynamicResource ImgArrowUpFilledAccent}" />
+        <ImageBrush x:Key="ArrowDownNormal" ImageSource="{DynamicResource ImgArrowDownFilled}" />
+        <ImageBrush x:Key="ArrowDownAccent" ImageSource="{DynamicResource ImgArrowDownFilledAccent}" />
+
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5" ScaleX="1" ScaleY="1" />
+        <ScaleTransform x:Key="TransformArrow" CenterX="0.5" CenterY="0.5" ScaleX="1.0"
+                        ScaleY="1.0" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <util:StringConcatConverter x:Key="StringConcatConverter" />
+        <util:MaxFromTwoConverter x:Key="MaxFromTwoConverter" />
+        <util1:MathConverter x:Key="MathConverter" />
+        <wpf:MultiMathConverter x:Key="MultiMathConverter" />
+        <controls:BlocksConverter x:Key="BlocksConverter" />
+        <viewModels:BlockModesToVisibilityConverter x:Key="BlockModesToVisibilityConverter" />
+        <viewModels:RenderModesToVisibilityConverter x:Key="RenderModesToVisibilityConverter" />
+        <viewModels:LayersModeToVisibilityConverter x:Key="LayersModeToVisibilityConverter" />
+        <viewModels:EqualityConverter x:Key="EqualityConverter" />
+
+        <DataTemplate DataType="{x:Type viewModels:CodeViewerGeometryVM}">
+            <views:CodeViewerGeometryView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:CodeViewerCodeVM}">
+            <views:CodeViewerCodeView />
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <DockPanel x:Name="MainGrid" LastChildFill="True" Width="Auto" Height="Auto" Margin="0 0 30 0">
+        <Grid x:Name="GridSettings" Height="Auto" Width="380"
+              HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="StackPanelAllVisibility" Orientation="Vertical" Grid.Row="0">
+                <Border x:Name="BorderBack"
+                        Margin="0 0 0 5">
+                    <controls:ColoredButton x:Name="ButtonBack"
+                                            Width="{Binding ElementName=GridSettings, Path=Width}"
+                                            Height="45"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            BorderThickness="0"
+                                            MainColorBrush="{DynamicResource MysteriousGray}"
+                                            HighlightBrush="{DynamicResource AccentColorBrush}"
+                                            MainText="{x:Static localization:CodeViewer_en_EN.Back}"
+                                            ForegroundBrush="White"
+                                            Command="{Binding ExitCodeView}" />
+                </Border>
+                <Border x:Name="BorderSaveToFile"
+                        Margin="0 0 0 5">
+                    <controls:ColoredButton x:Name="ButtonSaveToFile"
+                                            Width="{Binding ElementName=GridSettings, Path=Width}"
+                                            Height="45"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            BorderThickness="0"
+                                            MainColorBrush="#3fa376"
+                                            HighlightBrush="{DynamicResource AccentColorBrush}"
+                                            MainText="{x:Static localization:Session_en_EN.GenerationButtonSaveToFileText}"
+                                            ForegroundBrush="White"
+                                            Command="{Binding SaveGCodeToFileCommand}" />
+                </Border>
+                <Border x:Name="BorderChooseRenderMode"
+                        Style="{StaticResource CVGraySimpleRow}"
+                        BorderThickness="1 1 1 0">
+                    <Grid Margin="0 6 0 0 ">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <primitive:RBLeft x:Name="RB3D" Grid.Column="0"
+                                          Background="{DynamicResource MainGray}"
+                                          BorderBrush="LightGray"
+                                          BorderThickness="1"
+                                          ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                          Text="{x:Static localization:CodeViewer_en_EN.Header3D}"
+                                          IsChecked="{Binding RenderMode,
+                                                Converter={StaticResource EqualityConverter}, 
+                                                ConverterParameter={x:Static viewModels:RenderModes.MODE3D},
+                                                Mode=TwoWay}" />
+                        <primitive:RBRight x:Name="RB2D" Grid.Column="1"
+                                           Background="{DynamicResource MainGray}"
+                                           BorderBrush="LightGray"
+                                           BorderThickness="1"
+                                           ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                           Text="{x:Static localization:CodeViewer_en_EN.Header2D}"
+                                           IsChecked="{Binding RenderMode, 
+                                                Converter={StaticResource EqualityConverter}, 
+                                                ConverterParameter={x:Static viewModels:RenderModes.MODE2D},
+                                                Mode=TwoWay}" />
+                    </Grid>
+                </Border>
+                <Border x:Name="BorderChooseBlockMode"
+                        Style="{StaticResource CVGraySimpleRow}">
+                    <Grid Margin="0 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <primitive:RBLeft x:Name="RBGeometry" Grid.Column="0"
+                                          Background="{DynamicResource MainGray}"
+                                          BorderBrush="LightGray"
+                                          BorderThickness="1"
+                                          ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                          Text="{x:Static localization:CodeViewer_en_EN.ModeGeometry}"
+                                          IsChecked="{Binding BlockMode, 
+                                            Converter={StaticResource EqualityConverter}, 
+                                            ConverterParameter={x:Static viewModels:BlockModes.GEOMETRY},
+                                            Mode=TwoWay}" />
+                        <primitive:RBRight x:Name="RBBlocks" Grid.Column="1"
+                                           Background="{DynamicResource MainGray}"
+                                           BorderBrush="LightGray"
+                                           BorderThickness="1"
+                                           ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                           Text="{x:Static localization:CodeViewer_en_EN.ModeBlocks}"
+                                           IsChecked="{Binding BlockMode, 
+                                            Converter={StaticResource EqualityConverter}, 
+                                            ConverterParameter={x:Static viewModels:BlockModes.BLOCKS},
+                                            Mode=TwoWay}" />
+                    </Grid>
+                </Border>
+                <Border x:Name="BorderChooseMode"
+                        Style="{StaticResource CVGraySimpleRow}"
+                        Visibility="{Binding RenderMode, 
+                                                Converter={StaticResource RenderModesToVisibilityConverter}, 
+                                                ConverterParameter={x:Static viewModels:RenderModes.MODE3D}}">
+                    <Grid Margin="0 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <primitive:RBLeft x:Name="RBAllCode" Grid.Column="0"
+                                          Background="{DynamicResource MainGray}"
+                                          BorderBrush="LightGray"
+                                          BorderThickness="1"
+                                          ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                          Text="{x:Static localization:CodeViewer_en_EN.ModeAllCode}"
+                                          IsChecked="{Binding LayersMode, 
+                                            Converter={StaticResource EqualityConverter}, 
+                                            ConverterParameter={x:Static viewModels:LayersMode.ALL_CODE},
+                                            Mode=TwoWay}" />
+                        <primitive:RBText x:Name="RBRange" Grid.Column="1"
+                                          Background="{DynamicResource MainGray}"
+                                          BorderBrush="LightGray"
+                                          ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                          BorderThickness="0 1 1 1"
+                                          Text="{x:Static localization:CodeViewer_en_EN.ModeRange}"
+                                          IsChecked="{Binding LayersMode, 
+                                            Converter={StaticResource EqualityConverter}, 
+                                            ConverterParameter={x:Static viewModels:LayersMode.RANGE},
+                                            Mode=TwoWay}" />
+                        <primitive:RBRight x:Name="RBOneLayer" Grid.Column="2"
+                                           Background="{DynamicResource MainGray}"
+                                           BorderBrush="LightGray"
+                                           BorderThickness="1"
+                                           ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                           Text="{x:Static localization:CodeViewer_en_EN.ModeOneLayer}"
+                                           IsChecked="{Binding LayersMode, 
+                                            Converter={StaticResource EqualityConverter}, 
+                                            ConverterParameter={x:Static viewModels:LayersMode.ONE_LAYER},
+                                            Mode=TwoWay}" />
+                    </Grid>
+                </Border>
+                <Border x:Name="BorderModes"
+                        Style="{StaticResource CVGraySimpleRow}"
+                        Margin="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border x:Name="BorderRangeMode" Padding="0 0 0 6"
+                                Visibility="{Binding LayersMode, 
+                                                Converter={StaticResource LayersModeToVisibilityConverter}, 
+                                                ConverterParameter={x:Static viewModels:LayersMode.RANGE}}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <DockPanel Grid.Row="0" LastChildFill="True">
+                                    <TextBlock
+                                        Text="{x:Static localization:CodeViewer_en_EN.LayerStart}"
+                                        DockPanel.Dock="Left"
+                                        Style="{DynamicResource LabelTextBlockSettings}"
+                                        FontSize="12" />
+                                    <StackPanel x:Name="SPLayerStart" Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                Margin="10 0 0 0">
+                                        <Border x:Name="BorderZStart"
+                                                BorderThickness="1 1 0 1"
+                                                BorderBrush="LightGray">
+                                            <TextBlock x:Name="TBZStart" FontSize="12"
+                                                       MinWidth="60"
+                                                       Foreground="Gray" Background="Transparent"
+                                                       Margin="5 0 5 0"
+                                                       Text="{Binding LayerStart.Z, 
+                                                       Converter={StaticResource StringConcatConverter}, 
+                                                       ConverterParameter='mm'}" />
+                                        </Border>
+                                        <primitive:TypedTextBox x:Name="TTBStart"
+                                                                BoxType="INTEGERS"
+                                                                Minimum="1"
+                                                                Maximum="{Binding ElementName=TTBEnd, Path=Value}"
+                                                                TextStyle="{DynamicResource CVSmallTextBoxSettings}"
+                                                                HorizontalContentAlignment="Left"
+                                                                HorizontalAlignment="Left"
+                                                                IsReadOnly="False"
+                                                                Value="{Binding LayerStart.LayerIndex, Mode=TwoWay}"
+                                                                MinWidth="0" />
+                                        <Border Height="{Binding ElementName=TTBStart, Path=Height}"
+                                                BorderBrush="LightGray"
+                                                BorderThickness="0 1 1 1"
+                                                Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}">
+                                            <primitive:ButtonWithVisual x:Name="ButtonLayerStartDown"
+                                                                        Margin="2 0 2 0"
+                                                                        VisualWidth="12"
+                                                                        VisualHeight="12"
+                                                                        Width="14"
+                                                                        Height="14"
+                                                                        HorizontalAlignment="Left"
+                                                                        NormalBrush="{StaticResource ArrowDownNormal}"
+                                                                        MouseOverBrush="{StaticResource ArrowDownAccent}"
+                                                                        LayoutTransform="{StaticResource TransformArrow}"
+                                                                        ToolTip="{x:Static localization:CodeViewer_en_EN.TipLayerPrevious}"
+                                                                        ToolTipService.InitialShowDelay="1000"
+                                                                        VerticalAlignment="Center"
+                                                                        Command="{Binding LayerStartDownCommand}" />
+                                        </Border>
+                                        <Border Height="{Binding ElementName=TTBStart, Path=Height}"
+                                                BorderBrush="LightGray"
+                                                BorderThickness=" 0 1 1 1"
+                                                Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}">
+                                            <primitive:ButtonWithVisual x:Name="ButtonLayerStartUp"
+                                                                        Margin="2 0 2 0"
+                                                                        VisualWidth="12"
+                                                                        VisualHeight="12"
+                                                                        Width="14"
+                                                                        Height="14"
+                                                                        HorizontalAlignment="Left"
+                                                                        NormalBrush="{StaticResource ArrowUpNormal}"
+                                                                        MouseOverBrush="{StaticResource ArrowUpAccent}"
+                                                                        LayoutTransform="{StaticResource TransformArrow}"
+                                                                        ToolTip="{x:Static localization:CodeViewer_en_EN.TipLayerNext}"
+                                                                        ToolTipService.InitialShowDelay="1000"
+                                                                        VerticalAlignment="Center"
+                                                                        Command="{Binding LayerStartUpCommand}" />
+                                        </Border>
+                                    </StackPanel>
+                                </DockPanel>
+                                <DockPanel Grid.Row="1" LastChildFill="True" Margin="0 5 0 0">
+                                    <TextBlock Text="{x:Static localization:CodeViewer_en_EN.LayerEnd}"
+                                               DockPanel.Dock="Left"
+                                               Style="{DynamicResource LabelTextBlockSettings}"
+                                               FontSize="12" />
+                                    <StackPanel x:Name="SPLayerEnd" Orientation="Horizontal"
+                                                Margin="10 0 0 0"
+                                                HorizontalAlignment="Right">
+                                        <Border x:Name="BorderZEnd"
+                                                BorderThickness="1 1 0 1"
+                                                Height="{Binding ElementName=TTBEnd, Path=Height}"
+                                                BorderBrush="LightGray">
+                                            <TextBlock x:Name="TBZEnd" FontSize="12" Foreground="Gray"
+                                                       Background="Transparent"
+                                                       Margin="5 0 5 0"
+                                                       MinWidth="60"
+                                                       Text="{Binding LayerEnd.Z, 
+                                                       Converter={StaticResource StringConcatConverter}, 
+                                                       ConverterParameter='mm'}" />
+                                        </Border>
+                                        <primitive:TypedTextBox x:Name="TTBEnd"
+                                                                BoxType="INTEGERS"
+                                                                Minimum="{Binding ElementName=TTBStart, Path=Value}"
+                                                                Maximum="{Binding LayersCount}"
+                                                                TextStyle="{StaticResource CVSmallTextBoxSettings}"
+                                                                HorizontalContentAlignment="Left"
+                                                                HorizontalAlignment="Left"
+                                                                IsReadOnly="False"
+                                                                Value="{Binding LayerEnd.LayerIndex, Mode=TwoWay}"
+                                                                MinWidth="0" />
+                                        <Border Height="{Binding ElementName=TTBEnd, Path=Height}"
+                                                BorderBrush="LightGray"
+                                                BorderThickness="0 1 1 1"
+                                                Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}">
+                                            <primitive:ButtonWithVisual x:Name="ButtonLayerEndDown"
+                                                                        Margin="2 0 2 0"
+                                                                        VisualWidth="12"
+                                                                        VisualHeight="12"
+                                                                        Width="14"
+                                                                        Height="14"
+                                                                        HorizontalAlignment="Left"
+                                                                        NormalBrush="{StaticResource ArrowDownNormal}"
+                                                                        MouseOverBrush="{StaticResource ArrowDownAccent}"
+                                                                        LayoutTransform="{StaticResource TransformArrow}"
+                                                                        ToolTip="{x:Static localization:CodeViewer_en_EN.TipLayerPrevious}"
+                                                                        ToolTipService.InitialShowDelay="1000"
+                                                                        VerticalAlignment="Center"
+                                                                        Command="{Binding LayerEndDownCommand}" />
+                                        </Border>
+                                        <Border Height="{Binding ElementName=TTBEnd, Path=Height}"
+                                                BorderBrush="LightGray"
+                                                BorderThickness=" 0 1 1 1"
+                                                Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}">
+                                            <primitive:ButtonWithVisual x:Name="ButtonLayerEndUp"
+                                                                        Margin="2,3,2,2"
+                                                                        VisualWidth="12"
+                                                                        VisualHeight="12"
+                                                                        Width="14"
+                                                                        Height="14"
+                                                                        HorizontalAlignment="Left"
+                                                                        NormalBrush="{StaticResource ArrowUpNormal}"
+                                                                        MouseOverBrush="{StaticResource ArrowUpAccent}"
+                                                                        LayoutTransform="{StaticResource TransformArrow}"
+                                                                        ToolTip="{x:Static localization:CodeViewer_en_EN.TipLayerNext}"
+                                                                        ToolTipService.InitialShowDelay="1000"
+                                                                        VerticalAlignment="Center"
+                                                                        Command="{Binding LayerEndUpCommand}" />
+                                        </Border>
+                                    </StackPanel>
+                                </DockPanel>
+                                <Border x:Name="BorderSlider" Grid.Row="2" Margin="0 7 0 0">
+                                    <primitive:RangeSlider x:Name="RangeSlider"
+                                                           SelectionColorBrush="{DynamicResource AccentColorBrush}"
+                                                           ThumbStyle="{DynamicResource MySliderThumbFilled}"
+                                                           Width="358"
+                                                           TickFrequency="1"
+                                                           StartValue="{Binding LayerStart.LayerIndex, Mode=TwoWay}"
+                                                           EndValue="{Binding LayerEnd.LayerIndex, Mode=TwoWay}"
+                                                           Minimum="1"
+                                                           Maximum="{Binding LayersCount}" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="BorderLayerNumOneLayerMode" Grid.Row="1"
+                                Visibility="{Binding LayersMode, 
+                                                Converter={StaticResource LayersModeToVisibilityConverter}, 
+                                                ConverterParameter={x:Static viewModels:LayersMode.ONE_LAYER}}"
+                                Padding="0 0 0 6">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <DockPanel Grid.Row="0" LastChildFill="True">
+                                    <TextBlock
+                                        Text="{x:Static localization:CodeViewer_en_EN.LayerIndex}"
+                                        DockPanel.Dock="Left"
+                                        Style="{DynamicResource LabelTextBlockSettings}"
+                                        FontSize="12" />
+                                    <StackPanel x:Name="SPLayerIndex" Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                Margin="10 0 0 0">
+                                        <Border x:Name="ZSelected"
+                                                BorderThickness="1 1 0 1"
+                                                BorderBrush="LightGray">
+                                            <TextBlock x:Name="TBZSelected" FontSize="12"
+                                                       Foreground="Gray"
+                                                       Background="Transparent"
+                                                       Margin="5 0 5 0"
+                                                       MinWidth="60"
+                                                       Text="{Binding LayerSelected.Z, 
+                                                       Converter={StaticResource StringConcatConverter}, 
+                                                       ConverterParameter='mm'}" />
+                                        </Border>
+                                        <primitive:TypedTextBox x:Name="TTBSelectedLayer"
+                                                                BoxType="INTEGERS"
+                                                                Minimum="1"
+                                                                Maximum="{Binding LayersCount}"
+                                                                TextStyle="{DynamicResource CVSmallTextBoxSettings}"
+                                                                HorizontalContentAlignment="Left"
+                                                                HorizontalAlignment="Left"
+                                                                IsReadOnly="False"
+                                                                Value="{Binding LayerSelected.LayerIndex, Mode=TwoWay}"
+                                                                MinWidth="0" />
+                                        <Border
+                                            Height="{Binding ElementName=TTBSelectedLayer, Path=Height}"
+                                            BorderBrush="LightGray"
+                                            BorderThickness="0 1 1 1"
+                                            Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}">
+                                            <primitive:ButtonWithVisual
+                                                x:Name="ButtonLayerSelectedDown"
+                                                Margin="2 0 2 0"
+                                                VisualWidth="12"
+                                                VisualHeight="12"
+                                                Width="14"
+                                                Height="14"
+                                                HorizontalAlignment="Left"
+                                                NormalBrush="{StaticResource ArrowDownNormal}"
+                                                MouseOverBrush="{StaticResource ArrowDownAccent}"
+                                                LayoutTransform="{StaticResource TransformArrow}"
+                                                ToolTip="{x:Static localization:CodeViewer_en_EN.TipLayerPrevious}"
+                                                ToolTipService.InitialShowDelay="1000"
+                                                VerticalAlignment="Center"
+                                                Command="{Binding LayerSelectedDownCommand}"/>
+                                        </Border>
+                                        <Border
+                                            Height="{Binding ElementName=TTBSelectedLayer, Path=Height}"
+                                            BorderBrush="LightGray"
+                                            BorderThickness=" 0 1 1 1"
+                                            Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}">
+                                            <primitive:ButtonWithVisual x:Name="ButtonLayerSelectedUp"
+                                                                        Margin="2 0 2 0"
+                                                                        VisualWidth="12"
+                                                                        VisualHeight="12"
+                                                                        Width="14"
+                                                                        Height="14"
+                                                                        HorizontalAlignment="Left"
+                                                                        NormalBrush="{StaticResource ArrowUpNormal}"
+                                                                        MouseOverBrush="{StaticResource ArrowUpAccent}"
+                                                                        LayoutTransform="{StaticResource TransformArrow}"
+                                                                        ToolTip="{x:Static localization:CodeViewer_en_EN.TipLayerNext}"
+                                                                        ToolTipService.InitialShowDelay="1000"
+                                                                        VerticalAlignment="Center"
+                                                                        Command="{Binding LayerSelectedUpCommand}"/>
+                                        </Border>
+                                    </StackPanel>
+                                </DockPanel>
+                                <Border x:Name="BorderSliderOneLayer" Grid.Row="1" Margin="0 7 0 0">
+                                    <Slider x:Name="SiderOneLayer"
+                                            Style="{DynamicResource AuraSlider}"
+                                            Width="358"
+                                            TickFrequency="1"
+                                            Minimum="1"
+                                            Maximum="{Binding LayersCount}"
+                                            Value="{Binding LayerSelected.LayerIndex, Mode=TwoWay}"
+                                            managers:InputBindingBehavior.PropagateInputBindingsToWindow="True"
+                                            SmallChange="1" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+                <Expander x:Name="ExpanderVisibility"
+                          Style="{DynamicResource MinimalisticExpander}"
+                          Header="{x:Static localization:CodeViewer_en_EN.VisibilityHeader}"
+                          IsExpanded="True"
+                          HorizontalAlignment="Stretch"
+                          Background="White"
+                          BorderThickness="1">
+                    <StackPanel Orientation="Vertical" Background="{DynamicResource MainGray}">
+                        <ContentControl Content="{Binding CurrentGeometryBlockVM}" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+            <Expander x:Name="ExpanderCodeText" Grid.Row="1"
+                      Style="{DynamicResource MinimalisticExpander}"
+                      Visibility="{Binding BlockMode, Converter={StaticResource BlockModesToVisibilityConverter}, ConverterParameter={x:Static viewModels:BlockModes.BLOCKS}}"
+                      Background="White"
+                      Header="{x:Static localization:CodeViewer_en_EN.GCodeHeader}"
+                      Margin="0 -1 0 0">
+                <DockPanel LastChildFill="True">
+                    <DockPanel.Height>
+                        <MultiBinding Converter="{StaticResource MultiMathConverter}" ConverterParameter="x - y - 40">
+                            <Binding ElementName="MainGrid" Path="ActualHeight" />
+                            <Binding ElementName="StackPanelAllVisibility" Path="ActualHeight" />
+                        </MultiBinding>
+                    </DockPanel.Height>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="2">
+                        <Border DockPanel.Dock="Left" Width="52" Height="2"
+                                Background="{DynamicResource MainGray}"
+                                BorderThickness="0 0 1 0"
+                                BorderBrush="LightGray" />
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding CodeTexts}" BorderThickness="0" Padding="0"
+                             Background="White"
+                             VirtualizingStackPanel.IsVirtualizing="True"
+                             VirtualizingStackPanel.VirtualizationMode="Recycling"
+                             ScrollViewer.IsDeferredScrollingEnabled="True"
+                             VirtualizingStackPanel.CacheLength="1"
+                             VirtualizingStackPanel.CacheLengthUnit="Page">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="{x:Type ListBox}">
+                                <Border BorderBrush="LightGray"
+                                        BorderThickness="0"
+                                        x:Name="Bd"
+                                        Background="White"
+                                        SnapsToDevicePixels="True"
+                                        Padding="0">
+                                    <ScrollViewer Focusable="False" Style="{DynamicResource MinimalisticScrollViewer}">
+                                        <ItemsPresenter
+                                            SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:RunToBlock}">
+                                <DockPanel LastChildFill="True">
+                                    <Border DockPanel.Dock="Left" Width="52"
+                                            Background="{DynamicResource MainGray}"
+                                            BorderThickness="0 0 1 0"
+                                            BorderBrush="LightGray"
+                                            Padding=" 0 0 3 0">
+                                        <TextBlock FontSize="11" FontFamily="Courier New" MaxHeight="15"
+                                                   HorizontalAlignment="Right"
+                                                   Foreground="DarkGray"
+                                                   Text="{Binding Index}" />
+                                    </Border>
+                                    <ContentControl FontSize="11"
+                                                    FontFamily="Consolas"
+                                                    MaxHeight="15"
+                                                    Margin="7 0 0 0">
+                                        <Binding Path="BlockCode" Converter="{StaticResource BlocksConverter}" />
+                                    </ContentControl>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </DockPanel>
+            </Expander>
+        </Grid>
+    </DockPanel>
+</UserControl>

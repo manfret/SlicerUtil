@@ -1,0 +1,188 @@
+﻿<Expander x:Class="Aura.Views.LayupExpander"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+          xmlns:localization="clr-namespace:Aura.Themes.Localization"
+          xmlns:util1="clr-namespace:Aura.Controls.Util"
+          mc:Ignorable="d"
+          x:Name="UserControl">
+    <Expander.Resources>
+        <ImageBrush x:Key="TrashNormal" ImageSource="{DynamicResource ImgRemoveNormal}" />
+        <ImageBrush x:Key="TrashAccent" ImageSource="{DynamicResource ImgRemoveHighlight}" />
+        <ImageBrush x:Key="TrashDisabled" ImageSource="{DynamicResource ImgRemoveDisabled}" />
+        <ImageBrush x:Key="UpNormal" ImageSource="{DynamicResource ImgUpNormal}" />
+        <ImageBrush x:Key="UpAccent" ImageSource="{DynamicResource ImgUpHighlight}" />
+        <ImageBrush x:Key="UpDisabled" ImageSource="{DynamicResource ImgUpDisabled}" />
+        <ImageBrush x:Key="DownNormal" ImageSource="{DynamicResource ImgDownNormal}" />
+        <ImageBrush x:Key="DownAccent" ImageSource="{DynamicResource ImgDownHighlight}" />
+        <ImageBrush x:Key="DownDisabled" ImageSource="{DynamicResource ImgDownDisabled}" />
+        <util1:SolidColorBrushConverter x:Key="SolidColorBrushConverter"/>
+    </Expander.Resources>
+    <Expander.Style>
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Style="{DynamicResource LabelTextBlockSettings}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HeaderStringFormat" Value="S" />
+            <Setter Property="BorderThickness" Value="1 0 1 1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" x:Name="ContentRow" />
+                            </Grid.RowDefinitions>
+                            <ToggleButton Width="{TemplateBinding ActualWidth}"
+                                          IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          HorizontalAlignment="Left"
+                                          OverridesDefaultStyle="True">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                                <ToggleButton.Content>
+                                    <Border x:Name="Border" Style="{DynamicResource RowStyleSettings}"
+                                            Padding="0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <DockPanel LastChildFill="True">
+                                            <DockPanel DockPanel.Dock="Left" Height="Auto" Width="6" Background="{Binding ElementName=UserControl, Path=LeftColor, Converter={StaticResource SolidColorBrushConverter}}"
+                                                       Visibility="{Binding ElementName=UserControl, Path=ShowColor, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            <DockPanel LastChildFill="True" Margin="10 5 10 5">
+                                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                                    <StackPanel x:Name="Additional"
+                                                                Orientation="Horizontal"
+                                                                Margin="3 0 0 0">
+                                                        <primitive:ButtonWithVisual x:Name="ButtonUp"
+                                                                                    VisualWidth="16"
+                                                                                    VisualHeight="16"
+                                                                                    Opacity="0"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    NormalBrush="{StaticResource UpNormal}"
+                                                                                    MouseOverBrush="{StaticResource UpAccent}"
+                                                                                    DisabledBrush="{StaticResource UpDisabled}"
+                                                                                    ToolTip="{x:Static localization:Common_en_EN.TipUp}"
+                                                                                    ToolTipService.InitialShowDelay="1000"
+                                                                                    Margin="2 0 2 0"
+                                                                                    Command="{Binding ElementName=UserControl, Path=UpCommand}" />
+                                                        <primitive:ButtonWithVisual x:Name="ButtonDown"
+                                                                                    VisualWidth="16"
+                                                                                    VisualHeight="16"
+                                                                                    Opacity="0"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    NormalBrush="{StaticResource DownNormal}"
+                                                                                    MouseOverBrush="{StaticResource DownAccent}"
+                                                                                    DisabledBrush="{StaticResource DownDisabled}"
+                                                                                    ToolTip="{x:Static localization:Common_en_EN.TipDown}"
+                                                                                    ToolTipService.InitialShowDelay="1000"
+                                                                                    Margin="2 0 2 0"
+                                                                                    Command="{Binding ElementName=UserControl, Path=DownCommand}" />
+                                                        <primitive:ButtonWithVisual x:Name="ButtonRemove"
+                                                                                    VisualWidth="16"
+                                                                                    VisualHeight="16"
+                                                                                    Opacity="0"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    NormalBrush="{StaticResource TrashNormal}"
+                                                                                    MouseOverBrush="{StaticResource TrashAccent}"
+                                                                                    DisabledBrush="{StaticResource TrashDisabled}"
+                                                                                    ToolTip="{x:Static localization:Common_en_EN.TipDelete}"
+                                                                                    ToolTipService.InitialShowDelay="1000"
+                                                                                    Margin="4 0 5 0"
+                                                                                    Command="{Binding ElementName=UserControl, Path=RemoveCommand}" />
+                                                    </StackPanel>
+                                                    <Border x:Name="OpenArrow"
+                                                            HorizontalAlignment="Right"
+                                                            Width="9" Height="13"
+                                                            Background="{DynamicResource SimpleArrow}"
+                                                            Margin="5 0 5 0"
+                                                            RenderTransformOrigin="0.5,0.5">
+                                                        <Border.RenderTransform>
+                                                            <TransformGroup>
+                                                                <ScaleTransform />
+                                                                <SkewTransform />
+                                                                <RotateTransform />
+                                                                <TranslateTransform />
+                                                            </TransformGroup>
+                                                        </Border.RenderTransform>
+                                                    </Border>
+                                                </StackPanel>
+                                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                                    <ContentPresenter RecognizesAccessKey="True" ContentSource="Header" />
+                                                    <Border Width="Auto" Height="16" Margin="7 0 7 0">
+                                                        <TextBlock Foreground="DimGray" FontSize="10"
+                                                                   Text="{Binding ElementName=UserControl, Path=AdditionalText}"
+                                                                   Typography.Capitals="AllSmallCaps" />
+                                                    </Border>
+                                                </StackPanel>
+                                                <Border Background="Transparent" />
+                                            </DockPanel>
+                                        </DockPanel>
+
+                                    </Border>
+                                </ToggleButton.Content>
+                            </ToggleButton>
+                            <Border x:Name="ExpandSite" Grid.Row="1"
+                                    Visibility="Collapsed"
+                                    BorderBrush="LightGray"
+                                    BorderThickness="{Binding ElementName=UserControl, Path=ExpandSiteThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    Height="{TemplateBinding Height}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Focusable="false" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="True">
+                                <Setter Property="Visibility" Value="Visible" TargetName="ExpandSite" />
+                                <Setter TargetName="OpenArrow" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <EventTrigger SourceName="Border" RoutedEvent="MouseEnter">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="ButtonRemove"
+                                                             Storyboard.TargetProperty="Opacity" To="1" />
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="ButtonDown"
+                                                             Storyboard.TargetProperty="Opacity" To="1" />
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="ButtonUp"
+                                                             Storyboard.TargetProperty="Opacity" To="1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger SourceName="Border" RoutedEvent="MouseLeave">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="ButtonRemove"
+                                                             Storyboard.TargetProperty="Opacity" To="0" />
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="ButtonDown"
+                                                             Storyboard.TargetProperty="Opacity" To="0" />
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="ButtonUp"
+                                                             Storyboard.TargetProperty="Opacity" To="0" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Expander.Style>
+</Expander>

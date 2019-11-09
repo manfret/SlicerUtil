@@ -1,0 +1,68 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:primitive="clr-namespace:Aura.Controls.Primitive">
+
+    <Style x:Key="QuestionButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="MainGrid">
+                        <Path x:Name="CirclePath" 
+                          Data="M34.5,17.5 C34.5,26.888841 26.888841,34.5 17.5,34.5 C8.1111593,34.5 0.5,26.888841 0.5,17.5 C0.5,8.1111593 8.1111593,0.5 17.5,0.5 C26.888841,0.5 34.5,8.1111593 34.5,17.5 z"
+                          Fill="Transparent" 
+                          HorizontalAlignment="Left" 
+                          Margin="0" 
+                          Stretch="Fill" 
+                          Stroke="Gray" 
+                          StrokeThickness="1"
+                          Width="16"
+                          Height="16"
+                          Panel.ZIndex="0"/>
+                        <TextBlock x:Name="QuestionMark"
+                                   Text="?" 
+                                   FontSize="13"
+                                   Height="Auto"
+                                   Width="Auto"
+                                   Foreground="Gray"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Panel.ZIndex="1"
+                                   Padding="0 0 0 1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CirclePath" Property="Stroke" Value="{DynamicResource AccentColorBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type primitive:QuestionedTextBlock}">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type primitive:QuestionedTextBlock}">
+                    <Grid x:Name="MainGrid" Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="CaptionTextBox" 
+                                    Text="{Binding Caption, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                    MinWidth="30"
+                                    Style="{Binding CaptionStyle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    Grid.Column="0"/>
+                        <Button x:Name="PART_QuestionButton" Style="{StaticResource QuestionButtonStyle}"
+                                Visibility="Hidden"
+                                Grid.Column="1"
+                                Margin="4 0 4 0"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

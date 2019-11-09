@@ -1,0 +1,152 @@
+﻿<Window x:Class="Aura.Views.ConflictDialogNew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:Aura.Themes.Localization"
+        xmlns:controls="clr-namespace:Aura.Controls"
+        xmlns:viewModels="clr-namespace:Aura.ViewModels"
+        xmlns:views="clr-namespace:Aura.Views"
+        xmlns:util="clr-namespace:Aura.Controls.Util"
+        xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+        mc:Ignorable="d"
+        Title="ConflictDialogNew"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        MinHeight="300" MinWidth="300" Width="400" Height="400"
+        d:DataContext="{d:DesignInstance viewModels:ConflictCollectionVM, IsDesignTimeCreatable=True}">
+    <Window.Resources>
+        <Style x:Key="UnderlineTextBlockRight" TargetType="primitive:RBRight">
+            <Setter Property="Foreground" Value="LightGray" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <util:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        <DataTemplate DataType="{x:Type viewModels:ConflictsVM}">
+            <views:ConflictView />
+        </DataTemplate>
+    </Window.Resources>
+    <Border Padding="2" Background="{DynamicResource LightMisteriousGray}">
+        <Grid Width="400" Height="400" Background="{DynamicResource MysteriousGray}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Margin="20 8 0 0"
+                       Text="{x:Static localization:ConflictDialog_en_EN.Conflicts}"
+                       Foreground="LightGray"
+                       FontSize="14" />
+            <TextBlock Margin="20 7 25 10" Grid.Row="1" Foreground="LightGray" FontSize="12"
+                       TextWrapping="Wrap"
+                       Text="{x:Static localization:ConflictDialog_en_EN.Annotation}" />
+            <Grid Grid.Row="2" Margin="20 0 20 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <primitive:RBLeft Grid.Column="0"
+                                  Background="#575757"
+                                  BorderBrush="{DynamicResource AccentColorBrush}"
+                                  BorderThickness="1"
+                                  ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                  Text="{x:Static localization:ConflictDialog_en_EN.ReplaceAll}"
+                                  Command="{Binding SetFillOldFromNewToAllCommand}"
+                                  ActLikeButton="True"
+                                  Foreground="LightGray">
+                    <primitive:RBLeft.Triggers>
+                        <EventTrigger RoutedEvent="RadioButton.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="RadioButton.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).(SolidColorBrush.Color)" To="LightGray" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </primitive:RBLeft.Triggers>
+                </primitive:RBLeft>
+                <primitive:RBRight Grid.Column="1"
+                                   Background="#575757"
+                                   BorderBrush="{DynamicResource AccentColorBrush}"
+                                   BorderThickness="1"
+                                   ActionColorBrush="{DynamicResource AccentColorBrush}"
+                                   Text="{x:Static localization:ConflictDialog_en_EN.CreateNewAll}"
+                                   Command="{Binding SetSaveNewToAllCommand}"
+                                   Foreground="LightGray"
+                                   ActLikeButton="True">
+                    <primitive:RBRight.Triggers>
+                        <EventTrigger RoutedEvent="RadioButton.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="RadioButton.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).(SolidColorBrush.Color)" To="LightGray" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </primitive:RBRight.Triggers>
+                </primitive:RBRight>
+            </Grid>
+            <DockPanel Grid.Row="3" LastChildFill="True" Margin="25 0 25 0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right"
+                            Margin="0 0 0 15">
+                    <controls:ColoredButton DockPanel.Dock="Bottom" Height="20" Width="120"
+                                            BorderThickness="0"
+                                            ForegroundBrush="Black"
+                                            FontSize="12"
+                                            MainText="OK"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding SubmitCommand}"
+                                            MainColorBrush="LightGray"
+                                            HighlightBrush="{DynamicResource AccentColorBrush}" />
+                    <controls:ColoredButton DockPanel.Dock="Bottom" Height="20" Width="120" HorizontalAlignment="Left"
+                                            Margin="15 0 0 0"
+                                            BorderThickness="0"
+                                            ForegroundBrush="Black"
+                                            FontSize="12"
+                                            MainText="{x:Static localization:ConflictDialog_en_EN.Cancel}"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding CancelCommand}"
+                                            MainColorBrush="LightGray"
+                                            HighlightBrush="{DynamicResource AccentColorBrush}" />
+                </StackPanel>
+
+                <ScrollViewer Focusable="False" Style="{DynamicResource MinimalisticScrollViewer}"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto">
+                    <ListBox ItemsSource="{Binding VMs}" Background="Transparent" BorderThickness="0"
+                             Margin="0 5 0 0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,1764 @@
+﻿<UserControl x:Class="Aura.Views.SettingsItemProfileView"
+                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                xmlns:util="clr-namespace:Aura.Controls.Util"
+                                xmlns:viewModels="clr-namespace:Aura.ViewModels"
+                                xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+                                xmlns:localization="clr-namespace:Aura.Themes.Localization"
+                                xmlns:resx="clr-namespace:Aura.Controls.Resources"
+                                xmlns:val="clr-namespace:Settings.ValidValues;assembly=Settings"
+                                xmlns:memento="clr-namespace:Settings.Memento;assembly=Settings"
+                                xmlns:validationRules="clr-namespace:Aura.Controls.ValidationRules"
+                                mc:Ignorable="d"
+                                x:Name="UserControl"
+                                d:DataContext="{d:DesignInstance viewModels:SettingsItemVMProfile, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <util:InvertBooleanConverter x:Key="InvertBoolConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <util:BooleanToVisibilityInvertConverter x:Key="BooleanToVisibilityInvertConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+        <util:FiberInfillTypeToVisibilityConverter x:Key="FiberInfillTypeToVisibilityConverter" />
+        <util:FiberInfillTypeInvertToVisibilityConverter x:Key="FiberInfillTypeInvertToVisibilityConverter" />
+    </UserControl.Resources>
+    <Border Padding="0 0 0 10" Background="#f2f2f2" Width="380">
+            <StackPanel Orientation="Vertical">
+                <Border x:Name="BorderProfileName"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Common_en_EN.Name}"
+                            DockPanel.Dock="Left"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        <TextBox x:Name="ProfileName"
+                                 DockPanel.Dock="Right"
+                                 Style="{DynamicResource TextBoxSettingsWithoutWidth}"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}">
+                            <TextBox.Text>
+                                <Binding Path="Model.Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                    <Binding.ValidationRules>
+                                        <validationRules:NameValidator/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                    </TextBox>
+                    </DockPanel>
+                </Border>
+                <StackPanel x:Name="SPLayupRule" Orientation="Vertical">
+                    <Border x:Name="BorderAllowGenerateFiber"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="AllowGenerateFiber"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.GlobalSettingsMemento.AllowGenerateFiber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}" />
+                            <primitive:QuestionedTextBlock
+                                x:Name="PART_AllowGenerateFiber"
+                                Caption="{x:Static localization:Global_en_EN.AllowGenerateFiber}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Global_en_EN.AllowGenerateFiber}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartAllowGenerateFiber}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPLayerThicknesses" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivLayerThickness"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_LAYER_THICKNESS}" />
+                    <Border x:Name="BorderMacroLayerHeight"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="PartMacroLayerHeight"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SGlobal.Default}, Path=MacroLayerHeightMin}"
+                                                    Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=MacroLayerHeightMax}"
+                                                    Value="{Binding Model.GlobalSettingsMemento.MacroLayerHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Global_en_EN.MacroLayerHeight}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Global_en_EN.MacroLayerHeight}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileLayerThicknessMacroLayerHeight}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileLayerThicknessMacroLayerHeight}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInset0RatioToMacro"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock x:Name="QTBInset0RatioToMacro"
+                                                           Caption="{x:Static localization:Inset0_en_EN.RatioToMacro}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           DockPanel.Dock="Top"
+                                                           TipLabelText="{x:Static localization:Inset0_en_EN.RatioToMacro}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileLayerThicknessInset0RatioToMacro}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExternalShellThickness}" />
+                            <primitive:SliderWithODivide
+                                x:Name="SliOInset0PRatioToMacro"
+                                Minimum="1"
+                                Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=Inset0RatioToMacroMax}"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Divi="{Binding Model.GlobalSettingsMemento.MacroLayerHeight}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}"
+                                Value="{Binding Model.GlobalSettingsMemento.Inset0RatioToMacro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXPRatioToMacro"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock x:Name="QTBInsetXPRatioToMacro"
+                                                           Caption="{x:Static localization:InsetPlastic_en_EN.RatioToMacro}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           DockPanel.Dock="Top"
+                                                           TipLabelText="{x:Static localization:InsetPlastic_en_EN.RatioToMacro}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileLayerThicknessInsetXPRatioToMacro}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileLayerThicknessInsetXPInfill}" />
+                            <primitive:SliderWithODivide
+                                x:Name="SliOInsetXPRatioToMacro"
+                                Minimum="1"
+                                Maximum="{Binding Model.GlobalSettingsMemento.Inset0RatioToMacro}"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}"
+                                Divi="{Binding Model.GlobalSettingsMemento.MacroLayerHeight}"
+                                Value="{Binding Model.GlobalSettingsMemento.InsetXPRatioToMacro, Mode=TwoWay}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillRatioToMacro"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock x:Name="QTBInfillRatioToMacro"
+                                                           Caption="{x:Static localization:InfillPlasticSolid_en_EN.RatioToMacro}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           DockPanel.Dock="Top"
+                                                           TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.RatioToMacro}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileLayerThicknessInfillRatioToMacro}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileLayerThicknessInsetXPInfill}" />
+                            <primitive:SliderWithODivide
+                                x:Name="SliOInfillRatioToMacro"
+                                Minimum="1"
+                                Maximum="{Binding Model.GlobalSettingsMemento.Inset0RatioToMacro}"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Divi="{Binding Model.GlobalSettingsMemento.MacroLayerHeight}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}"
+                                Value="{Binding Model.GlobalSettingsMemento.InfillRatioToMacro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSThickRatioToMacro"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock x:Name="QTBSSThickRatioToMacro"
+                                                           Caption="{x:Static localization:Support_en_EN.RatioToMacroThick}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           DockPanel.Dock="Top"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.RatioToMacroThick}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileLayerThicknessSSThickRatioToMacro}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileLayerThicknessSupport}" />
+                            <primitive:SliderWithODivide
+                                x:Name="SliOSSThickRatioToMacro"
+                                Minimum="1"
+                                Maximum="{Binding Model.GlobalSettingsMemento.SupportThinRatioToMacro}"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Divi="{Binding Model.GlobalSettingsMemento.MacroLayerHeight}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}"
+                                Value="{Binding Model.GlobalSettingsMemento.SupportThickRatioToMacro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSThinRatioToMacro"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock x:Name="QTBSSThinRatioToMacro"
+                                                           Caption="{x:Static localization:Support_en_EN.RatioToMacroThin}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           DockPanel.Dock="Top"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.RatioToMacroThin}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileLayerThicknessSSThinRatioToMacro}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileLayerThicknessSupport}" />
+                            <primitive:SliderWithODivide
+                                x:Name="SliOSSThinRatioToMacro"
+                                Minimum="1"
+                                Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=SSThinRatioToMacroMax}"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Divi="{Binding Model.GlobalSettingsMemento.MacroLayerHeight}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}"
+                                Value="{Binding Model.GlobalSettingsMemento.SupportThinRatioToMacro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPFirstLayer" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivFirstLayer"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_FIRST_LAYER}" />
+                    <Border x:Name="BorderFLEWCoeffToNormal"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileFLEWCoeffToNormal"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SGlobal.Default}, Path=FLEWCoeffToNormalMin}"
+                                                    Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=FLEWCoeffToNormalMax}"
+                                                    Value="{Binding Model.GlobalSettingsMemento.FLEWCoeffToNormal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Global_en_EN.FLEWCoeffToNormal}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Global_en_EN.FLEWCoeffToNormal}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileFLEWCoeffToNormal}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileFLCoeffToNormals}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderFLThickness"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileFLThickness"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SGlobal.Default}, Path=FLThicknessMin}"
+                                                    Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=FLThicknessMax}"
+                                                    Value="{Binding Model.GlobalSettingsMemento.FLThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Global_en_EN.FLThickness}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.FLThickness}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileFLThickness}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileFLThickness}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderFLSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileFLSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SGlobal.Default}, Path=FLSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=FLSpeedMax}"
+                                                    Value="{Binding Model.GlobalSettingsMemento.FLSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Global_en_EN.FLSpeed}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.FLSpeed}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileFLSpeed}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPInset0" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivInset0"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_EXTERNAL_SHELL}" />
+                    <Border x:Name="BorderInset0EWCoeff"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInset0EWCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInset0.Default}, Path=EWCoeffMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInset0.Default}, Path=EWCoeffMax}"
+                                                    Value="{Binding Model.Inset0PlasticSettingsMemento.EWCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Inset0_en_EN.EWCoeff}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Inset0_en_EN.EWCoeff}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInset0EWCoeff}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExtrusionCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInset0Speed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInset0Inset0Speed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SInset0.Default}, Path=SpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInset0.Default}, Path=SpeedMax}"
+                                                    Value="{Binding Model.Inset0PlasticSettingsMemento.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Inset0_en_EN.Speed}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Inset0_en_EN.Speed}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInset0Speed}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExternalShellPrintingSpeed}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPInsetXP" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivInsetXP"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_PLASTIC_PERIMETERS}" />
+                    <Border x:Name="BorderInsetXPEWCoeff"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXPEWCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInsetP.Default}, Path=EWCoeffMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInsetP.Default}, Path=EWCoeffMax}"
+                                                    Value="{Binding Model.InsetXPlasticSettingsMemento.EWCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:InsetPlastic_en_EN.EWCoeff}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:InsetPlastic_en_EN.EWCoeff}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInsetXPEWCoeff}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExtrusionCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXPSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXPInset0Speed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SInsetP.Default}, Path=SpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInsetP.Default}, Path=SpeedMax}"
+                                                    Value="{Binding Model.InsetXPlasticSettingsMemento.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:InsetPlastic_en_EN.Speed}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:InsetPlastic_en_EN.Speed}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInsetXPSpeed}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPFiberSettings" Orientation="Vertical"
+                            Visibility="{Binding Model.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <primitive:TextDivider x:Name="DivF"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_FIBER_PRINTING}" />
+                    <Border x:Name="BorderExtrusionMultiplier"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="MaterialExtrusionMultiplier"
+                                DockPanel.Dock="Right"
+                                BoxType="DOUBLES"
+                                Minimum="{Binding Source={x:Static val:SF.Default}, Path=ExtrusionMultiplierPMin}"
+                                Maximum="{Binding Source={x:Static val:SF.Default}, Path=ExtrusionMultiplierPMax}"
+                                Value="{Binding Mode=TwoWay, Path=Model.FiberPrintingSettingsMemento.ExtrusionMultiplierP, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Fiber_en_EN.FlowMultiplier}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Fiber_en_EN.FlowMultiplier}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.FiberExtrusionMultiplier}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgFiberPlasticFlowMultiplier}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDoZHopAfterCut"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoZHopAfterCut"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.FiberPrintingSettingsMemento.DoZHopAfterCut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}" />
+                            <primitive:QuestionedTextBlock
+                                x:Name="PART_DoZHopAfterCut"
+                                Caption="{x:Static localization:FiberPrinting_en_EN.DoZHopAfterCut}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFStartMaxSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFStartMaxSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=StartMaxSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=StartMaxSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.StartMaxSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="StartMaxSpeed(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFStartMinSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFStartMinSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=StartMinSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=StartMinSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.StartMinSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="StartMinSpeed(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFStartMinLimitSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFStartMinLimitSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=StartMinLimitSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=StartMinLimitSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.StartMinLimitSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="StartMinSpeedLimit(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFNormalMaxSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFNormalMaxSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=NormalMaxSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=NormalMaxSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.NormalMaxSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="NormalMaxSpeed(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFNormalMinSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFNormalMinSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=NormalMinSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=NormalMinSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.NormalMinSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="NormalMinSpeed(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFNormalMinLimitSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFNormalMinLimitSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=NormalMinLimitSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=NormalMinLimitSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.NormalMinLimitSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="NormalMinSpeedLimit(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFFinishMaxSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFFinishMaxSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=FinishMaxSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=FinishMaxSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.FinishMaxSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="FinishMaxSpeed(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFFinishMinSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFFinishMinSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=FinishMinSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=FinishMinSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.FinishMinSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="FinishMinSpeed(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFFinishMinLimitSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFFinishMinLimitSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=FinishMinLimitSpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=FinishMinLimitSpeedMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.FinishMinLimitSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="FinishMinSpeedLimit(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFMinRadius"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFMinRadius"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=MinRadiusMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=MinRadiusMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.MinRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="MinRadius(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFMaxArcSegmentLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFMaxArcSegmentLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=MaxArcSegmentLengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=MaxArcSegmentLengthMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.MaxArcSegmentLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="MaxArcSegmentLength(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFStartLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFStartLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=StartLengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=StartLengthMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.StartLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="StartLength(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFSlowLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFSlowLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=SlowLengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=SlowLengthMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.SlowLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="SlowLength(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFTensionLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFTensionLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=TensionLengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=TensionLengthMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.TensionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="TensionLength(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFPlasticAfterCutCoeff"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFPlasticAfterCutCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SF.Default}, Path=PlasticAfterCutCoeffMin}"
+                                                    Maximum="{Binding Source={x:Static val:SF.Default}, Path=PlasticAfterCutCoeffMax}"
+                                                    Value="{Binding Model.FiberPrintingSettingsMemento.PlasticAfterCutCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="PlasticAfterCutCoeff(Developer)"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPFiberPerimetersSettings" Orientation="Vertical"
+                            Visibility="{Binding Model.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <primitive:TextDivider x:Name="DivInsetXF"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_REINFORCED_PERIMETERS}" />
+                    <Border x:Name="BorderInsetXFEW"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFEW"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInsetF.Default}, Path=EWMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInsetF.Default}, Path=EWMax}"
+                                                    Value="{Binding Model.InsetXFiberSettingsMemento.EW, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:InsetFiber_en_EN.EW}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:InsetFiber_en_EN.EW}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInsetXFEW}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInxsetXFEW}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFExtrusionFiberMaxPercent"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InsetFiber_en_EN.ExtrusionFiberMaxPercent}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                DockPanel.Dock="Top"
+                                TipLabelText="{x:Static localization:InsetFiber_en_EN.ExtrusionFiberMaxPercent}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInsetXFExtrusionFiberMaxPercent}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInsetXFFiberFeedrate}" />
+                            <primitive:SliderTTB
+                                x:Name="SliTTBInsetXFExtrusionFiberMaxPercent"
+                                Minimum="{Binding Source={x:Static val:SInsetF.Default}, Path=ExtrusionFiberRegularPercentMin}"
+                                Maximum="{Binding Source={x:Static val:SInsetF.Default}, Path=ExtrusionFiberRegularPercentMax}"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Value="{Binding Model.InsetXFiberSettingsMemento.ExtrusionFiberRegularPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXFSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInsetXFSpeedCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInsetF.Default}, Path=PrintingSpeedCoefficientMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInsetF.Default}, Path=PrintingSpeedCoefficientMax}"
+                                                    Value="{Binding Model.InsetXFiberSettingsMemento.SpeedCoefficient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InsetFiber_en_EN.PrintingSpeedCoefficient}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InsetFiber_en_EN.PrintingSpeedCoefficient}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInsetXFSpeed}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPFiberInfillSolidSettings" Orientation="Vertical"
+                            Visibility="{Binding Model.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <primitive:TextDivider x:Name="DivFiberSolid"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:InfillFiberSolid_en_EN.HEADER_INFILL_FIBER_SOLID}" />
+                    <Border x:Name="BorderInfillFiberSolidEW"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillFIberEW"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=EWMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=EWMax}"
+                                                    Value="{Binding Model.InfillXFiberSolidSettingsMemento.EW, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:InfillFiberSolid_en_EN.EW}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.EW}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidEW}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInxsetXFEW}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberSolidExtrusionFiberMaxPercent"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberSolid_en_EN.ExtrusionFiberMaxPercent}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                DockPanel.Dock="Top"
+                                TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.ExtrusionFiberMaxPercent}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidExtrusionFiberMaxPercent}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInsetXFFiberFeedrate}" />
+                            <primitive:SliderTTB
+                                x:Name="SliTTBInfillFiberSOlidExtrusionFiberMaxPercent"
+                                Minimum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=ExtrusionFiberRegularPercentMin}"
+                                Maximum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=ExtrusionFiberRegularPercentMax}"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Value="{Binding Model.InfillXFiberSolidSettingsMemento.ExtrusionFiberRegularPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberSolidSpeedCoefficient"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillFiberSolidSpeedCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=PrintingSpeedCoefficientMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=PrintingSpeedCoefficientMax}"
+                                                    Value="{Binding Model.InfillXFiberSolidSettingsMemento.SpeedCoefficient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberSolid_en_EN.SpeedCoefficient}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.SpeedCoefficient}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidSpeedCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberSolidMinSegmentLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillFiberSolidSegmentLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=MinSegmentLengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=MinSegmentLengthMax}"
+                                                    Value="{Binding Model.InfillXFiberSolidSettingsMemento.MinSegmentLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberSolid_en_EN.MinSegmentLength}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.MinSegmentLength}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidMinSegmentLength}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberSolidMinLength}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberSolidExtendIntoPerimeter"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="ProfileInfillFIberSolidExtendIntoPerimeter"
+                                DockPanel.Dock="Right"
+                                BoxType="DOUBLES"
+                                Minimum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=ExtendIntoPerimetersMin}"
+                                Maximum="{Binding Source={x:Static val:SInfillFSolid.Default}, Path=ExtendIntoPerimetersMax}"
+                                Value="{Binding Model.InfillXFiberSolidSettingsMemento.ExtendIntoPerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberSolid_en_EN.ExtendIntoPerimeters}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.ExtendIntoPerimeters}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidExtendIntoPerimeters}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileOtherExtensionIntoPerimeter}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPFiberInfillCellularSettings" Orientation="Vertical"
+                            Visibility="{Binding Model.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <primitive:TextDivider x:Name="DivFiberCellular"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:InfillFiberCellular_en_EN.HEADER_INFILL_FIBER_CELLULAR}" />
+                    <Border x:Name="BorderInfillFiberCellularEW"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillFIberCellularEW"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=EWMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=EWMax}"
+                                                    Value="{Binding Model.InfillXFiberCellularSettingsMemento.EW, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberCellular_en_EN.EW}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.EW}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberCellularEW}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInxsetXFEW}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberCellularExtrusionFiberMaxPercent"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberCellular_en_EN.ExtrusionFiberMaxPercent}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                DockPanel.Dock="Top"
+                                TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.ExtrusionFiberMaxPercent}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberCellularExtrusionFiberMaxPercent}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInsetXFFiberFeedrate}" />
+                            <primitive:SliderTTB
+                                x:Name="SliTTBInfillFiberCellularExtrusionFiberMaxPercent"
+                                Minimum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=ExtrusionFiberRegularPercentMin}"
+                                Maximum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=ExtrusionFiberRegularPercentMax}"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                Value="{Binding Model.InfillXFiberCellularSettingsMemento.ExtrusionFiberRegularPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberCellularSpeedCoefficient"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillFiberCellularSpeedCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=PrintingSpeedCoefficientMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=PrintingSpeedCoefficientMax}"
+                                                    Value="{Binding Model.InfillXFiberCellularSettingsMemento.SpeedCoefficient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberCellular_en_EN.SpeedCoefficient}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.SpeedCoefficient}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberCellularSpeedCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberCellularMinSegmentLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillFiberCellularSegmentLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=MinSegmentLengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=MinSegmentLengthMax}"
+                                                    Value="{Binding Model.InfillXFiberCellularSettingsMemento.MinSegmentLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberCellular_en_EN.MinSegmentLength}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.MinSegmentLength}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberCellularMinSegmentLength}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberSolidMinLength}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberCellularExtendIntoPerimeter"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="ProfileInfillFIberCellularExtendIntoPerimeter"
+                                DockPanel.Dock="Right"
+                                BoxType="DOUBLES"
+                                Minimum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=ExtendIntoPerimetersMin}"
+                                Maximum="{Binding Source={x:Static val:SInfillFCellular.Default}, Path=ExtendIntoPerimetersMax}"
+                                Value="{Binding Model.InfillXFiberCellularSettingsMemento.ExtendIntoPerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiberCellular_en_EN.ExtendIntoPerimeter}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.ExtendIntoPerimeter}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberCellularExtendIntoPerimeter}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileOtherExtensionIntoPerimeter}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderAnisogridRibPlacementType"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <ComboBox x:Name="CmbANisogridRibPlacementType"
+                                      Style="{DynamicResource MinimalisticComboBox}"
+                                      Background="White"
+                                      DockPanel.Dock="Bottom"
+                                      SelectedValue="{Binding Model.InfillXFiberCellularSettingsMemento.AnisogridRibPlacement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding AnisogridRibPlacementCollection}"
+                                      DisplayMemberPath="AnisogridRibPlacementCaption"
+                                      SelectedValuePath="AnisogridRibPlacement"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillFiber_en_EN.AnisogridRibPlacementType}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillFiber_en_EN.AnisogridRibPlacementType}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartAnisogridRibPlacementType}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartRibPlacement}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPSolidPlasticSettings" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivPlasticSolid"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:InfillPlasticSolid_en_EN.HEADER}" />
+                    <Border x:Name="BorderInfillPSEWCoeff"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillPSFEWCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillPS.Default}, Path=EWCoeffMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillPS.Default}, Path=EWCoeffMax}"
+                                                    Value="{Binding Model.InfillPlasticSolidSettingsMemento.EWCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticSolid_en_EN.EWCoeff}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.EWCoeff}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPSEWCoeff}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExtrusionCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillPSSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillPSSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SInfillPS.Default}, Path=SpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillPS.Default}, Path=SpeedMax}"
+                                                    Value="{Binding Model.InfillPlasticSolidSettingsMemento.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticSolid_en_EN.Speed}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.Speed}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPSSpeed}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillPSStartingAngle"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="ProfileInfillPSStartingAngle"
+                                DockPanel.Dock="Right"
+                                BoxType="INTEGERS"
+                                Minimum="{Binding Source={x:Static val:SInfillPS.Default}, Path=StartingAngleMin}"
+                                Maximum="{Binding Source={x:Static val:SInfillPS.Default}, Path=StartingAngleMax}"
+                                Value="{Binding Model.InfillPlasticSolidSettingsMemento.StartingAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticSolid_en_EN.StartingAngle}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.StartingAngle}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPSStartingAngle}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillSStartingAngle}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillPSAngleStep"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillPSAngleStep"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SInfillPS.Default}, Path=AngleStepMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillPS.Default}, Path=AngleStepMax}"
+                                                    Value="{Binding Model.InfillPlasticSolidSettingsMemento.AngleStep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticSolid_en_EN.AngleStep}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.AngleStep}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPSStartingAngle}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPlasticInfillSolidAngleStep}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillPSDoThinSolidOnEdges"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoThinSolidOnEdges"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.InfillPlasticSolidSettingsMemento.DoThinSolidOnEdges, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBDoThinSolidOnEdges"
+                                                           Caption="{x:Static localization:InfillPlasticSolid_en_EN.DoThinSolidOnEdges}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPPlasticCellularSettings" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivCellular"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_CELLULAR}" />
+                    <Border x:Name="BorderInfillPCEWCoeff"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillPCFEWCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SInfillPC.Default}, Path=EWCoeffMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillPC.Default}, Path=EWCoeffMax}"
+                                                    Value="{Binding Model.InfillPlasticCellularSettingsMemento.EWCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticCellular_en_EN.EWCoeff}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticCellular_en_EN.EWCoeff}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPCEWCoeff}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExtrusionCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillPCSpeed"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillPCSpeed"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SInfillPC.Default}, Path=SpeedMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillPC.Default}, Path=SpeedMax}"
+                                                    Value="{Binding Model.InfillPlasticCellularSettingsMemento.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticCellular_en_EN.Speed}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticCellular_en_EN.Speed}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPSSpeed}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillCType"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <ComboBox x:Name="CmbInfillCType"
+                                      Style="{DynamicResource MinimalisticComboBox}"
+                                      Background="White"
+                                      DockPanel.Dock="Bottom"
+                                      SelectedValue="{Binding Model.InfillPlasticCellularSettingsMemento.InfillCType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding InfillTypesCollection}"
+                                      DisplayMemberPath="InfillTypeCaption"
+                                      SelectedValuePath="InfillType"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="PART_InfillPTypeQTB"
+                                                           Caption="{x:Static localization:InfillPlasticCellular_en_EN.FillType}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:InfillPlasticCellular_en_EN.FillType}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPCType}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileFillPattern}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillPCStartingAngle"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileInfillPCStartingAngle"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SInfillPC.Default}, Path=StartingAngleMin}"
+                                                    Maximum="{Binding Source={x:Static val:SInfillPC.Default}, Path=StartingAngleMax}"
+                                                    Value="{Binding Model.InfillPlasticCellularSettingsMemento.StartingAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticCellular_en_EN.StartingAngle}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticCellular_en_EN.StartingAngle}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillPCStartingAngle}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillCStartingAngle}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPBrimSettings" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivBrim"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_BRIM}" />
+                    <Border x:Name="BorderBrimEWCoeff"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileBrimEWCoeff"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SBrim.Default}, Path=EWCoeffMin}"
+                                                    Maximum="{Binding Source={x:Static val:SBrim.Default}, Path=EWCoeffMax}"
+                                                    Value="{Binding Model.BrimSettingsMemento.EWCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Brim_en_EN.EWCoeff}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Brim_en_EN.EWCoeff}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileBrimEWCoeff}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExtrusionCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderBrimLoops"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileBrimLoops"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SBrim.Default}, Path=LoopsMin}"
+                                                    Maximum="{Binding Source={x:Static val:SBrim.Default}, Path=LoopsMax}"
+                                                    Value="{Binding Model.BrimSettingsMemento.Loops, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Brim_en_EN.Loops}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Brim_en_EN.Loops}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileBrimLoops}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileBrimLoops}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPSkirtSettings" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivSkirt"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_SKIRT}" />
+                    <Border x:Name="BorderSkirtDistance"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSkirtDistance"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SSkirt.Default}, Path=DistanceMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSkirt.Default}, Path=DistanceMax}"
+                                                    Value="{Binding Model.SkirtSettingsMemento.Distance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Skirt_en_EN.Distance}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Skirt_en_EN.Distance}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSkirtDistance}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSkirtDistance}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSkirtLoops"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSkirtLoops"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSkirt.Default}, Path=LoopsMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSkirt.Default}, Path=LoopsMax}"
+                                                    Value="{Binding Model.SkirtSettingsMemento.Loops, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Skirt_en_EN.Loops}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Skirt_en_EN.Loops}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSkirtLoops}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSkirtLoops}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPSupportSettings" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivSS"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_SUPPORT}" />
+                    <Border x:Name="BorderSSEWCoeffThickAndThin"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSEWCoeffThin"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=EWCoeffThickAndThinMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=EWCoeffThickAndThinMax}"
+                                                    Value="{Binding Model.SSMemento.EWCoeffThickAndThin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Support_en_EN.EWCoeffThin}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.EWCoeffThin}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSEWCoeffThickAndThin}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileExtrusionCoefficient}" />
+                        </DockPanel>
+                    </Border>
+                    <!--<Border x:Name="BorderSSGenerateInternalSupport"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="GenerateInternalSupport"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.SSMemento.GenerateInternalSupport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBGenerateInternalSupport"
+                                                           Caption="{x:Static localization:Support_en_EN.GenerateInternalSupport}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.GenerateInternalSupport}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSGenerateInternalSupport}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportGenerateInternalSupport}" />
+                        </DockPanel>
+                    </Border>-->
+                    <Border x:Name="BorderSSGeneratePerimeters"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="GeneratePerimeters"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.SSMemento.GeneratePerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBGeneratePerimeters"
+                                                           Caption="{x:Static localization:Support_en_EN.GeneratePerimeters}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.GeneratePerimeters}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSGeneratePerimeters}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportGeneratePerimeters}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSDoAirGap"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoAirGap"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.SSMemento.DoAirGap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBDoAirGap"
+                                                           Caption="{x:Static localization:Support_en_EN.DoAirGap}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.DoAirGap}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSDoAirGap}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportDoAirGaps}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSAirGapToUp"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSAirGapToUp"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=AirGapToUpMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=AirGapToUpMax}"
+                                                    Value="{Binding Model.SSMemento.AirGapToUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Support_en_EN.AirGapToUp}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.AirGapToUp}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSAirGapToUp}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportDoAirGaps}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSAirGapToBottom"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSAirGapToBottom"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=AirGapToBottomMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=AirGapToBottomMax}"
+                                                    Value="{Binding Model.SSMemento.AirGapToBottom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Support_en_EN.AirGapToBottom}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Support_en_EN.AirGapToBottom}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSAirGapToBottom}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportDoAirGaps}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSSelfSupportAngle"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSSelfSupportAngle"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=SelfSupportAngleMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=SelfSupportAngleMax}"
+                                                    Value="{Binding Model.SSMemento.SelfSupportAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Support_en_EN.SelfSupportAngle}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Support_en_EN.SelfSupportAngle}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSSelfSupportAngle}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportSelfSupportAngle}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSInfillPercent"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Support_en_EN.InfillPercent}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                DockPanel.Dock="Top"
+                                TipLabelText="{x:Static localization:Support_en_EN.InfillPercent}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSInfillPercent}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                            <primitive:SliderTTB x:Name="SliTTBSSInfillPercent"
+                                                 Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=InfillPercentMin}"
+                                                 Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=InfillPercentMax}"
+                                                 TickFrequency="1"
+                                                 TextStyle="{DynamicResource TextBoxSettings}"
+                                                 Value="{Binding Model.SSMemento.InfillPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSInfillType"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <ComboBox x:Name="CmbSSInfillType"
+                                      Style="{DynamicResource MinimalisticComboBox}"
+                                      Background="White"
+                                      DockPanel.Dock="Bottom"
+                                      SelectedValue="{Binding Model.SSMemento.CellularType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding InfillTypesCollection}"
+                                      DisplayMemberPath="InfillTypeCaption"
+                                      SelectedValuePath="InfillType"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBSSCellularType"
+                                                           Caption="{x:Static localization:Support_en_EN.CellularType}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.CellularType}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSInfillType}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileFillPattern}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSStartingAngle"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSStartingAngle"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=SelfSupportAngleMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=SelfSupportAngleMax}"
+                                                    Value="{Binding Model.SSMemento.InfillStartingAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Support_en_EN.InfillStartingAngle}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Support_en_EN.InfillStartingAngle}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSStartingAngle}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillCStartingAngle}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSXYDistanceFromObject"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="ProfileSSXYDistanceFromObject"
+                                DockPanel.Dock="Right"
+                                BoxType="DOUBLES"
+                                Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=XYDistanceFromObjectMin}"
+                                Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=XYDistanceFromObjectMax}"
+                                Value="{Binding Model.SSMemento.XYDistanceFromObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Support_en_EN.XYDistanceFromObject}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Support_en_EN.XYDistanceFromObject}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSXYDistanceFromObject}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileSupportXYDistanceFromModel}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSSpeedThin"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSSpeedThin"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=SpeedThinMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=SpeedThinMax}"
+                                                    Value="{Binding Model.SSMemento.SpeedThin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Support_en_EN.SpeedThin}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.SpeedThin}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSSpeedThin}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderSSSpeedThick"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileSSSpeedThick"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SSupport.Default}, Path=SpeedThickMin}"
+                                                    Maximum="{Binding Source={x:Static val:SSupport.Default}, Path=SpeedThickMax}"
+                                                    Value="{Binding Model.SSMemento.SpeedThick, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Support_en_EN.SpeedThick}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Support_en_EN.SpeedThick}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileSSSpeedThick}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPOozePrevention" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivOozePrevention"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.OOZE_PREVENTION_HEADER}" />
+                    <Border x:Name="BorderDoAvoidCrossingPerimeters"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoAvoidCrossingPerimeters"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.GlobalSettingsMemento.DoAvoidCrossingPerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBDoAvoidCrossingPerimeters"
+                                                           Caption="{x:Static localization:Global_en_EN.DoAvoidCrossingPerimeters}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.DoAvoidCrossingPerimeters}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOozePreventionDoAvoidCrossingPerimeters}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileOozePreventionAvoidCrossing}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDoRetractOnlyWhenCrossingPerimeters"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox
+                                x:Name="MaterialDoRetractOnlyWhenCrossingPerimeters"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                DockPanel.Dock="Right"
+                                HorizontalAlignment="Right"
+                                SnapsToDevicePixels="True"
+                                VerticalAlignment="Center"
+                                Style="{DynamicResource CheckBoxToggleStyle}"
+                                IsChecked="{Binding Model.GlobalSettingsMemento.DoRetractOnlyWhenCrossingPerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                LayoutTransform="{StaticResource CheckBoxTransform}"
+                                IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Global_en_EN.DoRetractOnlyWhenCrossingPerimeters}"
+                                DockPanel.Dock="Left"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Global_en_EN.DoRetractOnlyWhenCrossingPerimeters}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOozePreventionDoRetractOnlyWhenCrossingPerimeters}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDoRetractOnLayerChange"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="MaterialDoRetractOnLayerChange"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      DockPanel.Dock="Right"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.GlobalSettingsMemento.DoRetractOnLayerChange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Global_en_EN.DoRetractOnLayerChange}"
+                                DockPanel.Dock="Left"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Global_en_EN.DoRetractOnLayerChange}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOozePreventionDoRetractOnLayerChange}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDoZHop"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoZHop"
+                                      DockPanel.Dock="Right"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.GlobalSettingsMemento.DoZHop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock x:Name="QTBDoZHop"
+                                                           Caption="{x:Static localization:Global_en_EN.DoZHop}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.DoZHop}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOozePreventionDoZHop}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPlasticPlasticZHopHeight}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDoCoastAtEnd"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoCoastAtEnd"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      DockPanel.Dock="Right"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.GlobalSettingsMemento.DoCoastAtEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Global_en_EN.DoCoastAtEnd}"
+                                                           DockPanel.Dock="Left"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.DoCoastAtEnd}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOozePreventionDoCoastAtEnd}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPlasticCoastLength}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDoWipeNozzle"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="DoWipeNozzle"
+                                      RenderOptions.BitmapScalingMode="HighQuality"
+                                      DockPanel.Dock="Right"
+                                      HorizontalAlignment="Right"
+                                      SnapsToDevicePixels="True"
+                                      VerticalAlignment="Center"
+                                      Style="{DynamicResource CheckBoxToggleStyle}"
+                                      IsChecked="{Binding Model.GlobalSettingsMemento.DoWipeNozzle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      LayoutTransform="{StaticResource CheckBoxTransform}"
+                                      IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Global_en_EN.DoWipeNozzle}"
+                                                           DockPanel.Dock="Left"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.DoWipeNozzle}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOozePreventionDoWipeNozzle}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPlasticWipeLength}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="SPWipeTower" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivWipeTower"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_WIPE_TOWER}" />
+                    <Border x:Name="BorderWTPosX"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileWTPosX"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SWipeTower.Default}, Path=PosXMin}"
+                                                    Maximum="{Binding Source={x:Static val:SWipeTower.Default}, Path=PosXMax}"
+                                                    Value="{Binding Model.GlobalVariableSettingsMemento.WipeTowerPosX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:WipeTower_en_EN.PosX}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderWTPosY"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileWTPosY"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SWipeTower.Default}, Path=PosYMin}"
+                                                    Maximum="{Binding Source={x:Static val:SWipeTower.Default}, Path=PosYMax}"
+                                                    Value="{Binding Model.GlobalVariableSettingsMemento.WipeTowerPosY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:WipeTower_en_EN.PosY}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderWTWidth"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileWTWidth"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SWipeTower.Default}, Path=WidthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SWipeTower.Default}, Path=WidthMax}"
+                                                    Value="{Binding Model.GlobalVariableSettingsMemento.WipeTowerWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:WipeTower_en_EN.Width}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderWTLength"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileWTLength"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SWipeTower.Default}, Path=LengthMin}"
+                                                    Maximum="{Binding Source={x:Static val:SWipeTower.Default}, Path=LengthMax}"
+                                                    Value="{Binding Model.GlobalVariableSettingsMemento.WipeTowerLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:WipeTower_en_EN.Length}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                <Border x:Name="BorderWTLoopsCount"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox x:Name="ProfileWTLoopsCount"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="{Binding Source={x:Static val:SWipeTower.Default}, Path=LoopsCountMin}"
+                                                    Maximum="{Binding Source={x:Static val:SWipeTower.Default}, Path=LoopsCountMax}"
+                                                    Value="{Binding Model.GlobalVariableSettingsMemento.WTLoopsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock Caption="{x:Static localization:WipeTower_en_EN.LoopsCount}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+                <Border x:Name="BorderWTBrimLoopsCount"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox x:Name="ProfileWTBrimLoopsCount"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SWipeTower.Default}, Path=BrimLoopsCountMin}"
+                                                    Maximum="{Binding Source={x:Static val:SWipeTower.Default}, Path=BrimLoopsCountMax}"
+                                                    Value="{Binding Model.GlobalVariableSettingsMemento.WTBrimLoopsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock Caption="{x:Static localization:WipeTower_en_EN.BrimLoopsCount}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+                <StackPanel x:Name="SPOthers" Orientation="Vertical">
+                    <primitive:TextDivider x:Name="DivOther"
+                                           Style="{DynamicResource DividerRowStyle}"
+                                           VerticalAlignment="Bottom"
+                                           Text="{x:Static localization:Global_en_EN.HEADER_OTHER}" />
+                    <Border x:Name="BorderInfillPSExtendIntoPerimeter"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="ProfileInfillPSExtendIntoPerimeter"
+                                DockPanel.Dock="Right"
+                                BoxType="DOUBLES"
+                                Minimum="{Binding Source={x:Static val:SInfillPS.Default}, Path=ExtendIntoPerimeterMin}"
+                                Maximum="{Binding Source={x:Static val:SInfillPS.Default}, Path=ExtendIntoPerimeterMax}"
+                                Value="{Binding Model.InfillPlasticSolidSettingsMemento.ExtendIntoPerimeter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:InfillPlasticSolid_en_EN.ExtendIntoPerimeter}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.ExtendIntoPerimeter}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOtherInfillPSExtendIntoPerimeter}"
+                                TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileOtherExtensionIntoPerimeter}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderTrimGapRatio"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="ProfileTrimGapRatios"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding Source={x:Static val:SGlobal.Default}, Path=TrimGapRatioMin}"
+                                                    Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=TrimGapRatioMax}"
+                                                    Value="{Binding Model.GlobalSettingsMemento.TrimGapRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock Caption="{x:Static localization:Global_en_EN.TrimGapRatio}"
+                                                           CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                           TipLabelText="{x:Static localization:Global_en_EN.TrimGapRatio}"
+                                                           TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOtherTrimGapRatio}"
+                                                           TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileOtherTrimGapRatio}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderCoolingMinLayerTimeForSlowing"
+                            Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox
+                                x:Name="CoolingMinLayerTimeForSlowing"
+                                DockPanel.Dock="Right"
+                                BoxType="DOUBLES"
+                                Minimum="{Binding Source={x:Static val:SGlobal.Default}, Path=MinLayerTimeForSlowingMin}"
+                                Maximum="{Binding Source={x:Static val:SGlobal.Default}, Path=MinLayerTimeForSlowingMax}"
+                                Value="{Binding Model.GlobalSettingsMemento.MinLayerTimeForSlowing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextStyle="{DynamicResource TextBoxSettings}"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Global_en_EN.MinLayerTimeForSlowing}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                TipLabelText="{x:Static localization:Global_en_EN.MinLayerTimeForSlowing}"
+                                TipDescription="{x:Static resx:SettingsTipsResorces.ProfileOtherCoolingMinLayerTimeForSlowing}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderDescription"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock
+                                DockPanel.Dock="Top"
+                                Caption="{x:Static localization:Common_en_EN.Description}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                            <TextBox
+                                Style="{DynamicResource TextBoxSettingsDescription}"
+                                Text="{Binding Model.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                MinLines="3"
+                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderVersion"
+                            Style="{StaticResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="PrinterVersion"
+                                                    DockPanel.Dock="Right"
+                                                    BoxType="INTEGERS"
+                                                    Minimum="1"
+                                                    Maximum="100"
+                                                    Value="{Binding Model.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    TextStyle="{DynamicResource TextBoxSettings}"
+                                                    IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                            <primitive:QuestionedTextBlock
+                                Caption="{x:Static localization:Common_en_EN.Version}"
+                                CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+</UserControl>

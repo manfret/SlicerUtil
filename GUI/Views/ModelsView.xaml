@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="Aura.Views.ModelsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Aura.Views"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:util="clr-namespace:Aura.Controls.Util"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:ModelsCollectionVM, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <Style x:Key="ToggleStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="BorderThickness" Value="1 1 1 0" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Padding" Value="10 5 10 5" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="MinWidth" Value="35" />
+        </Style>
+        <util:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        <DataTemplate DataType="{x:Type viewModels:ShiftModelVM}">
+            <local:ShiftModelView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:RotateModelVM}">
+            <local:RotateModelView />
+        </DataTemplate> 
+        <DataTemplate DataType="{x:Type viewModels:ResizeModelVM}">
+            <local:ResizeModelView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:LayupDataCollectionVM}">
+            <local:LayupDataCollectionView/>
+        </DataTemplate>
+        <ImageBrush x:Key="BrushLayupNormal" ImageSource="{DynamicResource ImgLayupNormal}" />
+        <ImageBrush x:Key="BrushLayupHightlight" ImageSource="{DynamicResource ImgLayupHighlight}" />
+        <ImageBrush x:Key="BrushLayupDisabled" ImageSource="{DynamicResource ImgLayupDisabled}" />
+    </UserControl.Resources>
+    <Grid Width="380">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <controls:ColoredButton x:Name="ButtonAddModel"
+                                Grid.Row="0"
+                                HighlightBrush="{DynamicResource AccentColorBrush}"
+                                MainColorBrush="{DynamicResource MysteriousGray}"
+                                ForegroundBrush="White"
+                                MainText="{x:Static localization:Common_en_EN.AddNewModel}"
+                                Height="45"
+                                Width="380"
+                                Margin="0 0 0 4"
+                                Command="{Binding OpenModelCommand}" />
+        <Border x:Name="BorderTools" Grid.Row="1" Style="{DynamicResource RowStyleSettings}" Background="White"
+                BorderThickness="1" Margin="0" Padding="0">
+            <local:ModelActionView x:Name="ModelToolbox"
+                                   BorderThickness="0"
+                                   DataContext="{Binding}"/>
+        </Border>
+        <ScrollViewer Style="{DynamicResource MinimalisticScrollViewer}"
+                      Grid.Row="2"
+                      Focusable="False"
+                      Background="Transparent"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Vertical">
+                <ListView x:Name="LVModels" ItemsSource="{Binding Items}"
+                      SelectionMode="Single">
+                    <ListView.Template>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Grid>
+                                <Border x:Name="Border" BorderThickness="0"
+                                    Background="Transparent" />
+                                <ItemsPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:EntityDatasItemVM}">
+                            <ToggleButton
+                                BorderThickness="1 0 1 1"
+                                x:Name="MainBorder"
+                                Width="380"
+                                IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                Background="White">
+                                <ToggleButton.Style>
+                                    <Style TargetType="{x:Type ToggleButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                    <Border BorderThickness="1 0 1 1"
+                                                        BorderBrush="LightGray"
+                                                        Padding="10 5 10 5"
+                                                        Height="Auto"
+                                                        MinWidth="35"
+                                                        Background="{TemplateBinding Background}">
+                                                        <DockPanel x:Name="DockPanelModel" LastChildFill="True" Background="Transparent">
+                                                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                                                                <local:ToggleButtonWithBrush Visibility="{Binding HasData, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                                                         NormalBrush="{StaticResource BrushLayupNormal}"
+                                                                                         HighlightBrush="{StaticResource BrushLayupHightlight}"
+                                                                                         IsChecked="{Binding IsDataEnabled, Mode=TwoWay}"
+                                                                                         Margin="0 0 10 0"/>
+                                                                <ToggleButton Style="{DynamicResource RoundToggleButton}"
+                                                                          VerticalAlignment="Center"
+                                                                          IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}"/>
+                                                            </StackPanel>
+                                                            <TextBlock x:Name="TextBlockModelName" Text="{Binding Path=EntityName, Mode=TwoWay}"
+                                                                   Style="{DynamicResource LabelTextBlockSettings}"
+                                                                   Background="Transparent"/>
+                                                        </DockPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <DataTrigger.Setters>
+                                        <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource MainGray}" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter TargetName="MainBorder" Property="Background" Value="White" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                <Border BorderThickness="0" BorderBrush="LightGray" Margin="0 5 0 0" Background="White"
+                        Visibility="{Binding CurrentActionVM, Converter={StaticResource NullVisibilityConverter}}">
+                    <ContentControl Content="{Binding CurrentActionVM}"/>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

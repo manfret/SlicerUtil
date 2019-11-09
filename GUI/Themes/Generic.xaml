@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Aura;component/Themes/Minimalistics.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/Images.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/ArrowLessExpander.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraTipPopupSheet.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraSliderWithIO.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraQuestionedTextBlock.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraComboBox.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraScrollViewer.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraTypedTextBox.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraCheckBoxToggle.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraColorPicker.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraButtonWithVisual.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraSIze3DPanel.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraColoredButton.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraRbText.xaml"/>
+        <ResourceDictionary Source="/Aura;component/Themes/Primitives/AuraRangeSlider.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

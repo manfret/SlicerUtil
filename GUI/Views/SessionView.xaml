@@ -1,0 +1,1139 @@
+﻿<UserControl x:Class="Aura.Views.SessionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Aura.Views"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:util="clr-namespace:Aura.Controls.Util"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:resx="clr-namespace:Aura.Controls.Resources"
+             xmlns:val="clr-namespace:Settings.ValidValues;assembly=Settings"
+             xmlns:memento="clr-namespace:Settings.Memento;assembly=Settings"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:SessionVM, IsDesignTimeCreatable=True}"
+             x:Name="UserControl"
+             BorderThickness="0">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <util:BooleanToVisibilityInvertConverter x:Key="BooleanToVisibilityInvertConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+        <util:FiberInfillTypeToVisibilityConverter x:Key="FiberInfillTypeToVisibilityConverter" />
+        <util:ConcatObjectsAsStrings x:Key="ConcatObjectsAsStringsConverter" />
+        <DataTemplate DataType="{x:Type viewModels:PrintInformationVM}">
+            <local:PrintInformationView />
+        </DataTemplate>
+        <ImageBrush x:Key="BrushEditDisabled" ImageSource="{DynamicResource ImgEditDisabled}" />
+        <ImageBrush x:Key="BrushEditHightlight" ImageSource="{DynamicResource ImgEditHighlight}" />
+
+        <Style x:Key="SettingItemComboBoxContainerStyle" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                Padding="0 1 0 1">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{DynamicResource LabelTextBlockSettings}"
+                                           Text="{Binding Name}"
+                                           Margin="6 0 0 4" />
+                                <TextBlock Foreground="DimGray"
+                                           FontSize="8"
+                                           Text="AP"
+                                           Margin="5 2 0 0"
+                                           Visibility="{Binding TrueIsAnisoprintApproved, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Change IsHighlighted SelectedBackgroundBrush to set the selection color for the items -->
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Background" Value="{DynamicResource HightLightGrayBrush}" />
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Width="Auto" Height="Auto" Orientation="Horizontal" VerticalAlignment="Top" Background="{x:Null}">
+        <ContentControl Content="{Binding PrintInformationVM}"
+                        VerticalAlignment="Top"/>
+        <ScrollViewer Style="{DynamicResource MinimalisticScrollViewer}"
+                      Focusable="False"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="SPLayupRule" Orientation="Vertical" Width="380">
+                <Border x:Name="Generate">
+                    <local:StartCancelFinishButton MainColorBrush="{DynamicResource MysteriousGray}"
+                                                   DisabledColorBrush="{DynamicResource LightMisteriousGray}"
+                                                   HighlightBrush="{DynamicResource AccentColorBrush}"
+                                                   IsInteractionEnabled="{Binding CanBeGenerated}"
+                                                   FinishText="{x:Static localization:Session_en_EN.GenerationButtonSaveToFileText}"
+                                                   StartText="{x:Static localization:Session_en_EN.GenerationButtonMainText}"
+                                                   CancelText="{x:Static localization:Session_en_EN.GenerationButtonCancelText}"
+                                                   StartCommand="{Binding GenerateCommand}"
+                                                   CancelCommand="{Binding CancelCommand}"
+                                                   FinishCommand="{Binding SaveToFileCommand}"
+                                                   ProgressPercentage="{Binding SlicingProgressPercent}"
+                                                   Width="380"
+                                                   Height="45"
+                                                   StatusSemaphor="{Binding SlicingStatusSemaphor}"
+                                                   ToolTip="{Binding ToolTipGenerationHelp}"
+                                                   ToolTipService.ShowOnDisabled="True"
+                                                   ToolTipService.InitialShowDelay="0"
+                                                   Background="Transparent"/>
+                </Border>
+                <Border x:Name="BorderViewCode"
+                        Visibility="{Binding SlicingFinished, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0 5 0 0">
+                    <controls:ColoredButton x:Name="ButtonViewCode"
+                                            Width="380"
+                                            Height="45"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            BorderThickness="0"
+                                            MainColorBrush="{DynamicResource MysteriousGray}"
+                                            HighlightBrush="{DynamicResource AccentColorBrush}"
+                                            MainText="{x:Static localization:Session_en_EN.ViewCodeButtonMainText}"
+                                            ForegroundBrush="White"
+                                            Command="{Binding ViewCodeCommand}" />
+                </Border>
+                <Border x:Name="BorderPrinter"
+                        Margin="0 5 0 0"
+                        Style="{DynamicResource RowStyleSettings}"
+                        Padding="0"
+                        BorderThickness="0">
+                    <DockPanel LastChildFill="True">
+                        <local:ComboBoxWithAdditionalCommand x:Name="CMBPrinter"
+                                                             DockPanel.Dock="Bottom"
+                                                             Background="White"
+                                                             SelectedValue="{Binding SessionMemento.Printer, Mode=TwoWay}"
+                                                             ItemsSource="{Binding Printers}"
+                                                             AdditionalCommand="{Binding EditPrinterCommand}"
+                                                             ItemContainerStyle="{StaticResource SettingItemComboBoxContainerStyle}">
+                            <local:ComboBoxWithAdditionalCommand.ItemTemplate>
+                                <DataTemplate DataType="{x:Type memento:IPrinterMemento}">
+                                    <DockPanel LastChildFill="True" HorizontalAlignment="Stretch">
+                                        <TextBlock Style="{DynamicResource LabelTextBlockSettings}"
+                                                   Text="{Binding Name}"
+                                                   Margin="0 0 0 0" />
+                                        <TextBlock Foreground="DimGray"
+                                                   FontSize="8"
+                                                   Text="AP"
+                                                   Margin="5 2 0 0"
+                                                   Visibility="{Binding TrueIsAnisoprintApproved, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </DockPanel>
+                                </DataTemplate>
+                            </local:ComboBoxWithAdditionalCommand.ItemTemplate>
+                        </local:ComboBoxWithAdditionalCommand>
+                    </DockPanel>
+                </Border>
+                <Border x:Name="BorderExtrudersPlastic"
+                        Style="{DynamicResource RowStyleSettingsSmall}"
+                        BorderThickness="1 0 1 0"
+                        Background="{DynamicResource MainGray}">
+                    <ListBox x:Name="ListBoxExtrudersP" DockPanel.Dock="Top"
+                             ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="{x:Type ListBox}">
+                                <Grid>
+                                    <Border x:Name="Border" BorderThickness="0" />
+                                    <ItemsPresenter />
+                                </Grid>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="memento:ExtruderPMaterial">
+                                <Border Padding="5">
+                                    <DockPanel LastChildFill="True" x:Name="DockPanel" Background="Transparent">
+                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                            <primitive:ButtonWithVisual x:Name="ButtonEditPlasticInPlasticExtruder"
+                                                                        Visibility="Collapsed"
+                                                                        VisualWidth="16"
+                                                                        VisualHeight="16"
+                                                                        Width="16"
+                                                                        Height="16"
+                                                                        HorizontalAlignment="Left"
+                                                                        NormalBrush="{StaticResource BrushEditDisabled}"
+                                                                        MouseOverBrush="{StaticResource BrushEditHightlight}"
+                                                                        ToolTip="{x:Static localization:Common_en_EN.Edit}"
+                                                                        ToolTipService.InitialShowDelay="1000"
+                                                                        Command="{Binding ElementName=UserControl, Path=DataContext.EditMaterialPCommand}"
+                                                                        CommandParameter="{Binding Material}"
+                                                                        Margin="0 0 7 0" />
+                                            <ComboBox Style="{DynamicResource MinimalisticComboBox}"
+                                                      Width="180"
+                                                      Margin="0"
+                                                      Background="White"
+                                                      FontSize="12"
+                                                      SelectedValue="{Binding Material, UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:SessionView}}, Path=DataContext.Plastics}">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate DataType="{x:Type memento:IMaterialPMemento}">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Style="{DynamicResource LabelTextBlockSettings}"
+                                                                       Text="{Binding Name}"
+                                                                       FontSize="12"
+                                                                       Margin="0 0 0 0" />
+                                                            <TextBlock x:Name="TBAdditional"
+                                                                       Foreground="DimGray"
+                                                                       FontSize="8"
+                                                                       Text="AP"
+                                                                       Margin="5 2 0 0"
+                                                                       Visibility="{Binding TrueIsAnisoprintApproved, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="15">
+                                            <TextBlock
+                                                Text="{Binding Index, Converter={StaticResource ConcatObjectsAsStringsConverter}, ConverterParameter={x:Static localization:Printer_en_EN.ExtruderForConcat}}"
+                                                Style="{DynamicResource LabelTextBlockSettings}" />
+                                            <TextBlock Text="PLASTIC" Foreground="DimGray" FontSize="8"
+                                                       Margin="5 0 0 0" VerticalAlignment="Top" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}}"
+                                        Value="True">
+                                        <Setter TargetName="ButtonEditPlasticInPlasticExtruder" Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </Border>
+                <Border x:Name="BorderExtrudersFiber"
+                        Style="{DynamicResource RowStyleSettingsSmall}"
+                        BorderThickness="1 0 1 0"
+                        Background="{DynamicResource MainGray}">
+                    <ListBox x:Name="ListBoxExtrudersPF" ItemsSource="{Binding SessionMemento.ExtrudersPFMaterials}">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="{x:Type ListBox}">
+                                <Grid>
+                                    <Border x:Name="Border" BorderThickness="0" />
+                                    <ItemsPresenter />
+                                </Grid>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="memento:ExtruderPFMaterial">
+                                <Border Padding="5" Background="Transparent">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Height="15"
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Top"
+                                                    Margin="0 5 0 0">
+                                            <TextBlock
+                                                Text="{Binding Index, Converter={StaticResource ConcatObjectsAsStringsConverter}, ConverterParameter={x:Static localization:Printer_en_EN.ExtruderForConcat}}"
+                                                Style="{DynamicResource LabelTextBlockSettings}" />
+                                            <TextBlock Text="COMPOSITE" Foreground="DimGray"
+                                                       FontSize="8"
+                                                       Margin="5 0 0 0" VerticalAlignment="Top" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                                            <DockPanel LastChildFill="True">
+                                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                                    <primitive:ButtonWithVisual x:Name="ButtonEditPlasticInCompositeExtruder" 
+                                                                                Visibility="Collapsed"
+                                                                                VisualWidth="16"
+                                                                                VisualHeight="16"
+                                                                                Width="16"
+                                                                                Height="16"
+                                                                                HorizontalAlignment="Left"
+                                                                                NormalBrush="{StaticResource BrushEditDisabled}"
+                                                                                MouseOverBrush="{StaticResource BrushEditHightlight}"
+                                                                                ToolTip="{x:Static localization:Common_en_EN.Edit}"
+                                                                                ToolTipService.InitialShowDelay="1000"
+                                                                                Command="{Binding ElementName=UserControl, Path=DataContext.EditMaterialPCommand}"
+                                                                                CommandParameter="{Binding MaterialP}"
+                                                                                Margin="0 0 7 0" />
+                                                    <ComboBox Style="{DynamicResource MinimalisticComboBox}"
+                                                              Width="180"
+                                                              Margin="0 0 0 3"
+                                                              Background="White"
+                                                              SelectedValue="{Binding MaterialP, UpdateSourceTrigger=PropertyChanged}"
+                                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:SessionView}}, Path=DataContext.Plastics}"
+                                                              DisplayMemberPath="Name">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate DataType="{x:Type memento:IMaterialPMemento}">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock
+                                                                        Style="{DynamicResource LabelTextBlockSettings}"
+                                                                        Text="{Binding Name}"
+                                                                        FontSize="12"
+                                                                        Margin="0 0 0 0" />
+                                                                    <TextBlock x:Name="TBAdditional"
+                                                                               Foreground="DimGray"
+                                                                               FontSize="8"
+                                                                               Text="AP"
+                                                                               Margin="5 2 0 0"
+                                                                               Visibility="{Binding TrueIsAnisoprintApproved, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DockPanel>
+                                            <DockPanel LastChildFill="True">
+                                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Background="Transparent">
+                                                    <primitive:ButtonWithVisual x:Name="ButtonEditFiberInCompositeExtruder" 
+                                                                                Visibility="Collapsed"
+                                                                                VisualWidth="16"
+                                                                                VisualHeight="16"
+                                                                                Width="16"
+                                                                                Height="16"
+                                                                                HorizontalAlignment="Left"
+                                                                                NormalBrush="{StaticResource BrushEditDisabled}"
+                                                                                MouseOverBrush="{StaticResource BrushEditHightlight}"
+                                                                                ToolTip="{x:Static localization:Common_en_EN.Edit}"
+                                                                                ToolTipService.InitialShowDelay="1000"
+                                                                                Command="{Binding ElementName=UserControl, Path=DataContext.EditMaterialFCommand}"
+                                                                                CommandParameter="{Binding MaterialF}"
+                                                                                Margin="0 0 7 0" />
+                                                    <ComboBox Style="{DynamicResource MinimalisticComboBox}"
+                                                              Width="180"
+                                                              Margin="0"
+                                                              Background="White"
+                                                              SelectedValue="{Binding MaterialF, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:SessionView}}, Path=DataContext.Fibers}"
+                                                              DisplayMemberPath="Name">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate DataType="{x:Type memento:IMaterialFMemento}">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock
+                                                                        Style="{DynamicResource LabelTextBlockSettings}"
+                                                                        Text="{Binding Name}"
+                                                                        FontSize="12"
+                                                                        Margin="0 0 0 0" />
+                                                                    <TextBlock x:Name="TBAdditional"
+                                                                               Foreground="DimGray"
+                                                                               FontSize="8"
+                                                                               Text="AP"
+                                                                               Margin="5 2 0 0"
+                                                                               Visibility="{Binding TrueIsAnisoprintApproved, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}}"
+                                        Value="True">
+                                        <Setter TargetName="ButtonEditPlasticInCompositeExtruder" Property="Visibility" Value="Visible" />
+                                        <Setter TargetName="ButtonEditFiberInCompositeExtruder" Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </Border>
+                <Border x:Name="EntitiesExtruders"
+                        Style="{DynamicResource RowStyleSettingsSmall}"
+                        BorderThickness="1 0 1 0"
+                        Background="{DynamicResource MainGray}">
+                    <Expander x:Name="ExtruderEntities"
+                              Style="{DynamicResource MinimalisticExpander}"
+                              Header="{x:Static localization:Common_en_EN.Extruders}"
+                              HorizontalAlignment="Stretch"
+                              Background="{DynamicResource MainGray}"
+                              Margin="5 10 5 10"
+                              BorderThickness="1">
+                        <Border Padding="0 5 0 5">
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Border x:Name="BorderInset0" Grid.Row="0"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.Inset0Extruder, Mode=TwoWay}"/>
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:Inset0_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderInsetPlastic" Grid.Row="1"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.InsetPlasticExtruder, Mode=TwoWay}" />
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:Inset_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderInfillSolid" Grid.Row="2"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.InfillSolidExtruder, Mode=TwoWay}" />
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:InfillPlasticSolid_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderInfillCellular" Grid.Row="3"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.InfillPlasticCellularExtruder, Mode=TwoWay}" />
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:InfillPlasticCellular_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderSupport" Grid.Row="4"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.SupportExtruder, Mode=TwoWay}"/>
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:Support_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderBrim" Grid.Row="5"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.BrimExtruder, Mode=TwoWay}" />
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:Brim_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderSkirt" Grid.Row="6"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.SkirtExtruder, Mode=TwoWay}"/>
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:Skirt_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderFiberInset" Grid.Row="7"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5"
+                                        Visibility="{Binding SessionMemento.Profile.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPFMaterials}"
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.InsetFiberExtruder, Mode=TwoWay}"/>
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:Fiber_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                                <Border x:Name="BorderFiberInfill" Grid.Row="8"
+                                        BorderThickness="0"
+                                        Padding="10 5 10 5"
+                                        Visibility="{Binding SessionMemento.Profile.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <DockPanel LastChildFill="True">
+                                        <ComboBox DockPanel.Dock="Right"
+                                                  Style="{DynamicResource MinimalisticComboBox}"
+                                                  Width="120"
+                                                  Margin="0"
+                                                  Background="White"
+                                                  ItemsSource="{Binding SessionMemento.ExtrudersPFMaterials}" 
+                                                  DisplayMemberPath="Index"
+                                                  ItemStringFormat="Extruder {0}"
+                                                  SelectedValuePath="Index"
+                                                  SelectedValue="{Binding SessionMemento.InfillFiberExtruder, Mode=TwoWay}"/>
+                                        <primitive:QuestionedTextBlock DockPanel.Dock="Left"
+                                                                       Caption="{x:Static localization:InfillFiber_en_EN.HEADER}"
+                                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Expander>
+                </Border>
+                <Border x:Name="BorderProfile"
+                        Style="{DynamicResource RowStyleSettings}"
+                        Padding="0"
+                        BorderThickness="0">
+                    <DockPanel LastChildFill="True">
+                        <local:ComboBoxWithAdditionalCommand x:Name="CMBProfile"
+                                                             DockPanel.Dock="Bottom"
+                                                             Background="White"
+                                                             ItemsSource="{Binding Profiles}"
+                                                             SelectedValue="{Binding SessionMemento.Profile, Mode=TwoWay}"
+                                                             AdditionalCommand="{Binding EditProfileCommand}"
+                                                             ItemContainerStyle="{StaticResource SettingItemComboBoxContainerStyle}">
+                            <local:ComboBoxWithAdditionalCommand.ItemTemplate>
+                                <DataTemplate DataType="{x:Type memento:IProfileMemento}">
+                                    <DockPanel LastChildFill="True" HorizontalAlignment="Stretch">
+                                        <TextBlock Style="{DynamicResource LabelTextBlockSettings}"
+                                                   Text="{Binding Name}"
+                                                   Margin="0 0 0 0" />
+                                        <TextBlock Foreground="DimGray"
+                                                   FontSize="8"
+                                                   Text="AP"
+                                                   Margin="5 2 0 0"
+                                                   Visibility="{Binding TrueIsAnisoprintApproved, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </DockPanel>
+                                </DataTemplate>
+                            </local:ComboBoxWithAdditionalCommand.ItemTemplate>
+                        </local:ComboBoxWithAdditionalCommand>
+                    </DockPanel>
+                </Border>
+                <Border x:Name="BorderPart"
+                        Margin="0 7 0 0"
+                        Style="{DynamicResource RowStyleSettings}"
+                        Padding="0"
+                        BorderThickness="1 0 1 1">
+                    <StackPanel Orientation="Vertical" x:Name="Part" Background="#f2f2f2">
+                        <primitive:TextDivider x:Name="DivPart"
+                                               Margin="0"
+                                               Style="{DynamicResource DividerRowStyle}"
+                                               VerticalAlignment="Bottom"
+                                               Text="{x:Static localization:Global_en_EN.HEADER_PART}" />
+                        <Border x:Name="BorderUseLayupRules" Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding HasLayupRules, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="UseLayupRules"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.LayupRule.UseLayupRules, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="PART_UseLayupRules"
+                                                               Caption="{x:Static localization:Global_en_EN.UseLayupRules}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"/>
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderGenerateFiberPerimeters" Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="GenerateFiberPerimeters"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.LayupRule.GenerateFiberPerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="PART_GenerateFiber"
+                                                               Caption="{x:Static localization:InsetFiber_en_EN.Generate}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:InsetFiber_en_EN.Generate}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateFiberPerimeters}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateFiberPerimeters}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderGenerateFiberInfills"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.GlobalSettingsMemento.AllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="GenerateFiberInfills"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.LayupRule.GenerateFiberInfill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="PART_GenerateFiberInfill"
+                                                               Caption="{x:Static localization:InfillFiber_en_EN.GenerateFiberInfills}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:InfillFiber_en_EN.GenerateFiberInfills}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateFiberInfills}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateFiberInfill}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInsetX0Count"
+                                Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="PartInset0COunt"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=Inset0CountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=Inset0CountMax}"
+                                                        Value="{Binding SessionMemento.Profile.LayupRule.Inset0Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:Inset0_en_EN.Count}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:Inset0_en_EN.Count}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetX0Count}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetX0Count}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInsetXPOnlyCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityInvertConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="PartInsetXPOnlyCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetXPOnlyCountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetXPOnlyCountMax}"
+                                                        Value="{Binding SessionMemento.Profile.LayupRule.InsetXPOnlyCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetPlastic_en_EN.OnlyPlasticCOunt}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetPlastic_en_EN.OnlyPlasticCOunt}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetXPOnlyCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetXPCount}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInsetFOuterCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="PartInsetFOuterCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFOuterCountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFOuterCountMax}"
+                                                        Value="{Binding SessionMemento.Profile.LayupRule.InsetFOuterCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetFiber_en_EN.OuterCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetFiber_en_EN.OuterCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetFOuterCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetFOuterCount}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInsetFInnerCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="PartInsetFInnerCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFInnerCountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFInnerCountMax}"
+                                                        Value="{Binding SessionMemento.Profile.LayupRule.InsetFInnerCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetFiber_en_EN.InnerCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetFiber_en_EN.InnerCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetFInnerCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetFInnerCount}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInsetXPOuterWhenFiberCount"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="InsetXPOuterWhenFiberCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="0"
+                                                        Maximum="100000"
+                                                        Value="{Binding Path=SessionMemento.Profile.LayupRule.OuterPlasticWhenFiberCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetPlastic_en_EN.OuterPlasticWhenFiberCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetPlastic_en_EN.OuterPlasticWhenFiberCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetXPOuterWhenFiberCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetXPOuterWhenFiber}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInsetXPInnerWhenFiberCount"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="InsetXPInnerWhenFiberCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="0"
+                                                        Maximum="100000"
+                                                        Value="{Binding Path=SessionMemento.Profile.LayupRule.InnerPlasticWhenFiberCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetPlastic_en_EN.InnerPlasticWhenFiberCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetPlastic_en_EN.InnerPlasticWhenFiberCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetXPInnerWhenFiberCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetXPInnerWhenFiber}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillCPercent"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberInfill, Converter={StaticResource BooleanToVisibilityInvertConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillPlasticCellular_en_EN.Percent}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    DockPanel.Dock="Top"
+                                    TipLabelText="{x:Static localization:InfillPlasticCellular_en_EN.Percent}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInfillCPercent}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                <primitive:SliderTTB x:Name="SliTTBInfillCPercent"
+                                                     Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InfillCPercentMin}"
+                                                     Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InfillCPercentMax}"
+                                                     TickFrequency="1"
+                                                     TextStyle="{DynamicResource TextBoxSettings}"
+                                                     Value="{Binding SessionMemento.Profile.LayupRule.InfillCPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberType"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding SessionMemento.Profile.LayupRule.GenerateFiberInfill, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel LastChildFill="True">
+                                <ComboBox x:Name="CmbFiberInfillType"
+                                          Style="{DynamicResource MinimalisticComboBox}"
+                                          Background="White"
+                                          DockPanel.Dock="Bottom"
+                                          SelectedValue="{Binding SessionMemento.Profile.LayupRule.FiberInfillType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding FiberInfillTypeCollection}"
+                                          DisplayMemberPath="InfillTypeCaption"
+                                          SelectedValuePath="InfillType" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillFiber_en_EN.InfillFiberType}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InfillFiber_en_EN.InfillFiberType}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInfillFiberType}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInfillFiberType}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberSolidAngleList"
+                                Style="{DynamicResource SimpleRowStyleSettings}">
+                            <Border.Visibility>
+                                <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.SOLID}">
+                                    <Binding Path="SessionMemento.Profile.LayupRule.GenerateFiberInfill" />
+                                    <Binding Path="SessionMemento.Profile.LayupRule.FiberInfillType" />
+                                </MultiBinding>
+                            </Border.Visibility>
+                            <DockPanel LastChildFill="True">
+                                <TextBox x:Name="TBInfillFiberAngleList"
+                                         DockPanel.Dock="Bottom"
+                                         Style="{DynamicResource TextBoxSettings}"
+                                         Width="358">
+                                    <TextBox.Text>
+                                        <Binding Path="SessionMemento.Profile.LayupRule.AngleList"
+                                                 Mode="TwoWay"
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 ValidatesOnDataErrors="True"
+                                                 ValidatesOnExceptions="True"
+                                                 NotifyOnValidationError="True"
+                                                 Delay="600">
+                                            <Binding.ValidationRules>
+                                                <util:AngleListRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillFiberSolid_en_EN.AngleList}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.AngleList}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidAngleList}" />
+                            </DockPanel>
+                        </Border>
+                        <StackPanel x:Name="SPLayepRuleRombicSettings" Orientation="Vertical">
+                            <StackPanel.Visibility>
+                                <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.CELLULAR_RHOMBIC}">
+                                    <Binding Path="SessionMemento.Profile.LayupRule.GenerateFiberInfill" />
+                                    <Binding Path="SessionMemento.Profile.LayupRule.FiberInfillType" />
+                                </MultiBinding>
+                            </StackPanel.Visibility>
+                            <Border x:Name="BorderInfillFiberRombicGridDensity"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:QuestionedTextBlock DockPanel.Dock="Top"
+                                                                   Caption="{x:Static localization:InfillFiberCellular_en_EN.RombicGridDensity}"
+                                                                   CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                                   TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.RombicGridDensity}"
+                                                                   TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberRombicGridDensity}"
+                                                                   TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                    <primitive:SliderTTB x:Name="ProfileInfillFiberRombicGridDensity"
+                                                         Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridDensityMin}"
+                                                         Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridDensityMax}"
+                                                         Value="{Binding SessionMemento.Profile.LayupRule.RombicGridDensity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         TextStyle="{DynamicResource TextBoxSettings}"
+                                                         TickFrequency="1" />
+
+                                </DockPanel>
+                            </Border>
+                            <Border x:Name="BorderInfillFiberCellularRombicFirstRibAngle"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:TypedTextBox x:Name="ProfileInfillFiberFirstRibAngle"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridFirstRibAngleMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridFirstRibAngleMax}"
+                                                            Value="{Binding SessionMemento.Profile.LayupRule.RombicGridFirstRibAngle}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" />
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.RombicGridFirstRibAngle}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.RombicGridFirstRibAngle}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberRombicGridFirstRibAngle}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberRombicFirstRibAngle}" />
+                                </DockPanel>
+                            </Border>
+                            <Border x:Name="BorderInfillFiberRombicGridSecondRibAngle"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:TypedTextBox x:Name="ProfileInfillFiberSecondRibAngle"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridSecondRibAngleMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridSecondRibAngleMax}"
+                                                            Value="{Binding SessionMemento.Profile.LayupRule.RombicGridSecondRibAngle}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" />
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.RombicGridSecondRibAngle}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.RombicGridSecondRibAngle}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberRombicGridSecondRibAngle}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberRombicSecondRibAngle}" />
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel x:Name="SPLayupRuleIsogridSettings" Orientation="Vertical">
+                            <StackPanel.Visibility>
+                                <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.CELLULAR_ISOGRID}">
+                                    <Binding Path="SessionMemento.Profile.LayupRule.GenerateFiberInfill" />
+                                    <Binding Path="SessionMemento.Profile.LayupRule.FiberInfillType" />
+                                </MultiBinding>
+                            </StackPanel.Visibility>
+                            <Border x:Name="BorderInfillFiberIsogridDensity"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.IsogridDensity}"
+                                        DockPanel.Dock="Top"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.IsogridDensity}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberIsogridDensity}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                    <primitive:SliderTTB x:Name="ProfileInfillFiberIsogridDensity"
+                                                         TickFrequency="1"
+                                                         Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridDensityMin}"
+                                                         Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridDensityMax}"
+                                                         Value="{Binding SessionMemento.Profile.LayupRule.IsogridDensity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         TextStyle="{DynamicResource TextBoxSettings}" />
+
+                                </DockPanel>
+                            </Border>
+                            <Border x:Name="BorderInfillFiberIsogridOrientation"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:TypedTextBox x:Name="ProfileInfillFiberIsogridOrientation"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridOrientationMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridOrientationMax}"
+                                                            Value="{Binding SessionMemento.Profile.LayupRule.IsogridOrientation}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" />
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.IsogridOrientation}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.IsogridOrientation}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberIsogridOrientation}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberIsogridOrientation}" />
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel x:Name="SPLayupRuleAnisogridSettings" Orientation="Vertical">
+                            <StackPanel.Visibility>
+                                <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.CELLULAR_ANISOGRID}">
+                                    <Binding Path="SessionMemento.Profile.LayupRule.GenerateFiberInfill" />
+                                    <Binding Path="SessionMemento.Profile.LayupRule.FiberInfillType" />
+                                </MultiBinding>
+                            </StackPanel.Visibility>
+                            <Border x:Name="BorderInfillFIberAnisogridFillDensity"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.AnisogridFillDensity }"
+                                        DockPanel.Dock="Top"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.AnisogridFillDensity}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberAnisogridFillDensity}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                    <primitive:SliderTTB x:Name="PrifileInfillFiberAnisogridDensity"
+                                                         TickFrequency="1"
+                                                         Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridDensityMin}"
+                                                         Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridDensityMax}"
+                                                         Value="{Binding SessionMemento.Profile.LayupRule.AnisogridDensity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         TextStyle="{DynamicResource TextBoxSettings}" />
+
+                                </DockPanel>
+                            </Border>
+                            <Border x:Name="BorderInfillFiberAnisogridOrientation"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:TypedTextBox x:Name="ProfileInfillFiberAnisogridOrientation"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridOrientationMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridOrientationMax}"
+                                                            Value="{Binding SessionMemento.Profile.LayupRule.AnisogridOrientation}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" />
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.AnisogridOrientation}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.AnisogridOrientation}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberAnisogridOrientation}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberAnisogridOrientation}" />
+                                </DockPanel>
+                            </Border>
+                            <Border x:Name="BorderInfillFiberAnisogridAngleBetweenMainRibs"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                                <DockPanel LastChildFill="True">
+                                    <primitive:TypedTextBox x:Name="ProfileInfillFiberAnisogridAngleBetweenMainRibs"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridAngleBetweenMainRibsMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridAngleBetweenMainRibsMax}"
+                                                            Value="{Binding SessionMemento.Profile.LayupRule.AnisogridAngleBetweenMainRibs}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" />
+                                    <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.AnisogridAngleBetweenMainRibs}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.AnisogridAngleBetweenMainRibs}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberAnisogridAngleBetweenMainRibs}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberAnisogridAngleBetweenMainRibs}" />
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+                        <Border x:Name="BorderInfillSBottomTopLayerCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox
+                                    x:Name="PartInfillSBottomTopLayerCount"
+                                    DockPanel.Dock="Right"
+                                    BoxType="INTEGERS"
+                                    Minimum="{Binding Source={x:Static val:SGlobalVariable.Default}, Path=InfillSBottomTopLayerCountMin}"
+                                    Maximum="{Binding Source={x:Static val:SGlobalVariable.Default}, Path=InfillSBottomTopLayerCountMax}"
+                                    Value="{Binding SessionMemento.Profile.GlobalVariableSettingsMemento.InfillSBottomTopLayerCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    TextStyle="{DynamicResource TextBoxSettings}" />
+                                <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillPlasticSolid_en_EN.BottomTopLayerCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InfillPlasticSolid_en_EN.BottomTopLayerCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInfillSBottomTopLayerCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInfillSBottomTopLayerCount}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderGenerateBrim"
+                                Style="{StaticResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="GenerateBrim"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.GlobalVariableSettingsMemento.GenerateBrim, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="QTBGenerateBrim"
+                                                               Caption="{x:Static localization:Brim_en_EN.Generate}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:Brim_en_EN.Generate}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateBrim}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateBrim}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderGenerateSkirt"
+                                Style="{StaticResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="GenerateSkirt"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.GlobalVariableSettingsMemento.GenerateSkirt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="QTBGenerateSkirt"
+                                                               Caption="{x:Static localization:Skirt_en_EN.Generate}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:Skirt_en_EN.Generate}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateSkirt}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateSkirt}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderGenerateSupport"
+                                Style="{StaticResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="GenerateSupport"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.GlobalVariableSettingsMemento.GenerateSupport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="QTBGenerateSupport"
+                                                               Caption="{x:Static localization:Support_en_EN.Generate}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:Support_en_EN.Generate}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateSupport}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateSupport}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderGenerateWipeTower"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Padding="10 7 10 7">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="GenerateWipeTower"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding SessionMemento.Profile.GlobalVariableSettingsMemento.GenerateWipeTower, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}" />
+                                <primitive:QuestionedTextBlock x:Name="QTBGenerateWipeTower"
+                                                               Caption="{x:Static localization:Global_en_EN.GenerateWipeTower}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:Global_en_EN.GenerateWipeTower}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateWipeTower}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateWipeTower}" />
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Aura.Themes.SendReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aura.Themes"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:validationRules="clr-namespace:Aura.Controls.ValidationRules"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:SendReportVM, IsDesignTimeCreatable=True}">
+    <Border Style="{DynamicResource RowStyleSettings}" Background="{DynamicResource MainGray}" BorderThickness="1"
+            VerticalAlignment="Top" Margin="0 10 0 0">
+        <StackPanel Orientation="Vertical" Width="380" Background="Transparent">
+            <TextBlock x:Name="Courage" Style="{DynamicResource LabelTextBlockSettingsSmall}"
+                       TextWrapping="Wrap" Text="{x:Static localization:Common_en_EN.CourageMessage}"
+                       Margin="0 0 0 10"/>
+            <TextBlock x:Name="EMailLabel" Style="{DynamicResource LabelTextBlockSettings}"
+                       Text="{x:Static localization:Common_en_EN.YourEMail}"/>
+            <TextBox x:Name="EMail" Style="{DynamicResource TextBoxSettingsWithoutWidth}"
+                     HorizontalContentAlignment="Left"
+                     Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+            <TextBlock x:Name="DescriptionCaption"  Style="{DynamicResource LabelTextBlockSettings}"
+                       Text="{x:Static localization:Common_en_EN.ReportDescriptionTitle}"
+                       Margin="0 2 0 0"/>
+            <TextBox x:Name="ReportText" Style="{DynamicResource TextBoxSettingsDescription}"
+                     Margin="0 5 0 8"
+                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Height="150"/>
+            <TextBlock x:Name="TextBlockSuccess" Foreground="Green" Text="{Binding StatusString}" />
+            <StackPanel Orientation="Horizontal"  Margin="10 10 0 0" HorizontalAlignment="Right">
+                <controls:ColoredButton x:Name="AttachProject"
+                                        MainColorBrush="{DynamicResource MysteriousGray}"
+                                        ForegroundBrush="White"
+                                        Width="120" BorderThickness="0" Height="25"
+                                        MainText="{x:Static localization:Common_en_EN.ReportAttachProject}"
+                                        FontSize="12" HighlightBrush="{DynamicResource AccentColorBrush}"
+                                        Command="{Binding AttachProjectCommand}"
+                                        Margin="0 0 15 0"/>
+                <controls:ColoredButton x:Name="SendReport" 
+                                        MainColorBrush="{DynamicResource MysteriousGray}"
+                                        ForegroundBrush="White"
+                                        Width="120" BorderThickness="0" Height="25"
+                                        MainText="{x:Static localization:Common_en_EN.ReportSend}"
+                                        FontSize="12" HighlightBrush="{DynamicResource AccentColorBrush}"
+                                        Command="{Binding SendReportCommand}"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

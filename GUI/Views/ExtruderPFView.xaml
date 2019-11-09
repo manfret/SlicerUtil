@@ -1,0 +1,234 @@
+﻿<controls:SelectableUserControl x:Class="Aura.Views.ExtruderPFView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Aura.Views"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:resx="clr-namespace:Aura.Controls.Resources"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:val="clr-namespace:Settings.ValidValues;assembly=Settings"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:util="clr-namespace:Aura.Controls.Util"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             d:DataContext="{d:DesignInstance viewModels:ExtruderFiberVM, IsDesignTimeCreatable=True}"
+             x:Name="UserControl"
+             mc:Ignorable="d">
+    <controls:SelectableUserControl.Resources>
+        <util:ConcatObjectsAsStrings x:Key="ConcatObjectsAsStringsConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <util:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+    </controls:SelectableUserControl.Resources>
+    <local:ExtruderExpander x:Name="PART_ExpanderExtruderPF"
+                            Header="{Binding Extruder.ExtruderIndex, 
+        Converter={StaticResource ConcatObjectsAsStringsConverter}, 
+        ConverterParameter={x:Static localization:Printer_en_EN.ExtruderForConcat}}"
+                            HorizontalAlignment="Stretch"
+                            IsExpanded="{Binding ElementName=UserControl, Path=IsSelected}"
+                            AdditionalText="COMPOSITE"
+                            RemoveCommand="{Binding RemoveExtruderCommand}"
+                            Background="{DynamicResource MainGray}">
+        <Border Padding="10 0 0 10">
+            <StackPanel Orientation="Vertical">
+                <Border Tag="BorderOffsetX"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBX"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=OffsetXMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=OffsetXMax}"
+                                                Value="{Binding Extruder.OffsetX, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.XOffset}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.XOffset}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderOffsetX}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgExtruderHorizontalOffset}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderOffsetY"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBY"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=OffsetYMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=OffsetYMax}"
+                                                Value="{Binding Extruder.OffsetY, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.YOffset}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.YOffset}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderOffsetY}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgExtruderHorizontalOffset}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderOffsetZ"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBZ"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=OffsetZMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=OffsetZMax}"
+                                                Value="{Binding Extruder.OffsetZ, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.ZOffset}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.ZOffset}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderOffsetZ}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgExtruderZOffset}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderCutDistance"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBCutDistance"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=CutDistanceMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=CutDistanceMax}"
+                                                Value="{Binding Extruder.CutDistance, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.ExtruderPFCutDistance}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.ExtruderPFCutDistance}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderPFCutDistance}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgExtruderCompositeCutDistance}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderExtraLength"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="MaterialExtraLength"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=ExtraLengthFMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=ExtraLengthFMax}"
+                                                Value="{Binding Mode=TwoWay, Path=Extruder.ExtraLengthF, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.ExtruderPFRestartLength}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.ExtruderPFRestartLength}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderPFExtraLength}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgExtruderCompositeFiberRestart}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderCutCode"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:QuestionedTextBlock DockPanel.Dock="Top"
+                                                       Caption="{x:Static localization:Printer_en_EN.ExtruderPFCutCode}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static resx:SettingsTipsResorces.ExtruderPFCutCode}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderPFCutCode}" />
+                        <TextBox Tag="PrinterStartGCode"
+                                 Style="{DynamicResource TextBoxSettingsDescription}"
+                                 Text="{Binding Extruder.CutCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MinLines="3"
+                                 IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderNozzleContactRadius"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBNozzleContactRadius"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=NozzleContactRadiusMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=NozzleContactRadiusMax}"
+                                                Value="{Binding Extruder.NozzleContactRadius, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock Caption="ContactRadius(Developer)"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderNozzleContactRadiusExtended"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBNozzleContactRadiusExtended"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=NozzleContactRadiusExtendedMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=NozzleContactRadiusExtendedMax}"
+                                                Value="{Binding Extruder.NozzleContactRadiusExtended, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock Caption="ContactRadiusExtended(Developer)"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderPauseForHeating"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="TTBPauseForHeating"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=PauseForHeatingMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=PauseForHeatingMax}"
+                                                Value="{Binding Extruder.PauseForHeating, Mode=TwoWay}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}" />
+                        <primitive:QuestionedTextBlock Caption="PauseForHeating(Developer)"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderHasFan"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                    <DockPanel LastChildFill="True">
+                        <CheckBox Tag="PrinterHasHeatedTable"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  HorizontalAlignment="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  IsChecked="{Binding Extruder.HasFan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}"
+                                  IsEnabled="{Binding Printer.IsAnisoprintApproved, Converter={StaticResource InvertBooleanConverter}}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.HasFan}"
+                            DockPanel.Dock="Left"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.HasFan}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderHasFan}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgExtruderHasFan}" />
+                    </DockPanel>
+                </Border>
+                <Border Tag="BorderFanIndex"
+                        Style="{StaticResource SimpleRowStyleSettings}"
+                        Visibility="{Binding Extruder.HasFan, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <DockPanel LastChildFill="True">
+                        <primitive:TypedTextBox Tag="PrinterTravelSpeedXY"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=FanIndexMin}"
+                                                Maximum="{Binding Source={x:Static val:SExtruderPF.Default}, Path=FanIndexMax}"
+                                                Value="{Binding Extruder.FanIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                IsReadOnly="{Binding Printer.IsAnisoprintApproved}"
+                                                TextStyle="{DynamicResource TextBoxSettings}" />
+                        <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.FanIndex}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.FanIndex}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.ExtruderFanIndex}" />
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+    </local:ExtruderExpander>
+</controls:SelectableUserControl>

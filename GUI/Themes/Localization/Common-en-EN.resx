@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Depth" xml:space="preserve">
+    <value>Depth (Y) </value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width (X)</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height (Z)</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="TipDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="TipDeleteCaptionDefault" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="TipDeleteQuestionDefault" xml:space="preserve">
+    <value>Delete this?</value>
+  </data>
+  <data name="TipDuplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="TipExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Extruders" xml:space="preserve">
+    <value>Extruders</value>
+  </data>
+  <data name="GCodeFilter" xml:space="preserve">
+    <value>G-code file (*.gcode)|*.gcode</value>
+  </data>
+  <data name="ModelFilter" xml:space="preserve">
+    <value>3D-model file (*.stl, *.step, *.stp, *.3ds, *.obj)|*.stl; *.step; *.stp; *.3ds; *.obj</value>
+  </data>
+  <data name="FileWritingExceptionCaption" xml:space="preserve">
+    <value>File writing error</value>
+  </data>
+  <data name="FileWritingExceptionText" xml:space="preserve">
+    <value>File writing exception</value>
+  </data>
+  <data name="TipShift" xml:space="preserve">
+    <value>Shift mode</value>
+  </data>
+  <data name="TipApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="TipCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TipRotate" xml:space="preserve">
+    <value>Rotate mode</value>
+  </data>
+  <data name="TipResize" xml:space="preserve">
+    <value>Resize mode</value>
+  </data>
+  <data name="ErrorModelNotInTable" xml:space="preserve">
+    <value>The model is outside the table</value>
+  </data>
+  <data name="TipClone" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="TipSplit" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="TipLayup" xml:space="preserve">
+    <value>Set layers structure scheme</value>
+  </data>
+  <data name="Layer" xml:space="preserve">
+    <value>Layer</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="MM" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="PickFromModel" xml:space="preserve">
+    <value>Pick layup rules from another model</value>
+  </data>
+  <data name="AddNewRegion" xml:space="preserve">
+    <value>Add new layup region</value>
+  </data>
+  <data name="TipDown" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="TipUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="TipCreateSoloRegion" xml:space="preserve">
+    <value>Transfrom to unique layup region</value>
+  </data>
+  <data name="TipGetFromAnotherRegion" xml:space="preserve">
+    <value>Get layup rules from another region</value>
+  </data>
+  <data name="ProjectFilter" xml:space="preserve">
+    <value>Aura project (*.auproj)|*.auproj</value>
+  </data>
+  <data name="HeaderAbout" xml:space="preserve">
+    <value>About...</value>
+  </data>
+  <data name="HeaderOpenModel" xml:space="preserve">
+    <value>Open model...</value>
+  </data>
+  <data name="HeaderOpenProject" xml:space="preserve">
+    <value>Open project...</value>
+  </data>
+  <data name="HeaderSaveProject" xml:space="preserve">
+    <value>Save project</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="CopyDetailsTitle" xml:space="preserve">
+    <value>Copy details</value>
+  </data>
+  <data name="DefaultProjectName" xml:space="preserve">
+    <value>New project</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="OnClosingMessage" xml:space="preserve">
+    <value>Save changes in open {PROJECT_NAME} project before quitting?</value>
+  </data>
+  <data name="OnClosingTitle" xml:space="preserve">
+    <value>Closing</value>
+  </data>
+  <data name="OpenProjectHasChanges" xml:space="preserve">
+    <value>Save changes in open {PROJECT_NAME} project before open new?</value>
+  </data>
+  <data name="OpenProjectTitle" xml:space="preserve">
+    <value>Open project</value>
+  </data>
+  <data name="AllRightReserved" xml:space="preserve">
+    <value>All right reserved</value>
+  </data>
+  <data name="LicenseTerms" xml:space="preserve">
+    <value>License terms</value>
+  </data>
+  <data name="HeaderSaveProjectAs" xml:space="preserve">
+    <value>Save project as...</value>
+  </data>
+  <data name="ComposerFirmwarer" xml:space="preserve">
+    <value>Updating Composer firmware</value>
+  </data>
+  <data name="FirmwarePath" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="FirmwareFilter" xml:space="preserve">
+    <value>Composer firmware files (*.fw, *fw2)|*.fw; *.fw2</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="FirmItTitle" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="FirmwareNoCmbPort" xml:space="preserve">
+    <value>Select port</value>
+  </data>
+  <data name="FirmwareNoPath" xml:space="preserve">
+    <value>Choose firmware file</value>
+  </data>
+  <data name="FirmwareNotVerified" xml:space="preserve">
+    <value>Firmware not verified</value>
+  </data>
+  <data name="FirmwareVerified" xml:space="preserve">
+    <value>Firmware uploaded successfully</value>
+  </data>
+  <data name="InformationNotReceived" xml:space="preserve">
+    <value>Information not received</value>
+  </data>
+  <data name="InformationReceived" xml:space="preserve">
+    <value>Printer model verified</value>
+  </data>
+  <data name="PrinterNotReady" xml:space="preserve">
+    <value>Printer not ready</value>
+  </data>
+  <data name="PrinterReady" xml:space="preserve">
+    <value>Printer is ready</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+  <data name="FirmwaringStarting" xml:space="preserve">
+    <value>Connecting to printer</value>
+  </data>
+  <data name="FirmwareFileIncorrect" xml:space="preserve">
+    <value>Wrong firmware file</value>
+  </data>
+  <data name="FirmwareDisplayReady" xml:space="preserve">
+    <value>Display is ready</value>
+  </data>
+  <data name="FirmwarePrinterModelIncorrect" xml:space="preserve">
+    <value>Printer model incorrect</value>
+  </data>
+  <data name="FirmwareDisplayUpdated" xml:space="preserve">
+    <value>Display firmware uploaded</value>
+  </data>
+  <data name="FirmwareUploadError" xml:space="preserve">
+    <value>Firmware upload error</value>
+  </data>
+  <data name="FirmwareItDevTitle" xml:space="preserve">
+    <value>Upload(DEV)</value>
+  </data>
+  <data name="AdditionalInformation" xml:space="preserve">
+    <value>Additional</value>
+  </data>
+  <data name="HeaderFirmwareComposerA4" xml:space="preserve">
+    <value>Update Composer firmware...</value>
+  </data>
+  <data name="UnsuccessSlicing" xml:space="preserve">
+    <value>Slicing failed. Check parameters.</value>
+  </data>
+  <data name="ReportAttachProject" xml:space="preserve">
+    <value>Attach project</value>
+  </data>
+  <data name="ReportSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ReportStartDescription" xml:space="preserve">
+    <value>Report form</value>
+  </data>
+  <data name="YourEMail" xml:space="preserve">
+    <value>Please add you e-mail</value>
+  </data>
+  <data name="ReportAttachAnotherProject" xml:space="preserve">
+    <value>Another</value>
+  </data>
+  <data name="ReportIsEmptyFillFields" xml:space="preserve">
+    <value>Please attach project or/and add description</value>
+  </data>
+  <data name="WrongEmail" xml:space="preserve">
+    <value>Please add correct e-mail</value>
+  </data>
+  <data name="ReportIsEmptyFiles" xml:space="preserve">
+    <value>Please attach generating bug project </value>
+  </data>
+  <data name="ReportAttachCurrentProject" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="FirmwaringStarted" xml:space="preserve">
+    <value>Firmware update started</value>
+  </data>
+  <data name="DisplayConnecting" xml:space="preserve">
+    <value>Connecting to display</value>
+  </data>
+  <data name="FirmwareDisplayUpdating" xml:space="preserve">
+    <value>Uploading display firmware</value>
+  </data>
+  <data name="FirmwareUploading" xml:space="preserve">
+    <value>Uploading firmware</value>
+  </data>
+  <data name="PrinterConnecting" xml:space="preserve">
+    <value>Connecting to printer</value>
+  </data>
+  <data name="PrinterModelVerifying" xml:space="preserve">
+    <value>Verifying printer model </value>
+  </data>
+  <data name="SystemConfigurationUpdating" xml:space="preserve">
+    <value>Updating system configuration</value>
+  </data>
+  <data name="SystemConfigurationUpdated" xml:space="preserve">
+    <value>System configuration updated</value>
+  </data>
+  <data name="SystemConfigurationSavingError" xml:space="preserve">
+    <value>System configuration can't be saved</value>
+  </data>
+  <data name="SystemConfigurationWritingError" xml:space="preserve">
+    <value>System configuration can't be updated</value>
+  </data>
+  <data name="FirmwareNoVersionForDev" xml:space="preserve">
+    <value>Select printer version</value>
+  </data>
+  <data name="FirmwareVersions" xml:space="preserve">
+    <value>Versions</value>
+  </data>
+  <data name="TipDeleteLayupSettings" xml:space="preserve">
+    <value>Delete all layup settings</value>
+  </data>
+  <data name="LayupRulesRemoveCaption" xml:space="preserve">
+    <value>Layup rules deleting</value>
+  </data>
+  <data name="LayupRulesRemoveText" xml:space="preserve">
+    <value>Do you want to delete all layups settings?</value>
+  </data>
+  <data name="AddNewModel" xml:space="preserve">
+    <value>Add model</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RemoveModel" xml:space="preserve">
+    <value>Remove model</value>
+  </data>
+  <data name="ShiftModel" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="RotateModel" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="ResizeModel" xml:space="preserve">
+    <value>Resize</value>
+  </data>
+  <data name="IsUniform" xml:space="preserve">
+    <value>Uniform</value>
+  </data>
+  <data name="CloneModel" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="AddNewLayup" xml:space="preserve">
+    <value>Add new layup</value>
+  </data>
+  <data name="PriorityForConcat" xml:space="preserve">
+    <value>Priority </value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>default</value>
+  </data>
+  <data name="LayupModel" xml:space="preserve">
+    <value>Set layup</value>
+  </data>
+  <data name="RemoveAll" xml:space="preserve">
+    <value>Remove all</value>
+  </data>
+  <data name="Pick" xml:space="preserve">
+    <value>Pick</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="GenerationDisabledTooltip" xml:space="preserve">
+    <value>To generate code add at least one model. 
+Be assured that all models is laying in print area and
+has no intersections between themselves  </value>
+  </data>
+  <data name="MessageHasIntersectionBetweenThemselves" xml:space="preserve">
+    <value>Models should not be intersected between themselves</value>
+  </data>
+  <data name="MessageNoFiberExtruder" xml:space="preserve">
+    <value>Set extruder for each part entity</value>
+  </data>
+  <data name="MessageNoModel" xml:space="preserve">
+    <value>To generate code load at least one model</value>
+  </data>
+  <data name="HasLayupRules" xml:space="preserve">
+    <value>Your project has non-default layup rules</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="LayupReference" xml:space="preserve">
+    <value>By default, the structure of the part is defined by rules in the slicing tab. Use can override these rules with custom region layup rules. Each layup has the start and the finish height and priority. If region layup rules have intersection by height, the higher priority layup rules will be used for slicing. The priority "1" is the highest.</value>
+  </data>
+  <data name="ReportDescriptionTitle" xml:space="preserve">
+    <value>Ask your question or describe the bug</value>
+  </data>
+  <data name="CourageMessage" xml:space="preserve">
+    <value>Our support team will be glad to help with your issue. 
+For a better response, please attach the project with the issue. </value>
+  </data>
+  <data name="MessageHasIntersectionBrimSkirtWithPrintArea" xml:space="preserve">
+    <value>Part brim/skirt should lays in print area</value>
+  </data>
+  <data name="MessageHasIntersectionWithPrintArea" xml:space="preserve">
+    <value>Part should lays in print area</value>
+  </data>
+  <data name="MessageHasIntersectionWithWipeTower" xml:space="preserve">
+    <value>Part shoud has no intersections with wipe tower</value>
+  </data>
+  <data name="CreateNewProject" xml:space="preserve">
+    <value>New project</value>
+  </data>
+</root>

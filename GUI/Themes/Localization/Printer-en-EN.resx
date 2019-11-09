@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TravelSpeedXY" xml:space="preserve">
+    <value>X/Y travel speed (mm/sec)</value>
+  </data>
+  <data name="TravelSpeedZ" xml:space="preserve">
+    <value>Z travel speed (mm/sec)</value>
+  </data>
+  <data name="BuildArea" xml:space="preserve">
+    <value>Build area (mm)</value>
+  </data>
+  <data name="HasHeatedTable" xml:space="preserve">
+    <value>Has heated build plate</value>
+  </data>
+  <data name="StartGCode" xml:space="preserve">
+    <value>Start G-code</value>
+  </data>
+  <data name="EndGCode" xml:space="preserve">
+    <value>End G-code</value>
+  </data>
+  <data name="ExtruderNozzleDiameter" xml:space="preserve">
+    <value>Nozzle diameter (mm)</value>
+  </data>
+  <data name="ExtruderOffset" xml:space="preserve">
+    <value>Extruder offset (mm)</value>
+  </data>
+  <data name="ExtruderPFCutDistance" xml:space="preserve">
+    <value>Cut distance (mm)</value>
+  </data>
+  <data name="ExtruderPFCutPause" xml:space="preserve">
+    <value>!! Cut pause (sec)</value>
+  </data>
+  <data name="ExtruderPFCutServeIndex" xml:space="preserve">
+    <value>!! Cut servo index</value>
+  </data>
+  <data name="ExtruderPFNeutralAngle" xml:space="preserve">
+    <value>Neutral angle (°)</value>
+  </data>
+  <data name="ExtruderPFServoAngle" xml:space="preserve">
+    <value>Servo angle (°)</value>
+  </data>
+  <data name="ExtruderDeleteCaption" xml:space="preserve">
+    <value>Deleting extruder</value>
+  </data>
+  <data name="ExtruderDeleteQuestion" xml:space="preserve">
+    <value>Delete this extruder?</value>
+  </data>
+  <data name="ExtruderForConcat" xml:space="preserve">
+    <value>Extruder - </value>
+  </data>
+  <data name="ExtrudersPlastic" xml:space="preserve">
+    <value>Plastic extruders</value>
+  </data>
+  <data name="RemoveCaption" xml:space="preserve">
+    <value>Deleting printer...</value>
+  </data>
+  <data name="RemoveQuestion" xml:space="preserve">
+    <value>Delete this printer?</value>
+  </data>
+  <data name="FileFilter" xml:space="preserve">
+    <value>Printer settings file (*.aup)|*.aup</value>
+  </data>
+  <data name="TipAddNewCompositeExtruder" xml:space="preserve">
+    <value>Add new composite extruder</value>
+  </data>
+  <data name="TipAddNewPlasticExtruder" xml:space="preserve">
+    <value>Add new plastic extruder</value>
+  </data>
+  <data name="TipAddNewPrinter" xml:space="preserve">
+    <value>Add new printer</value>
+  </data>
+  <data name="TipExportPrinters" xml:space="preserve">
+    <value>Export all printers</value>
+  </data>
+  <data name="TipImportPrinters" xml:space="preserve">
+    <value>Import printers</value>
+  </data>
+  <data name="PrinterInSessionCaption" xml:space="preserve">
+    <value>Printer can't be deleted</value>
+  </data>
+  <data name="PrinterInSessionText" xml:space="preserve">
+    <value>Printer is used by current session and can't be deleted</value>
+  </data>
+  <data name="AdditionalRetractMM" xml:space="preserve">
+    <value>Additional retract length (mm)</value>
+  </data>
+  <data name="FanIndex" xml:space="preserve">
+    <value>Cooling fan index</value>
+  </data>
+  <data name="HasFan" xml:space="preserve">
+    <value>Has cooling fan</value>
+  </data>
+  <data name="OnChangeExtruderUpMM" xml:space="preserve">
+    <value>Z-lift on tool change (mm)</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height (mm)</value>
+  </data>
+  <data name="Length" xml:space="preserve">
+    <value>Depth (mm)</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width (mm)</value>
+  </data>
+  <data name="ExtruderPFRestartLength" xml:space="preserve">
+    <value>Fiber restart length (mm)</value>
+  </data>
+  <data name="XOffset" xml:space="preserve">
+    <value>X offset (mm)</value>
+  </data>
+  <data name="YOffset" xml:space="preserve">
+    <value>Y offset (mm)</value>
+  </data>
+  <data name="ZOffset" xml:space="preserve">
+    <value>Z offset (mm)</value>
+  </data>
+  <data name="ExtruderPFCutCode" xml:space="preserve">
+    <value>Cut G-code</value>
+  </data>
+  <data name="HEADER_ACCELERATION" xml:space="preserve">
+    <value>Accelerations</value>
+  </data>
+  <data name="HEADER_BUILD_AREA" xml:space="preserve">
+    <value>Build area</value>
+  </data>
+  <data name="HEADER_FEATURES" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="HEADER_G_CODE" xml:space="preserve">
+    <value>G-code</value>
+  </data>
+  <data name="HEADER_OTHER" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="HEADER_TRAVEL_SPEED" xml:space="preserve">
+    <value>Travel speed</value>
+  </data>
+  <data name="Inset0Acceleration" xml:space="preserve">
+    <value>External shell acceleration (mm/sec²)</value>
+  </data>
+  <data name="Inset0Jerk" xml:space="preserve">
+    <value>External shell jerk (mm/sec)</value>
+  </data>
+  <data name="OtherAcceleration" xml:space="preserve">
+    <value>Regular acceleartion (mm/sec²)</value>
+  </data>
+  <data name="OthersJerk" xml:space="preserve">
+    <value>Regular jerk (mm/sec)</value>
+  </data>
+  <data name="UseAccelerations" xml:space="preserve">
+    <value>Enable acceleration control</value>
+  </data>
+  <data name="UseJerks" xml:space="preserve">
+    <value>Enable jerk control</value>
+  </data>
+  <data name="AddNewPrinter" xml:space="preserve">
+    <value>Add new printer</value>
+  </data>
+  <data name="HomeXPosition" xml:space="preserve">
+    <value>Home position for X-axis (mm)</value>
+  </data>
+  <data name="HomeYPosition" xml:space="preserve">
+    <value>Home position for Y-axis (mm)</value>
+  </data>
+  <data name="HomeZPosition" xml:space="preserve">
+    <value>Home position for Z-axis (mm)</value>
+  </data>
+</root>

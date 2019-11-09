@@ -1,0 +1,460 @@
+﻿<UserControl x:Class="Aura.Views.SettingsItemPrinterView"
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+                             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+                             xmlns:val="clr-namespace:Settings.ValidValues;assembly=Settings"
+                             xmlns:resx="clr-namespace:Aura.Controls.Resources"
+                             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+                             xmlns:util="clr-namespace:Aura.Controls.Util"
+                             xmlns:views="clr-namespace:Aura.Views"
+                             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                             xmlns:managers="clr-namespace:Aura.Managers"
+                             xmlns:validationRules="clr-namespace:Aura.Controls.ValidationRules"
+                             mc:Ignorable="d"
+                             x:Name="UserControl"
+                             d:DataContext="{d:DesignInstance viewModels:SettingsItemVMPrinter, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <util:InvertBooleanConverter x:Key="InvertBoolConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+    </UserControl.Resources>
+    <Border Padding="0 0 0 10" Background="#f2f2f2">
+        <StackPanel Orientation="Vertical">
+            <Border x:Name="BorderName"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Common_en_EN.Name}"
+                            DockPanel.Dock="Left"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    <TextBox x:Name="PrinterName"
+                                 DockPanel.Dock="Right"
+                                 Style="{DynamicResource TextBoxSettingsWithoutWidth}"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}">
+                        <TextBox.Text>
+                            <Binding Path="Model.Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validationRules:NameValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivBuildArea"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Printer_en_EN.HEADER_BUILD_AREA}" />
+            <Border x:Name="BorderWidth"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterWidth"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=WidthMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=WidthMax}"
+                                                Value="{Binding Model.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.Width}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.Width}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterWidth}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterWidth}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderLength"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterLength"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=LengthMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=LengthMax}"
+                                                Value="{Binding Model.Length, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.Length}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.Length}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterLength}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterLength}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderHeight"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterHeight"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=HeightMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=HeightMax}"
+                                                Value="{Binding Model.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.Height}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.Height}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterHeight}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterHeight}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderHomeXPosition"
+                    Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterHomeXPosition"
+                                            DockPanel.Dock="Right"
+                                            BoxType="DOUBLES"
+                                            Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=HomeXPositionMin}"
+                                            Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=HomeXPositionMax}"
+                                            Value="{Binding Model.HomeXPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextStyle="{DynamicResource TextBoxSettings}"
+                                            IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Printer_en_EN.HomeXPosition}"
+                        CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderHomeYPosition"
+                    Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterHomeYPosition"
+                                            DockPanel.Dock="Right"
+                                            BoxType="DOUBLES"
+                                            Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=HomeYPositionMin}"
+                                            Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=HomeYPositionMax}"
+                                            Value="{Binding Model.HomeYPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextStyle="{DynamicResource TextBoxSettings}"
+                                            IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Printer_en_EN.HomeYPosition}"
+                        CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderHomeZPosition"
+                    Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterHomeZPosition"
+                                            DockPanel.Dock="Right"
+                                            BoxType="DOUBLES"
+                                            Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=HomeZPositionMin}"
+                                            Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=HomeZPositionMax}"
+                                            Value="{Binding Model.HomeZPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextStyle="{DynamicResource TextBoxSettings}"
+                                            IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Printer_en_EN.HomeZPosition}"
+                        CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivTravelSpeed"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Printer_en_EN.HEADER_TRAVEL_SPEED}" />
+            <Border x:Name="BorderTravelSpeedXY"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterTravelSpeedXY"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=TravelSpeedXYMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=TravelSpeedXYMax}"
+                                                Value="{Binding Model.TravelSpeedXY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.TravelSpeedXY}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.TravelSpeedXY}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterTravelSpeedXY}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterTravelSpeedXY}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderTravelSpeedZ"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterTravelSpeedZ"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=TravelSpeedZMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=TravelSpeedZMax}"
+                                                Value="{Binding Model.TravelSpeedZ, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.TravelSpeedZ}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.TravelSpeedZ}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterTravelSpeedZ}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterTravelSpeedZ}" />
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivAccelerations"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Printer_en_EN.HEADER_ACCELERATION}" />
+            <Border x:Name="BorderUseAccelerations"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <CheckBox x:Name="UseAccelerations"
+                                  DockPanel.Dock="Right"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  HorizontalAlignment="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  IsChecked="{Binding Model.UseAccelerations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}"
+                                  IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                    <primitive:QuestionedTextBlock x:Name="QTBUseAccelerations"
+                                                       Caption="{x:Static localization:Printer_en_EN.UseAccelerations}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.UseAccelerations}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterUseAccelerations}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderInset0Acceleration"
+                        Style="{DynamicResource SimpleRowStyleSettings}"
+                        Visibility="{Binding Model.UseAccelerations, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="TTBInset0Acceleration"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=Inset0AccelerationMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=Inset0AccelerationMax}"
+                                                Value="{Binding Model.Inset0Acceleration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.Inset0Acceleration}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.Inset0Acceleration}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterInset0Acceleration}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterExternalShell}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderOthersAcceleration"
+                        Style="{DynamicResource SimpleRowStyleSettings}"
+                        Visibility="{Binding Model.UseAccelerations, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="TTBOthersAcceleration"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=OtherAccelerationMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=OtherAccelerationMax}"
+                                                Value="{Binding Model.OthersAcceleration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.OtherAcceleration}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.OtherAcceleration}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterOthersAcceleration}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderUseJerks"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <CheckBox x:Name="UseJerks"
+                                  DockPanel.Dock="Right"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  HorizontalAlignment="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  IsChecked="{Binding Model.UseJerks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}"
+                                  IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                    <primitive:QuestionedTextBlock x:Name="QTBUseJerk"
+                                                       Caption="{x:Static localization:Printer_en_EN.UseJerks}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.UseJerks}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterUseJerks}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderInset0Jerk"
+                        Style="{DynamicResource SimpleRowStyleSettings}"
+                        Visibility="{Binding Model.UseJerks, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="TTBInset0Jerk"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=Inset0JerkMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=Inset0JerkMax}"
+                                                Value="{Binding Model.Inset0Jerk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock Caption="{x:Static localization:Printer_en_EN.Inset0Jerk}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.Inset0Jerk}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterInset0Jerk}"
+                                                       TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterExternalShell}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderOthersJerk"
+                        Style="{DynamicResource SimpleRowStyleSettings}"
+                        Visibility="{Binding Model.UseJerks, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="TTBOthersJerk"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=OtherJerkMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=OtherJerkMax}"
+                                                Value="{Binding Model.OthersJerk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock Caption="{x:Static localization:Printer_en_EN.OthersJerk}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.OthersJerk}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterOthersJerk}" />
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivFeatures"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Printer_en_EN.HEADER_FEATURES}" />
+            <Border x:Name="BorderHasHeatedTable"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <CheckBox x:Name="PrinterHasHeatedTable"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  HorizontalAlignment="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  IsChecked="{Binding Model.HasHeatedTable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}"
+                                  IsEnabled="{Binding Model.IsAnisoprintApproved, Converter={StaticResource InvertBoolConverter}}" />
+                    <primitive:QuestionedTextBlock Caption="{x:Static localization:Printer_en_EN.HasHeatedTable}"
+                                                       DockPanel.Dock="Left"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.HasHeatedTable}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterHasHeatedTable}"
+                                                       TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterHasHeatedTable}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderAdditionalRetract"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterAdditionalRetract"
+                                                DockPanel.Dock="Right"
+                                                BoxType="DOUBLES"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=AdditionalRetractMMMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=AdditionalRetractMMMax}"
+                                                Value="{Binding Model.AdditionalRetractMM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.AdditionalRetractMM}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.AdditionalRetractMM}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterAdditionalRetract}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterBowden}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderOnChangeExtruderUpMM"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterOnChangeExtruderUpMM"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="{Binding Source={x:Static val:SPrinter.Default}, Path=OnChangeExtruderUpMMMin}"
+                                                Maximum="{Binding Source={x:Static val:SPrinter.Default}, Path=OnChangeExtruderUpMMMax}"
+                                                Value="{Binding Model.OnChangeExtruderUpMM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Printer_en_EN.OnChangeExtruderUpMM}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                            TipLabelText="{x:Static localization:Printer_en_EN.OnChangeExtruderUpMM}"
+                            TipDescription="{x:Static resx:SettingsTipsResorces.PrinterOnChangeExtruderUpMM}"
+                            TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgPrinterZLiftHeight}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderExtruders"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <views:ExtrudersView DataContext="{Binding ExtrudersVM}">
+                    <i:Interaction.Behaviors>
+                        <managers:ParentScrollBehavior ScrollViewer="{Binding RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}"/>
+                    </i:Interaction.Behaviors>
+                </views:ExtrudersView>
+            </Border>
+            <primitive:TextDivider x:Name="DivGCode"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Printer_en_EN.HEADER_G_CODE}" />
+            <Border x:Name="BorderStartGCode"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:QuestionedTextBlock DockPanel.Dock="Top"
+                                                       Caption="{x:Static localization:Printer_en_EN.StartGCode}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.StartGCode}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterStartGCode}" />
+                    <TextBox x:Name="PrinterStartGCode"
+                                 Style="{DynamicResource TextBoxSettingsDescription}"
+                                 Text="{Binding Model.StartGCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MinLines="3"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderEndGCode"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:QuestionedTextBlock DockPanel.Dock="Top"
+                                                       Caption="{x:Static localization:Printer_en_EN.EndGCode}"
+                                                       CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                       TipLabelText="{x:Static localization:Printer_en_EN.EndGCode}"
+                                                       TipDescription="{x:Static resx:SettingsTipsResorces.PrinterEndGCode}" />
+                    <TextBox x:Name="PrinterEndGCode"
+                                 Style="{DynamicResource TextBoxSettingsDescription}"
+                                 Text="{Binding Model.EndGCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}"
+                                 MinLines="3" />
+                </DockPanel>
+            </Border>
+            <primitive:TextDivider x:Name="DivOther"
+                                       Style="{DynamicResource DividerRowStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Text="{x:Static localization:Printer_en_EN.HEADER_OTHER}" />
+            <Border x:Name="BorderDescription"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:QuestionedTextBlock
+                            DockPanel.Dock="Top"
+                            Caption="{x:Static localization:Common_en_EN.Description}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                    <TextBox x:Name="PrinterDescription"
+                                 Style="{DynamicResource TextBoxSettingsDescription}"
+                                 Text="{Binding Model.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="{Binding Model.IsAnisoprintApproved}"
+                                 MinLines="3" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderVersion"
+                        Style="{StaticResource SimpleRowStyleSettings}">
+                <DockPanel LastChildFill="True">
+                    <primitive:TypedTextBox x:Name="PrinterVersion"
+                                                DockPanel.Dock="Right"
+                                                BoxType="INTEGERS"
+                                                Minimum="1"
+                                                Maximum="100"
+                                                Value="{Binding Model.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                TextStyle="{DynamicResource TextBoxSettings}"
+                                                IsReadOnly="{Binding Model.IsAnisoprintApproved}" />
+                    <primitive:QuestionedTextBlock
+                            Caption="{x:Static localization:Common_en_EN.Version}"
+                            CaptionStyle="{DynamicResource LabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="Aura.Views.PrintInformationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:util="clr-namespace:Aura.Controls.Util"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:settings="clr-namespace:Settings;assembly=Settings"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:PrintInformationVM, IsDesignTimeCreatable=True}">
+   <UserControl.Resources>
+       <Style x:Key="GrayHeader" TargetType="{x:Type TextBlock}">
+           <Setter Property="Foreground" Value="#4c4c4c" />
+           <Setter Property="FontSize" Value="18" />
+           <Setter Property="FontWeight" Value="Bold" />
+           <Setter Property="FontFamily" Value="Arial" />
+       </Style>
+       <Style x:Key="MaterialText" TargetType="{x:Type TextBlock}">
+           <Setter Property="Foreground" Value="#4c4c4c" />
+           <Setter Property="FontSize" Value="15" />
+           <Setter Property="FontWeight" Value="Normal" />
+           <Setter Property="FontFamily" Value="Arial" />
+       </Style>
+       <util:OCNVCP x:Key="CollectionNullVisibilityConverterP"/>
+       <util:OCNVPF x:Key="CollectionNullVisibilityConverterPF"/>
+       <util:IntNullVisibilityConverter x:Key="NullVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid x:Name="MainGrid" Width="350" Background="Transparent" Margin="0 10 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border x:Name="BorderPrintTime" Grid.Row="0"
+                                Background="Transparent"
+                                Margin="0 0 0 14">
+            <StackPanel Orientation="Horizontal" Background="Transparent">
+                <TextBlock x:Name="TextBlockPrintTimeLabel"
+                                           Style="{StaticResource GrayHeader}"
+                                           Text="{x:Static localization:PrintInformation_en_EN.PrintTime}"
+                                           Margin="0 0 10 0" />
+                <TextBlock x:Name="TextBlockPrintTimeValueHour"
+                                           Style="{StaticResource GrayHeader}"
+                                           Text="{Binding Hours, StringFormat={}{0}h}"
+                                           Visibility="{Binding Hours, Converter={StaticResource NullVisibilityConverter}}" />
+                <TextBlock x:Name="TextBlockPrintTimeValueDelimeter"
+                                           Style="{StaticResource GrayHeader}"
+                                           Text=":"
+                                           Visibility="{Binding Hours, Converter={StaticResource NullVisibilityConverter}}" />
+                <TextBlock x:Name="TextBlockPrintTimeValueMinutes"
+                                           Style="{StaticResource GrayHeader}"
+                                           Text="{Binding Minutes, StringFormat={}{0}min}" />
+            </StackPanel>
+        </Border>
+        <Border x:Name="BorderPlastics" Grid.Row="1"
+                                Background="Transparent"
+                                Margin="0 0 0 14"
+                                Visibility="{Binding PlasticConsumptions, Converter={StaticResource CollectionNullVisibilityConverterP}}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Static localization:PrintInformation_en_EN.PlasticsHeader}" 
+                                           TextAlignment="Left"
+                                           Style="{StaticResource GrayHeader}"/>
+                <ListView x:Name="ListViewPlastics" ItemsSource="{Binding PlasticConsumptions}">
+                    <ListView.Template>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Grid>
+                                <Border x:Name="Border" BorderThickness="0" Background="Transparent" />
+                                <ItemsPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="settings:MaterialData">
+                            <Border x:Name="BorderPlasticMaterial" Background="Transparent"
+                                                Margin="0 3 0 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="TextBlockName"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Text="{Binding Name}" />
+                                    <TextBlock x:Name="TextBlockLength"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Margin="7 0 0 0"
+                                                           Text="{Binding Length, StringFormat={}{0:F1}m}" />
+                                    <TextBlock x:Name="TextBlockMass"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Text="{Binding Mass, StringFormat={} ({0:F1}g)}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </Border>
+        <Border x:Name="BorderComposite" Grid.Row="2"
+                                Background="Transparent"
+                                Margin="0 0 0 14"
+                                Visibility="{Binding CompositeConsumptions, Converter={StaticResource CollectionNullVisibilityConverterPF}}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Static localization:PrintInformation_en_EN.CompositeHeader}" 
+                                           TextAlignment="Left"
+                                           Style="{StaticResource GrayHeader}"/>
+                <ListView x:Name="ListViewComposite" ItemsSource="{Binding CompositeConsumptions}">
+                    <ListView.Template>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Grid>
+                                <Border x:Name="Border" BorderThickness="0" Background="Transparent" />
+                                <ItemsPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="settings:MaterialPFData">
+                            <Border x:Name="BorderCompositeMaterial" Background="Transparent"
+                                                Margin="0 3 0 0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TextBlockName"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Text="{Binding NameP}" />
+                                        <TextBlock x:Name="TextBlockLength"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Margin="7 0 0 0"
+                                                           Text="{Binding LengthP, StringFormat={}{0:F1}m}" />
+                                        <TextBlock x:Name="TextBlockMass"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Text="{Binding MassP, StringFormat={} ({0:F1}g)}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TextBlockNameF"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Text="{Binding NameF}" />
+                                        <TextBlock x:Name="TextBlockLengthF"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Margin="7 0 0 0"
+                                                           Text="{Binding LengthF, StringFormat={}{0:F1}m}" />
+                                        <TextBlock x:Name="TextBlockCost"
+                                                           Width="Auto"
+                                                           Style="{StaticResource MaterialText}"
+                                                           Text="{Binding MassF, StringFormat={} ({0:F1}g)}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

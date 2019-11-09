@@ -1,0 +1,91 @@
+LICENSE AGREEMENT (OFFER)
+Moscow
+(31 october 2018 revised)
+ 
+Subject to Article 437 of the Civil Code of the Russian Federation (hereinafter referred to as the CC RF), this document constitutes an official proposal (public offer) of Limited Liability Company “Anisoprint” (hereinafter referred to as the Licensor), represented by Mr. Antonov Fedor Konstantinovich, General Director, acting pursuant to the Charter, addressed to legal entities, self-employed entrepreneurs and individuals (irrespective of the country of incorporation, residence (location)) (hereinafter referred to as the Agreement). Pursuant to clause 2 of Article 437 of the CC RF, in case of acceptance of the conditions set forth below, an accepting person will act as a Licensee (pursuant to clause 3 of Article 438 of the CC RF, acceptance of the offer is equivalent to entering into the agreement on the terms stipulated in the offer), and the Licensor and the Licensee will jointly become Parties to the Agreement.
+
+1.  TERMS AND DEFINITIONS
+1.1. Anisoprint Aura – professional software (hereinafter referred to as the Software) intended for generation of control software for CNC 3D-printers based on digital 3D-models. 
+1.2. Website – the Licensor’s Internet page located at the following address: http://anisoprint.ru.
+1.3. Offer – the Licensor’s public offer addressed to any person to enter into a license agreement (hereinafter referred to as the Agreement) with such person on material terms and conditions contained in this Agreement.
+1.4. Acceptance – complete and unconditional acceptance by the Licensee of the terms and conditions of the Agreement. 
+1.5. Simple non-exclusive license – non-exclusive right to use the Software worldwide under the brand name designated by the Licensor, without the right to alter or make other adaptations, without the right to distribute, and with reservation of the Licensor’s right to grant licenses to other persons.
+
+2. SUBJECT MATTER
+2.1. The Licensor shall grant the right to the Licensee to use the Software on the terms of simple (non-exclusive) license, and the Licensee undertakes to accept the Software and use it in accordance with the terms and conditions of this offer.
+2.2. Acceptance of the offer means the Licensee’s actions on downloading and installing the Software at the Licensee’s computer or server.
+2.3. The Licensee is entitled to use the Software worldwide.
+2.4. Recommended requirements for hardware required for the Software functioning: CPU Intel Core i5 3470 @ 3.2GHZ (4 CPUs) / AMD X8 FX-8350 @ 4GHZ (8 CPUs), random access memory: 8GB, video card: NVIDIA GTX 660 2GB / AMD HD7870 2GB, OS Windows 7 x64 Service Pack 1 or higher.
+2.5. Transfer of the Software usage rights is to be effected by way of the Software downloading from the Licensor’s Website and its installation at the Licensee’s computer.
+
+3. USE
+3.1. The Licensee shall be provided with the following ways of use of the Software:
+3.1.1. to use the Software integrally for its direct intended purpose with installation at a computer or server;
+3.2. the Licensee may not modify, decompile, reverse assemble, decrypt and perform any other acts with the Software object code for the purpose of receiving information on implementation of algorithms employed in the Software, without prior written consent of the Licensor. Software copying with knowingly removed or damaged internal protection mechanism, as well as unlawful use of such Software constitute illegal act.
+
+4. RIGHTS AND OBLIGATIONS OF THE PARTIES
+4.1. The Licensor undertakes:
+4.1.1. To provide the Licensee with the Software usage right.
+4.1.2. To provide updates and information on the Software updates.
+4.2. The Licensee undertakes:
+4.2.1. To strictly comply with and not to violate terms and conditions of the Agreement, as well as comply with confidentiality obligation with respect to commercial and engineering information obtained in the course of carrying out of cooperation activities with the Licensor.
+4.3. The Licensee may:
+4.3.1. Repudiate the Agreement, provided that the Licensor refuses to grant to the Licensee the Software usage rights under the Agreement in violation of the terms and condition of the Agreement.
+4.3.2. The Licensee may not grant (transfer), in full or in part, to any third parties any rights acquired by it under the Agreement, including the right to sell, replicate, copy the Software, grant access to any third parties, otherwise dispose of, including free of charge, without prior written consent of the Licensor for the aforesaid actions.
+
+5. SOFTWARE USAGE RIGHT WARRANTIES
+5.1. The Licensor warrants that the Licensor legally owns the Software usage rights to be granted (transferred) to the Licensee under the Agreement. The Licensor may grant (transfer) the aforesaid rights to the Licensee. The Software is not registered with the Federal Service for Intellectual Property.
+5.2. The Licensor represents that as of the date of execution of the Agreement the Software is free and clear from any third parties’ claims both connected with the Software itself and with the rights to be granted under the Agreement.
+5.3. The Licensor shall be released from liability and shall not indemnify the Lessee for damages caused by violations and/or errors during the Software operation resulted from inappropriate actions of the Licensee’s personnel or any third parties, as well as from malfunctions of hardware and failures of electrical equipment.
+5.4. The Software will be provided to the Licensee on an "AS IS" basis in accordance with the principle generally accepted in international practice. This means that the Licensor shall bear no responsibility for the problems arising in the course of installation, updating, support and operation of the Software (including, problems connected with compatibility with other software programs (packages, drivers, etc.), problems arising due to varying interpretation of accompanying documents, non-conformity of outcome of the Software usage with the Licensee’s expectations, etc.). The Licensee shall understand that it bears full responsibility for the adverse effects caused by incompatibility or conflict of the Software with other software programs installed on the Licensee’s computer. The Software is not intended for and may not be used in information management systems operating in hazardous environments or servicing the life-support systems where malfunction of the Software operation may create a threat to life or result in high losses of property.
+5.5. In the event of making demands, complaints, or claims by any third parties to the Licensee in connection with the Licensor’s Software usage in violation of arrangements of the Licensee with such third parties, the Licensee shall settle such demands and claims by its own efforts and at its own expense.
+5.6. The Licensee shall accept the condition that contents of the Agreement may change in the event of the Software updates installation. The Licensee undertakes to review at its own discretion the text of the Agreement upon updating the Software.
+
+6. LICENSE FEES
+6.1. License fees for the Software usage right shall not be fixed and paid out by the Licensee.
+6.2. The Licensee shall not provide the Licensor with any Software usage report.
+
+7. LIABILITY OF THE PARTIES
+7.1. The Parties shall be held liable for default or improper performance of their respective obligations pursuant to the Agreement and applicable laws of the Russian Federation. 
+7.2. Defaulting Party shall reimburse the other Party for losses incurred as a result of such default or improper performance of its obligations under the Agreement. Burden of proving the losses shall rest on the affected Party.
+7.3. Notwithstanding anything contained herein, the Licensor shall under no circumstances be liable for the consequences of the Software use by the Licensee. In any case, cumulative liability of the Licensor pursuant to Article 15 of the Civil Code of the Russian Federation shall be limited to 5 000 (five thousand) rubles, and be imposed to it provided that any wrongful acts are committed by the Licensor.
+7.4. Termination of the Agreement shall not release the Parties from liability for default/improper performance of their obligations under the Agreement.
+7.5. Usage of the Software in any way other than contemplated by this Agreement, or upon termination of the Agreement, or otherwise in violation of the rights vested in the Licensee under the Agreement shall result in liability for violation of exclusive rights to the Software as established under applicable law and/or the Agreement.
+7.6. All disputes arising out of or in connection with the Agreement shall be subject to prior settlement using the complaint procedure. Complaint shall be reviewed by receiving Party within 10 Business Days upon its receipt.
+7.7. Any disputes between the Parties remaining unsettled under the complaint procedure shall be referred for resolution to the court at the Licensor’s location.
+
+8. TERM AND PROCEDURE FOR TERMINATION OF THE AGREEMENT
+8.1. This Agreement shall come into effect from the time of the offer acceptance and be valid during the term of exclusive rights to the Software.
+8.2. This Agreement may be terminated as agreed between the Parties, as well as unilaterally on the grounds as provided for by clauses 8.4 and 8.5 of the Agreement by giving a prior written notice of termination by either Party within 5 days before the date of expected termination.
+8.3. In the event of early termination of the Agreement, validity of the Software usage right granted to the Licensee shall be terminated.
+8.4. The Licensor may terminate the Agreement in its sole discretion provided that:
+8.4.1. The Licensee fails to comply with conditions of the Software usage rights under the Agreement.
+8.5. The Licensee may terminate the Agreement in its sole discretion provided that:
+8.5.1. The Licensor fails to comply with the transfer time with respect to the Software usage rights.
+
+9. CONFIDENTIALITY
+9.1. All information related to activity under the Agreement received by a Party from the other Party shall be deemed to be confidential information. Either Party shall maintain confidentiality with respect to confidential information disclosed to such Party with the same care to avoid its disclosure or use as observed in relation to own confidential information.
+9.2. Receiving Party undertakes to prevent disclosure of such confidential information without consent of the Owner of such information, save as otherwise provided for by applicable laws of the Russian Federation, including where Receiving Party is required pursuant to applicable laws of the Russian Federation to disclose such information (classified information) to its counterparty within the framework of civil law (contractual) relations between a Party to the Agreement and the counterparty. In such a case, Disclosing Party shall promptly notify the Owner of such information of such disclosure.
+9.3. Confidential information may be disclosed by Receiving Party to its employees on a “need to know” basis to enable performance of respective obligations under this Agreement by such Receiving Party.
+9.4. When performing disclosure of the information as set forth in clauses 10.2 and 10.3 of the Agreement, a Party to the Agreement shall in each such case inform the third parties of the confidential treatment of such information.
+9.5. Confidentiality obligations set out in this Agreement shall not apply to confidential information, which:
+- is in public domain (open for general use and available in press and other mass media);
+- has been legally known to the Receiving Party prior to its disclosure by Disclosing Party;
+- is permitted for circulation with the written consent of the Owner of confidential information;
+- may not be deemed to be confidential pursuant to applicable laws of the Russian Federation.
+9.6. The Parties undertake to comply with conditions of this Section for 5 (five) years upon termination or expiry of the term of this Agreement whichever is the later.
+9.7. In the event of termination of the Agreement or at the request of the Owner of confidential information, a Receiving Party undertakes to return or destroy (at the discretion of the Owner of confidential information) in the shortest possible time all confidential information disclosed by the Owner of confidential information pursuant to the terms and conditions of this Agreement.
+
+10. FINAL PROVISIONS
+10.1. The Licensor may at any time make amendments to the Agreement via posting revised version of the Agreement on the Website. In such a case, the Licensor is not obliged to notify the Licensee of such amendments. The Licensee undertakes to independently keep track for updates of the Agreement text.
+10.2. Text of the Agreement is published and posted on the Website at the following address: http://anisoprint.ru/files/legal/aura_eula.pdf.
+LICENSOR
+“Anisoprint” LLC
+Registered office: 115280, Moscow, 1st Mashinostroyeniya Street, 2/7, bld. 1, apt. 118
+PSRN 1157746573137
+TIN/CRR 7723396928/772301001
+Settlement account No.: 40702810001270006560
+With the bank: TOCHKA PJSC BANK “FC OTKRITIE”
+Correspondent account No.: 30101810845250000999
+BIC: 044525999
+

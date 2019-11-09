@@ -1,0 +1,371 @@
+﻿<UserControl x:Class="Aura.Views.CodeViewerGeometryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:CodeViewerGeometryVM, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5" ScaleX="1" ScaleY="1" />
+        <Style x:Key="CVSimpleRow" TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness" Value="1 0 1 0" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Padding" Value="10 4 10 4" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="MinWidth" Value="35" />
+        </Style>
+        <Style x:Key="CVGraySimpleRow" TargetType="{x:Type Border}" BasedOn="{StaticResource CVSimpleRow}">
+            <Setter Property="Background" Value="{DynamicResource MainGray}" />
+        </Style>
+        <Style x:Key="SmallLabelTextBlockSettings" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#383838" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="Margin" Value="0,0,0,2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Border x:Name="BorderGeometry"
+            Style="{StaticResource CVGraySimpleRow}"
+            BorderThickness="0"
+            Padding="0 0 0 4">
+        <StackPanel Width="380" Height="Auto"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Stretch"
+              Orientation="Vertical">
+            <Border x:Name="BorderShowInset0"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True" Margin="0 5 0 0">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker x:Name="ColorPickerInset0"
+                                          ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding Inset0Color, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowInset0, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowInset0"
+                                  IsChecked="{Binding Inset0Show, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Inset0_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowInsetXP"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding InsetXPColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowInsetXP, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowInsetXP"
+                                  IsChecked="{Binding InsetXPShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  SnapsToDevicePixels="True"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:InsetPlastic_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowMicroInfill"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding MicroInfillColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowMicroInfill, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowMicroInfill"
+                                  IsChecked="{Binding MicroInfillShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Inset0_en_EN.MICRO_INFILL_HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowSolidInfill"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding InfillSolidColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowInfillSolid, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowInfillSolid"
+                                  IsChecked="{Binding InfillSolidShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:InfillPlasticSolid_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowCellularInfill"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding InfillCellularColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowInfillCellular, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowInfillCellular"
+                                  IsChecked="{Binding InfillCellularShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:InfillPlasticCellular_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowSupportThin"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding SupportThinColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowSupportThin, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowSupportThin"
+                                  IsChecked="{Binding SupportThinShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Support_en_EN.THIN_HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowSupportThick"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding SupportThickColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowSupportThick, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowSupportThick"
+                                  IsChecked="{Binding SupportThickShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Support_en_EN.THICK_HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowSkirt"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding SkirtColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowSkirt, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowSkirt"
+                                  IsChecked="{Binding SkirtShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Skirt_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowBrim"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding BrimColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowBrim, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowBrim"
+                                  IsChecked="{Binding BrimShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Brim_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowWipeTower"
+                    Padding="10 4 10 4">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding WipeTowerColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowWipeTower, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowWipeTower"
+                                  IsChecked="{Binding WipeTowerShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Global_en_EN.HEADER_WIPE_TOWER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowInsetXF"
+                    Padding="10 4 10 4"
+                    Visibility="{Binding InsetXFEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding InsetXFColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowInsetXF, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowInsetXF"
+                                  IsChecked="{Binding InsetXFShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:Fiber_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+            <Border x:Name="BorderShowFiberInfill"
+                    Padding="10 4 10 4"
+                    Visibility="{Binding InfillXFEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <xctk:ColorPicker ColorMode="ColorPalette"
+                                          ShowStandardColors="False"
+                                          Style="{DynamicResource RoundedColorPickerStyle}"
+                                          AvailableColors="{Binding Colors}"
+                                          SelectedColor="{Binding FiberInfillColor, Mode=TwoWay}"
+                                          UsingAlphaChannel="False"
+                                          ShowTabHeaders="False"
+                                          IsEnabled="{Binding ElementName=ShowFiberInfill, Path=IsChecked}" />
+                        <CheckBox x:Name="ShowFiberInfill"
+                                  IsChecked="{Binding InfillFiberShow, Mode=TwoWay}"
+                                  Margin="10 0 0 0"
+                                  RenderOptions.BitmapScalingMode="HighQuality"
+                                  DockPanel.Dock="Right"
+                                  VerticalAlignment="Center"
+                                  Style="{DynamicResource CheckBoxToggleStyle}"
+                                  LayoutTransform="{StaticResource CheckBoxTransform}" />
+                    </StackPanel>
+                    <primitive:QuestionedTextBlock
+                        Caption="{x:Static localization:InfillFiber_en_EN.HEADER}"
+                        CaptionStyle="{StaticResource SmallLabelTextBlockSettings}" />
+                </DockPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>

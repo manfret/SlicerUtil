@@ -1,0 +1,595 @@
+﻿<UserControl x:Class="Aura.Views.LayupDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             xmlns:primitive="clr-namespace:Aura.Controls.Primitive"
+             xmlns:localization="clr-namespace:Aura.Themes.Localization"
+             xmlns:resx="clr-namespace:Aura.Controls.Resources"
+             xmlns:val="clr-namespace:Settings.ValidValues;assembly=Settings"
+             xmlns:memento="clr-namespace:Settings.Memento;assembly=Settings"
+             xmlns:util="clr-namespace:Aura.Controls.Util"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:LayupDataVM, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <Style x:Key="SimpleRow" TargetType="{x:Type Border}">
+            <Setter Property="BorderThickness" Value="1 0 1 0" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Padding" Value="10 4 10 4" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="MinWidth" Value="35" />
+        </Style>
+        <Style x:Key="WhiteSimpleRow" TargetType="{x:Type Border}" BasedOn="{StaticResource SimpleRow}">
+            <Setter Property="Background" Value="White" />
+        </Style>
+        <Style x:Key="GraySimpleRow" TargetType="{x:Type Border}" BasedOn="{StaticResource SimpleRow}">
+            <Setter Property="Background" Value="{DynamicResource MainGray}" />
+        </Style>
+        <Style x:Key="StyleLabels" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#383838" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="Padding" Value="0,0,0,2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="SmallTextBoxSettingsWithoutWidth" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="Background" Value="{DynamicResource MainBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="IsTabStop" Value="True" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="bg" BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}" BorderThickness="1" Padding="2 0 2 0">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsReadOnly" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource MainGray}" />
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="ToolTip"
+                                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)[0].ErrorContent}" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsReadOnly" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="BorderBrush" TargetName="bg"
+                                        Value="{DynamicResource AccentColorBrush}" />
+                                    <Setter Property="BorderThickness" TargetName="bg" Value="1" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsFocused" Value="True" />
+                                    <Condition Property="IsReadOnly" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="BorderBrush" TargetName="bg"
+                                        Value="{DynamicResource AccentColorBrush}" />
+                                    <Setter Property="BorderThickness" TargetName="bg" Value="1" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SmallTextBoxSettings64" TargetType="{x:Type TextBox}"
+               BasedOn="{StaticResource SmallTextBoxSettingsWithoutWidth}">
+            <Setter Property="Width" Value="64" />
+        </Style>
+        <Style x:Key="SmallTextBoxSettings80" TargetType="{x:Type TextBox}"
+               BasedOn="{StaticResource SmallTextBoxSettingsWithoutWidth}">
+            <Setter Property="Width" Value="80" />
+        </Style>
+
+        <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+        <util:BooleanToVisibilityInvertConverter x:Key="BooleanToVisibilityInvertConverter" />
+        <util:FiberInfillTypeToVisibilityConverter x:Key="FiberInfillTypeToVisibilityConverter" />
+        <util:FiberInfillTypeInvertToVisibilityConverter x:Key="FiberInfillTypeInvertToVisibilityConverter" />
+
+        <ImageBrush x:Key="TargetNormal" ImageSource="{DynamicResource ImgTarget}" />
+        <ImageBrush x:Key="TargetAccent" ImageSource="{DynamicResource ImgTargetAccent}" />
+    </UserControl.Resources>
+
+    <Border Padding="0 2 0 12" Background="#f2f2f2" Width="380">
+        <StackPanel Orientation="Vertical" Background="Transparent">
+            <Border Style="{StaticResource GraySimpleRow}" BorderThickness="0 0 0 0">
+                <Grid Margin="0 0 0 2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="LightGray" BorderThickness="0 0 1 0">
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Style="{StaticResource StyleLabels}"
+                                       Text="{x:Static localization:Common_en_EN.Start}" />
+                            <primitive:ButtonWithVisual VisualWidth="13"
+                                                        VisualHeight="13"
+                                                        Width="13"
+                                                        Height="13"
+                                                        Margin="5 0 5 0"
+                                                        NormalBrush="{StaticResource TargetNormal}"
+                                                        MouseOverBrush="{StaticResource TargetAccent}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"
+                                                        Command="{Binding SelectStartCommand}"/>
+                            <primitive:TypedTextBox TextStyle="{StaticResource SmallTextBoxSettings64}"
+                                                    MinWidth="10"
+                                                    Width="64"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding ZMin}"
+                                                    Maximum="{Binding LayupDataLayerIndex.RegionData.EndHeightMM}"
+                                                    IsReadOnly="{Binding IsDefault}"
+                                                    Value="{Binding LayupDataLayerIndex.RegionData.StartHeightMM}">
+                            </primitive:TypedTextBox>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource StyleLabels}"
+                                       Text="{x:Static localization:Common_en_EN.End}"
+                                       Margin="15 0 0 0"/>
+                            <primitive:ButtonWithVisual VisualWidth="13"
+                                                        VisualHeight="13"
+                                                        Width="13"
+                                                        Height="13"
+                                                        Margin="5 0 5 0"
+                                                        NormalBrush="{StaticResource TargetNormal}"
+                                                        MouseOverBrush="{StaticResource TargetAccent}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"
+                                                        Command="{Binding SelectEndCommand}"/>
+                            <primitive:TypedTextBox TextStyle="{StaticResource SmallTextBoxSettings64}"
+                                                    MinWidth="10"
+                                                    Width="64"
+                                                    BoxType="DOUBLES"
+                                                    Minimum="{Binding LayupDataLayerIndex.RegionData.StartHeightMM}"
+                                                    Maximum="{Binding ZMax}"
+                                                    IsReadOnly="{Binding IsDefault}"
+                                                    Value="{Binding LayupDataLayerIndex.RegionData.EndHeightMM}">
+                            </primitive:TypedTextBox>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource GraySimpleRow}" Padding="0" BorderThickness="0 1 0 0">
+                <StackPanel Orientation="Vertical">
+                    <Border x:Name="BorderGenerateFiberPerimeters" Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding IsAllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="GenerateFiberPerimeters"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberPerimeters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}"
+                                          IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock x:Name="PART_GenerateFiber"
+                                                               Caption="{x:Static localization:InsetFiber_en_EN.Generate}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:InsetFiber_en_EN.Generate}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateFiberPerimeters}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateFiberPerimeters}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderGenerateFiberInfills"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding IsAllowGenerateFiber, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <CheckBox x:Name="GenerateFiberInfills"
+                                          DockPanel.Dock="Right"
+                                          RenderOptions.BitmapScalingMode="HighQuality"
+                                          HorizontalAlignment="Right"
+                                          SnapsToDevicePixels="True"
+                                          VerticalAlignment="Center"
+                                          Style="{DynamicResource CheckBoxToggleStyle}"
+                                          IsChecked="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          LayoutTransform="{StaticResource CheckBoxTransform}"
+                                          IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock x:Name="PART_GenerateFiberInfill"
+                                                               Caption="{x:Static localization:InfillFiber_en_EN.GenerateFiberInfills}"
+                                                               CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                               TipLabelText="{x:Static localization:InfillFiber_en_EN.GenerateFiberInfills}"
+                                                               TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartGenerateFiberInfills}"
+                                                               TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartGenerateFiberInfill}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetX0Count"
+                                Style="{DynamicResource SimpleRowStyleSettings}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="PartInset0COunt"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=Inset0CountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=Inset0CountMax}"
+                                                        Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.Inset0Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:Inset0_en_EN.Count}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:Inset0_en_EN.Count}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetX0Count}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetX0Count}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXPOnlyCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityInvertConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="PartInsetXPOnlyCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetXPOnlyCountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetXPOnlyCountMax}"
+                                                        Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.InsetXPOnlyCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetPlastic_en_EN.OnlyPlasticCOunt}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetPlastic_en_EN.OnlyPlasticCOunt}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetXPOnlyCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetXPCount}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetFOuterCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="PartInsetFOuterCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFOuterCountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFOuterCountMax}"
+                                                        Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.InsetFOuterCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetFiber_en_EN.OuterCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetFiber_en_EN.OuterCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetFOuterCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetFOuterCount}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetFInnerCount"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="PartInsetFInnerCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFInnerCountMin}"
+                                                        Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InsetFInnerCountMax}"
+                                                        Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.InsetFInnerCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetFiber_en_EN.InnerCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetFiber_en_EN.InnerCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetFInnerCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetFInnerCount}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXPOuterWhenFiberCount"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="InsetXPOuterWhenFiberCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="0"
+                                                        Maximum="100000"
+                                                        Value="{Binding Path=LayupDataLayerIndex.RegionData.LayupRule.OuterPlasticWhenFiberCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetPlastic_en_EN.OuterPlasticWhenFiberCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetPlastic_en_EN.OuterPlasticWhenFiberCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetXPOuterWhenFiberCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetXPOuterWhenFiber}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInsetXPInnerWhenFiberCount"
+                                Style="{StaticResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberPerimeters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:TypedTextBox x:Name="InsetXPInnerWhenFiberCount"
+                                                        DockPanel.Dock="Right"
+                                                        BoxType="INTEGERS"
+                                                        Minimum="0"
+                                                        Maximum="100000"
+                                                        Value="{Binding Path=LayupDataLayerIndex.RegionData.LayupRule.InnerPlasticWhenFiberCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        TextStyle="{DynamicResource TextBoxSettings}"
+                                                        IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InsetPlastic_en_EN.InnerPlasticWhenFiberCount}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InsetPlastic_en_EN.InnerPlasticWhenFiberCount}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInsetXPInnerWhenFiberCount}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInsetXPInnerWhenFiber}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillCPercent"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill, Converter={StaticResource BooleanToVisibilityInvertConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillPlasticCellular_en_EN.Percent}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    DockPanel.Dock="Top"
+                                    TipLabelText="{x:Static localization:InfillPlasticCellular_en_EN.Percent}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInfillCPercent}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                            <primitive:SliderTTB x:Name="SliTTBInfillCPercent"
+                                                     Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InfillCPercentMin}"
+                                                     Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=InfillCPercentMax}"
+                                                     TickFrequency="1"
+                                                     TextStyle="{DynamicResource TextBoxSettings}"
+                                                     Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.InfillCPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberType"
+                                Style="{DynamicResource SimpleRowStyleSettings}"
+                                Visibility="{Binding LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DockPanel LastChildFill="True">
+                            <ComboBox x:Name="CmbFiberInfillType"
+                                          Style="{DynamicResource MinimalisticComboBox}"
+                                          Background="White"
+                                          DockPanel.Dock="Bottom"
+                                          SelectedValue="{Binding LayupDataLayerIndex.RegionData.LayupRule.FiberInfillType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding FiberInfillTypeCollection}"
+                                          DisplayMemberPath="InfillTypeCaption"
+                                          SelectedValuePath="InfillType"
+                                          IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillFiber_en_EN.InfillFiberType}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InfillFiber_en_EN.InfillFiberType}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfilePartInfillFiberType}"
+                                    TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartInfillFiberType}" />
+                        </DockPanel>
+                    </Border>
+                    <Border x:Name="BorderInfillFiberSolidAngleList"
+                                Style="{DynamicResource SimpleRowStyleSettings}">
+                        <Border.Visibility>
+                            <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.SOLID}">
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill" />
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.FiberInfillType" />
+                            </MultiBinding>
+                        </Border.Visibility>
+                        <DockPanel LastChildFill="True">
+                            <TextBox x:Name="TBInfillFiberAngleList"
+                                         DockPanel.Dock="Bottom"
+                                         Style="{DynamicResource TextBoxSettings}"
+                                         Width="358"
+                                         IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}">
+                                <TextBox.Text>
+                                    <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.AngleList"
+                                                 Mode="TwoWay"
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 ValidatesOnDataErrors="True"
+                                                 ValidatesOnExceptions="True"
+                                                 NotifyOnValidationError="True"
+                                                 Delay="600">
+                                        <Binding.ValidationRules>
+                                            <util:AngleListRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <primitive:QuestionedTextBlock
+                                    Caption="{x:Static localization:InfillFiberSolid_en_EN.AngleList}"
+                                    CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                    TipLabelText="{x:Static localization:InfillFiberSolid_en_EN.AngleList}"
+                                    TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberSolidAngleList}" />
+                        </DockPanel>
+                    </Border>
+                    <StackPanel x:Name="SPLayepRuleRombicSettings" Orientation="Vertical">
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.CELLULAR_RHOMBIC}">
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill" />
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.FiberInfillType" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <Border x:Name="BorderInfillFiberRombicGridDensity"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:QuestionedTextBlock DockPanel.Dock="Top"
+                                                                   Caption="{x:Static localization:InfillFiberCellular_en_EN.RombicGridDensity}"
+                                                                   CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                                                   TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.RombicGridDensity}"
+                                                                   TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberRombicGridDensity}"
+                                                                   TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                <primitive:SliderTTB x:Name="ProfileInfillFiberRombicGridDensity"
+                                                         Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridDensityMin}"
+                                                         Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridDensityMax}"
+                                                         Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.RombicGridDensity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         TextStyle="{DynamicResource TextBoxSettings}"
+                                                         TickFrequency="1" 
+                                                         IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberCellularRombicFirstRibAngle"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="ProfileInfillFiberFirstRibAngle"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridFirstRibAngleMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridFirstRibAngleMax}"
+                                                            Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.RombicGridFirstRibAngle}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" 
+                                                            IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.RombicGridFirstRibAngle}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.RombicGridFirstRibAngle}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberRombicGridFirstRibAngle}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberRombicFirstRibAngle}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberRombicGridSecondRibAngle"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="ProfileInfillFiberSecondRibAngle"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridSecondRibAngleMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=RombicGridSecondRibAngleMax}"
+                                                            Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.RombicGridSecondRibAngle}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}"
+                                                            IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.RombicGridSecondRibAngle}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.RombicGridSecondRibAngle}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberRombicGridSecondRibAngle}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberRombicSecondRibAngle}" />
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel x:Name="SPLayupRuleIsogridSettings" Orientation="Vertical">
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.CELLULAR_ISOGRID}">
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill" />
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.FiberInfillType" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <Border x:Name="BorderInfillFiberIsogridDensity"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.IsogridDensity}"
+                                        DockPanel.Dock="Top"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.IsogridDensity}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberIsogridDensity}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                <primitive:SliderTTB x:Name="ProfileInfillFiberIsogridDensity"
+                                                         TickFrequency="1"
+                                                         Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridDensityMin}"
+                                                         Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridDensityMax}"
+                                                         Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.IsogridDensity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         TextStyle="{DynamicResource TextBoxSettings}" 
+                                                         IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberIsogridOrientation"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="ProfileInfillFiberIsogridOrientation"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridOrientationMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=IsogridOrientationMax}"
+                                                            Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.IsogridOrientation}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}" 
+                                                            IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.IsogridOrientation}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.IsogridOrientation}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberIsogridOrientation}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberIsogridOrientation}" />
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel x:Name="SPLayupRuleAnisogridSettings" Orientation="Vertical">
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource FiberInfillTypeToVisibilityConverter}"
+                                              ConverterParameter="{x:Static memento:FiberInfillType.CELLULAR_ANISOGRID}">
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.GenerateFiberInfill" />
+                                <Binding Path="LayupDataLayerIndex.RegionData.LayupRule.FiberInfillType" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <Border x:Name="BorderInfillFIberAnisogridFillDensity"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.AnisogridFillDensity }"
+                                        DockPanel.Dock="Top"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.AnisogridFillDensity}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberAnisogridFillDensity}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfilePartFillDensity}" />
+                                <primitive:SliderTTB x:Name="PrifileInfillFiberAnisogridDensity"
+                                                         TickFrequency="1"
+                                                         Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridDensityMin}"
+                                                         Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridDensityMax}"
+                                                         Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.AnisogridDensity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         TextStyle="{DynamicResource TextBoxSettings}" 
+                                                         IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberAnisogridOrientation"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="ProfileInfillFiberAnisogridOrientation"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridOrientationMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridOrientationMax}"
+                                                            Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.AnisogridOrientation}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}"
+                                                            IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.AnisogridOrientation}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.AnisogridOrientation}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberAnisogridOrientation}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberAnisogridOrientation}" />
+                            </DockPanel>
+                        </Border>
+                        <Border x:Name="BorderInfillFiberAnisogridAngleBetweenMainRibs"
+                                    Style="{DynamicResource SimpleRowStyleSettings}">
+                            <DockPanel LastChildFill="True">
+                                <primitive:TypedTextBox x:Name="ProfileInfillFiberAnisogridAngleBetweenMainRibs"
+                                                            DockPanel.Dock="Right"
+                                                            BoxType="INTEGERS"
+                                                            Minimum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridAngleBetweenMainRibsMin}"
+                                                            Maximum="{Binding Source={x:Static val:SLayupRule.Default}, Path=AnisogridAngleBetweenMainRibsMax}"
+                                                            Value="{Binding LayupDataLayerIndex.RegionData.LayupRule.AnisogridAngleBetweenMainRibs}"
+                                                            TextStyle="{DynamicResource TextBoxSettings}"
+                                                            IsEnabled="{Binding IsDefault, Converter={StaticResource InverseBoolConverter}}"/>
+                                <primitive:QuestionedTextBlock
+                                        Caption="{x:Static localization:InfillFiberCellular_en_EN.AnisogridAngleBetweenMainRibs}"
+                                        CaptionStyle="{DynamicResource LabelTextBlockSettings}"
+                                        TipLabelText="{x:Static localization:InfillFiberCellular_en_EN.AnisogridAngleBetweenMainRibs}"
+                                        TipDescription="{x:Static resx:SettingsTipsResorces.ProfileInfillFiberAnisogridAngleBetweenMainRibs}"
+                                        TipImageBitmap="{x:Static resx:SettingsTipsResorces.ImgProfileInfillFiberAnisogridAngleBetweenMainRibs}" />
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,31 @@
+﻿<controls:SelectableUserControl x:Class="Aura.Views.SettingsCollectionItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aura.Views"
+             xmlns:controls="clr-namespace:Aura.Controls"
+             xmlns:util="clr-namespace:Aura.Controls.Util"
+             xmlns:viewModels="clr-namespace:Aura.ViewModels"
+             mc:Ignorable="d" 
+             x:Name="UserControl">
+    <controls:SelectableUserControl.Resources>
+        <util:InvertBooleanConverter x:Key="InvertBoolConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <util:BooleanToVisibilityInvertConverter x:Key="BooleanToVisibilityInvertConverter" />
+        <ScaleTransform x:Key="CheckBoxTransform" CenterX="0.5" CenterY="0.5"
+                        ScaleX="1.18" ScaleY="1.18" />
+        <util:FiberInfillTypeToVisibilityConverter x:Key="FiberInfillTypeToVisibilityConverter" />
+        <util:FiberInfillTypeInvertToVisibilityConverter x:Key="FiberInfillTypeInvertToVisibilityConverter" />
+    </controls:SelectableUserControl.Resources>
+    <local:ExpanderExtended x:Name="PART_Expander"
+                            Header="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"
+                            Width="380"
+                            Background="{DynamicResource MainBackgroundBrush}"
+                            IsExpanded="{Binding ElementName=UserControl, Path=IsSelected}"
+                            RemoveCommand="{Binding RemoveItemCommand}"
+                            DuplicateCommand="{Binding DuplicateItemCommand}"
+                            ExportCommand="{Binding ExportItemCommand}"
+                            Expanded="PART_Expander_OnExpanded">
+    </local:ExpanderExtended>
+</controls:SelectableUserControl>
