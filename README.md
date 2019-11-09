@@ -30,7 +30,7 @@ ISettingsMemento is the interface which allows to correctly manipulated with any
 SettingsStore provides storage and add/remove any settings.
 SessionStore provides methods to organize correct storage of concurent settings. Concurency depends on version of settings, default/user type and etc.
 
-#GUI
+# GUI
 
 The GUI developed with WPF framework. It uses MVVM-pattern and maintain with Stores and Settings (as Model in MVVM). The GUI also uses proprietary devDept.Eyeshot 3D-engine to works with 3D-graphics.
 
